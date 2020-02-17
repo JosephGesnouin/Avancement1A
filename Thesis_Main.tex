@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% This is the official template for theses and seminar papers from the Chair for Information Systems for Sustainable Society (IS3) at the University of Cologne
+
+%
+%PREAMBLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{hyperref}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{psl-cover}
+
+
+% set margins for double-sided printing
+\usepackage[left=1cm, right=2.5cm, top=2.5cm, bottom=3cm, bindingoffset=1.5cm, head=15pt]{geometry} 
+\usepackage{setspace}
+\onehalfspacing
+% set headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\fancyhead[LE,RO]{\textsl{\leftmark}}
+\fancyhead[RE,LO]{\thesisauthor}
+\fancyfoot[C]{ \\
+\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+% set APA citation style
+\usepackage{apacite}
+\usepackage[numbib,notlof,notlot,nottoc]{tocbibind}
+\pagenumbering{gobble}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%THESIS Parameters 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{AVANCEMENT DE THÈSE
+- Validation de 1ère année -
+\\
+Analyse des mouvements et gestes des piétons via caméra embarquée pour la prédiction de leurs intentions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+\author{Joseph Gesnouin}
+\date{X Avril 2020}
+\jurymember{5}{Fabien Moutarde}{Professeur, Mines ParisTech}{Directeur de thèse}
+\jurymember{4}{Bogdan Stanciulescu}{Maître de conférences, Mines ParisTech}{Maitre de thèse}
+\jurymember{3}{Steve Pechberti}{Ingénieur de recherche, Vedecom}{Encadrant industriel}
+
+\jurymember{2}{Examinateur 2}{Titre}{Jury}
+\jurymember{1}{Examinateur 1}{Titre}{Jury}
+
+%% commandes avec des valeurs par défaut non nulles
+%%\institute{nom de l’organisme d’accueil PSL}
+\doctoralschool{Ingénierie des Systèmes, Matériaux, Mécanique, Energétique}{621}
+\specialty{Informatique temps réel, robotique et automatique.}
+
+
+\maketitle{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TITLE PAGE (Pre-defined, just change parameters above)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{Template/Title.tex}
+
+%\newpage
+%\thispagestyle{empty}
+%\strut
+%\markboth{}{}
+%\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Résumé
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{Template/resume.tex}
+
+
+%\newpage
+%\thispagestyle{empty}
+%\strut
+%\markboth{}{}
+%\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Confidentialité
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{Template/SOOA.tex}
+
+%\newpage
+%\thispagestyle{empty}
+%\strut
+%\markboth{}{}
+%\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Remerciements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{Template/remerciements.tex}
+
+%\thispagestyle{empty}
+%\strut
+%\markboth{}{}
+%\clearpage
+%\vspace*{\fill}
+%\thispagestyle{empty} % optional -- suppress showing of page number
+%\begin{quotation}
+%\em % optional -- to switch to emphasis (italics) mode
+%\medskip
+%%\raggedleft
+%"Je crois que la science\\ avec conscience et sans orgueil est le seul outil d'émancipation personnelle en premier lieu, collégiale sinon collective en second lieu" - Jean-Yves G.\\
+%D'après Rabelais, Elysée Reclus, Primo Levi, Illiouchine, Bourdieu et Pascal.
+%\end{quotation}
+%\vspace*{\fill}
+
+%\newpage
+%\thispagestyle{empty}
+%\strut
+%\markboth{}{}
+%\newpage
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%TOC,TOF,TOT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+\pagenumbering{Roman}
+\tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%MAIN PART
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Introduction
+\input{./Sections/Introduction}
+
+
+% SEC1
+\input{./Sections/Section_1}
+
+% SEC1
+\input{./Sections/Section_2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\appendix
+\renewcommand*{\thesection}{\Alph{section}}\textbf{}
+
+% APPENDIX A
+\input{Appendices/Appendix_1.tex}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%BIBLIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\renewcommand*{\thesection}{}\textbf{}
+
+\bibliographystyle{apacite}
+\bibliography{Bibliography.bib}
+
+
+\end{document}

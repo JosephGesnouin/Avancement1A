@@ -4,6 +4,8 @@
 
 Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la dynamique des articulations d'un piéton à une intention. Cette estimation de la dynamique des articulations sera ensuite combinée à la vision afin d’avoir une estimation plus robuste et absolue de l'intention du piéton en fonction de son environnement.
 
+\textit{De ce fait, nous avons du nous intérésser à plusieurs étapes qui seront considérées comme des parties indépendantes de notre approche}
+
 \subsection{Squeletisation de pietons}
 La nécéssité première de cette thèse consiste donc en l'obtention d'une squeletisation cohérente de chaque piéton présent dans l'image au fil du temps.
 
@@ -12,6 +14,9 @@ Cette squeletisation sera ensuite utilisée en tant que donnée d'entrée de not
 L'idée de restreindre la gestuelle d'une personne à la seule évolution de son ossature au fil du temps n'est pas nouvelle.
 
 des travaux  \cite{johansson1973visual,johansson1976spatio}: montrant qu'avec seulement des points lumineux, les gens interprétent facilement les stimuli comme des personnes effectuant des actions: L'humain peut reconnaitre une action juste avec la pose. Pourquoi pas la machine?
+
+La tâche de détection est compliquée par la variabilité de l’apparence des personnes (vêtements, pose ...)
+ainsi que par des phénomènes d’occlusions,dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.
 
 
 

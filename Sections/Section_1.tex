@@ -7,9 +7,11 @@ Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la d
 \subsection{Squeletisation de pietons}
 La nécéssité première de cette thèse consiste donc en l'obtention d'une squeletisation cohérente de chaque piéton présent dans l'image au fil du temps.
 
-Cette squeletisation sera ensuite utilisée en tant qu'input de notre réseau afin d'en inférer une classe en fonction de la gestuelle de celui-ci.
+Cette squeletisation sera ensuite utilisée en tant que donnée d'entrée de notre réseau afin d'en inférer une classe en fonction de la gestuelle de celui-ci.
 
+L'idée de restreindre la gestuelle d'une personne à la seule évolution de son ossature au fil du temps n'est pas nouvelle.
 
+des travaux  \cite{johansson1973visual,johansson1976spatio}: montrant qu'avec seulement des points lumineux, les gens interprétent facilement les stimuli comme des personnes effectuant des actions: L'humain peut reconnaitre une action juste avec la pose. Pourquoi pas la machine?
 
 
 
@@ -17,7 +19,7 @@ Cette squeletisation sera ensuite utilisée en tant qu'input de notre réseau af
 
 POURQUOI?!
 -RAPIDE
--Johansson Experiment \cite{johansson1973visual,johansson1976spatio}: montrant qu'avec seulement des points lumineux, les gens interprétent facilement les stimuli comme des personnes effectuant des actions: L'humain peut reconnaitre une action juste avec la pose. Pourquoi pas la machine?
+-Johansson Experiment 
 
 PipeLine: SQUELETTE -> HAR -> INTENTION
 
@@ -30,7 +32,7 @@ Real Time
 \subsubsection{Approches Top Down}
 \subsubsection{Approches Bottom Up}
 
-\subsection{Action Recognition}
+\subsection{Human Action Recognition}
 \label{subsec:HAR}
 
 \subsubsection{Image-Based}

@@ -2,6 +2,11 @@
 \section{Etat de l'art}
 \label{sec:SOTA}
 
+Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la dynamique des articulations d'un piéton à une intention. Cette estimation de la dynamique des articulations sera ensuite combinée à la vision afin d’avoir une estimation plus robuste et absolue de l'intention du piéton en fonction de son environnement.
+
+\subsection{Squeletisation de pietons}
+
+
 POURQUOI?!
 -RAPIDE
 -Johansson Experiment \cite{johansson1973visual,johansson1976spatio}: montrant qu'avec seulement des points lumineux, les gens interprétent facilement les stimuli comme des personnes effectuant des actions: L'humain peut reconnaitre une action juste avec la pose. Pourquoi pas la machine?
@@ -12,8 +17,6 @@ PK LE FAIRE AVEC DES SQUELETTES?! -> moins de bruit + rapide
 -COMPARER AUX AUTRES APPROCHES? (Conv3D / Spatio temporal bullshit
 
 Real Time
-
-\subsection{Squeletisation de pietons}
 
 \label{subsec:SQUEL}
 \subsubsection{Approches Top Down}
@@ -27,9 +30,9 @@ Real Time
 \subsubsection{Graph Based}
 
 \subsection{Intention Prediction}
-\textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire [16, 1, 5], ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.
+\textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire [16, 1, 5], ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
 
-Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.}
+Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.
 
 
 In the literature various terms such as intention, actionand behavior are used to describe what the agent is doing or about to do in the scene. Here, we distinguish intention as the underlying state of mind which cannot be observed but can be inferred from the behavior. This is opposed toactions and, more generally, behaviors, i.e. observable ac-tions such as walking or crossing, for which there is groundtruth available.

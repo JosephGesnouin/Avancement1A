@@ -6,8 +6,22 @@
 Afin de pouvoir réaliser des premiers tests  et pour avoir une première expérience des problèmes rencontrés, j'ai utilisé des versions de l'état de l'art des approches de classifications 
 
 \subsection{Représentation Graphe/Squelette porteuse de sens}
+Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{Images/openpose.png}
+    \caption{Un exemple de la représentation squelette obtenue à l'aide de la bibliothèque OpenPose \cite{cao2017realtime}}
+    \label{fig:openPoseSkel}
+\end{figure}
+
+La figure \ref{fig:openPoseSkel}, nous permet de réaliser que conserver le squelette obtenu par les algorithmes de detection de pose classiques sans avoir recourt à une transformation classique pourrait biaiser nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être:
+
+
 
 \subsection{Autoencodeur semi-supervisé pour l'action recognition}
+
+\subsubsection{Introduction}
 Le deep learning étant une composition de transformation non linéaires en esperant trouver une représentation adaptée au format des données et conservant un maximum de sémantique de celui-ci. (représentation dans l'espace où \textbf{les instances peuvent être séparées linéairement}.)
 
 Je me suis intéréssé à cette question de représentation pour plusieurs raisons:
@@ -32,6 +46,7 @@ Une fois la convergence obtenue, on peut imaginer deux utilisations:
     \item Générer des données en réalisant une génération d'instance au niveau de l'espace latent et utiliser la partie décodeur pour voir si cela donne des instances "utilisables" pour faire de la data génération.
 \end{itemize}
 
+\subsubsection{Formalisation}
 On pose le problème comme ceci: \newline
 $$\min _{\theta_{1}, \theta_{2}},\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta 1}(\mathbf{X})\right)\right\|^{2}$$
 
@@ -41,6 +56,7 @@ $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\lef
 
 Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante (LDA / QDA / FDA).
 
+\subsubsection{Tests et évaluation}
 J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC
 
 Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres  qui comporte la partie encodeur et une softmax 
@@ -48,7 +64,7 @@ Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres  qu
 
 Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par seconde) donc très rapide comparé aux autres approches, même si l'accuracy laisse à désirer. A titre de comparaison, j'ai réalisé la même pipeline avec un AE MLP et une fonction de coût habituelle, je tombe sur 86.2\% donc j'imagine qu'il y'a un petit truc à creuser, pas nécéssairement sur la course à l'accuracy mais sur la vitesse de l'approche.
 
-Plusieurs remarques:
+\subsubsection{Remarques}
 \begin{itemize}
     \item le nombre maximum d'axes obtenus par la LDA correspond à (\#classes-1): sur SHREC 14 l'espace latent est donc de dimension 13 toute représentation avec un espace latent superieur est impossible (on ne peut donc difficilement imposer des contraintes de sparsité au modèle)
     \item Problème de convergence au niveau de l'apprentissage de l'AE avec fonction de cout modifiée (optimiser ADAM), j'imagine que mon learning rate est trop élevé mais il faudrait pousser plus profondément afin de voir pourquoi l'optima de la solution du problème est aussi difficile à obtenir.

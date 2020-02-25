@@ -9,6 +9,8 @@ Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la d
 
 \textit{3D action recognition – analysis of human actions based on3D  skeleton  data  –  becomes  popular  recently  due  to  its  succinctness,robustness, and view-invariant representation}
 
+PipeLine: SQUELETTE -> HAR -> INTENTION
+
 \subsection{Squelettisation de piétons}
 La nécéssité première de cette thèse consiste donc en l'obtention d'une squelettisation cohérente de chaque piéton présent dans l'image au fil du temps.
 
@@ -16,7 +18,7 @@ Cette squelettisation sera ensuite utilisée en tant que donnée d'entrée de no
 
 L'idée de restreindre la gestuelle d'une personne à la seule évolution de son ossature au fil du temps n'est pas nouvelle.
 
-Durant les années 70, les travaux en psychologie de Johansson  \cite{johansson1973visual,johansson1976spatio} ont permis de montrer qu'avec seulement des points lumineux, l'être humain interprétait facilement les stimulis présentés comme ceux d'un être humain effectuant des actions: l'humain peut donc reconnaitre une action juste avec la pose. Pourquoi pas la machine?
+Durant les années 70, les travaux en psychologie de Johansson  \cite{johansson1973visual,johansson1976spatio} ont permis de montrer qu'avec seulement des points lumineux, l'être humain interprétait facilement les stimulis qui lui étaient présentés comme ceux d'un être humain effectuant des actions: l'humain peut donc reconnaitre une action juste avec la pose et sans information annexe telle que l'environnement. 
 
 \begin{figure}[H]
     \centering
@@ -27,22 +29,10 @@ Durant les années 70, les travaux en psychologie de Johansson  \cite{johansson1
 \end{figure}
 
 La tâche de détection est compliquée par la variabilité de l’apparence des personnes (vêtements, pose ...)
-ainsi que par des phénomènes d’occlusions,dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.
+ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.
 
 
 
-
-
-POURQUOI?!
--RAPIDE
--Johansson Experiment 
-
-PipeLine: SQUELETTE -> HAR -> INTENTION
-
-PK LE FAIRE AVEC DES SQUELETTES?! -> moins de bruit + rapide
--COMPARER AUX AUTRES APPROCHES? (Conv3D / Spatio temporal bullshit
-
-Real Time
 
 \label{subsec:SQUEL}
 \subsubsection{Approches Top Down}

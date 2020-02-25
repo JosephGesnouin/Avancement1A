@@ -15,7 +15,9 @@ Le format de structure de données de la majorité des articulations disponibles
     \label{fig:openPoseSkel}
 \end{figure}
 
-La figure \ref{fig:openPoseSkel}, nous permet de réaliser que conserver le squelette obtenu par les algorithmes de detection de pose classiques sans avoir recourt à une transformation classique pourrait biaiser nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être:
+La figure \ref{fig:openPoseSkel}, nous permet de réaliser que conserver le squelette obtenu par les algorithmes de detection de pose classiques, sans avoir recourt à une transformation pourrait biaiser nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être: par exeple, l'extrémité gauche du bras et l'épaule droite (\textit{4 et 5}) ou encore l'extrémité droite du bras et la hanche gauche (\textit{7 et 8}).
+
+Beaucoup de travaux ignorent cette spécificité et considèrent, 
 
 
 

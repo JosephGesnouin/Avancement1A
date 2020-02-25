@@ -15,22 +15,24 @@ Le format de structure de données de la majorité des articulations disponibles
     \label{fig:openPoseSkel}
 \end{figure}
 
-La figure \ref{fig:openPoseSkel}, nous permet de réaliser que conserver le squelette obtenu par les algorithmes de detection de pose classiques, sans avoir recourt à une transformation pourrait biaiser nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être: par exeple, l'extrémité gauche du bras et l'épaule droite (\textit{4 et 5}) ou encore l'extrémité droite du bras et la hanche gauche (\textit{7 et 8}).
+La figure \ref{fig:openPoseSkel}, nous permet de constater que conserver le squelette obtenu par les algorithmes de detection de pose classiques, sans avoir recourt à une transformation pourrait réduire la qualité de nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être: par exemple, l'extrémité gauche du bras et l'épaule droite (\textit{nodes 4 et 5}) ou encore l'extrémité droite du bras et la hanche gauche (\textit{nodes 7 et 8}).
 
-Beaucoup de travaux ignorent cette spécificité et considèrent, 
+Une grande majorité des travaux actuels semblent négliger l'importance de cette représentation spatiale et ne se focalisent que sur le coté temporel: la dynamique, sans remettre en question la structure de données en entrée.
+
+En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation
 
 
 
 \subsection{Autoencodeur semi-supervisé pour l'action recognition}
 
 \subsubsection{Introduction}
-Le deep learning étant une composition de transformation non linéaires en esperant trouver une représentation adaptée au format des données et conservant un maximum de sémantique de celui-ci. (représentation dans l'espace où \textbf{les instances peuvent être séparées linéairement}.)
+Les auto encodeurs étant une composition de transformation non linéaires en esperant trouver une représentation dans l'espace adaptée au format des données et conservant un maximum de sémantique de celui-ci.
 
 Je me suis intéréssé à cette question de représentation pour plusieurs raisons:
 \begin{itemize}
-    \item Tout est une question d'embedding et de normalisation en machine learning. Au final, jouer avec des layers permet seulement de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données d'entrée soient porteuses d'information. Le jour ou l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Théoriquement n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{2016arXiv160803287M}).
+    \item Tout est une question d'embedding et de normalisation en machine learning. Au final, le role premier des couches cachées est de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données d'entrée soient porteuses d'information. Le jour ou l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Théoriquement n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{2016arXiv160803287M}).
     
-    \item En s'intéréssant à la question de la représentation des données, on évite un apprentissage de cette représentation à "l'aveugle" (en optimisant un réseau précis sur un jeu de données précis et en testant un maximum d'hyperparamètres on est assurés de faire un bon résultat.  On peut \textbf{potentiellement} réduire la taille de notre réseau et donc par définition réduire le temps d'inférence de celui-ci, ce qui peut être intéréssant dans le cadre d'un sujet en temps réel.
+    \item En s'intéréssant à la question de la représentation des données, on évite un apprentissage de cette représentation à "l'aveugle" (en optimisant un réseau précis sur un jeu de données précis et en testant un maximum d'hyperparamètres on est assurés de faire un bon résultat.  On peut potentiellement réduire la taille de notre réseau et donc par définition réduire le temps d'inférence de celui-ci, ce qui peut être intéréssant dans le cadre d'un sujet en temps réel.
 \end{itemize}
 
 L'idée étant d'entrainer un autoencodeur avec une fonction de coût modifiée en rajoutant une contrainte sur la séparation linéaire des classes dans l'espace latent (LDA / QDA / FDA). Il a été montré que la représentation optimale interne d'un MLP s'obtient en faisant une analogie avec une analyse discriminante non linéaire \cite{webb1990optimised}.
@@ -61,8 +63,7 @@ Ajout d'une variation dans la fonction de coût: avec S la matrice de projection
 \subsubsection{Tests et évaluation}
 J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC
 
-Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres  qui comporte la partie encodeur et une softmax 
-
+Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres comportant la partie encodeur de l'autoencodeur et une softmax
 
 Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par seconde) donc très rapide comparé aux autres approches, même si l'accuracy laisse à désirer. A titre de comparaison, j'ai réalisé la même pipeline avec un AE MLP et une fonction de coût habituelle, je tombe sur 86.2\% donc j'imagine qu'il y'a un petit truc à creuser, pas nécéssairement sur la course à l'accuracy mais sur la vitesse de l'approche.
 

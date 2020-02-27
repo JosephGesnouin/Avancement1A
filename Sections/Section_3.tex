@@ -1,11 +1,11 @@
 \clearpage
-\section{Experimentations, Réalisations}
+\chapter{Experimentations, Réalisations}
 \label{sec:SOTA}
 
-\subsection{Squeletisation}
+\section{Squeletisation}
 Afin de pouvoir réaliser des premiers tests  et pour avoir une première expérience des problèmes rencontrés, j'ai utilisé des versions de l'état de l'art des approches de classifications 
 
-\subsection{Représentation Graphe/Squelette porteuse de sens}
+\section{Représentation Graphe/Squelette porteuse de sens}
 Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
 
 \begin{figure}[H]
@@ -23,9 +23,9 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
 
 
 
-\subsection{Autoencodeur semi-supervisé pour l'action recognition}
+\section{Autoencodeur semi-supervisé pour l'action recognition}
 
-\subsubsection{Introduction}
+\subsection{Introduction}
 Les auto encodeurs étant une composition de transformation non linéaires en esperant trouver une représentation dans l'espace adaptée au format des données et conservant un maximum de sémantique de celui-ci.
 
 Je me suis intéréssé à cette question de représentation pour plusieurs raisons:
@@ -50,7 +50,7 @@ Une fois la convergence obtenue, on peut imaginer deux utilisations:
     \item Générer des données en réalisant une génération d'instance au niveau de l'espace latent grâce à des approches type SMOTE \cite{chawla2002smote} ou ADASYN \cite{he2008adasyn}  et utiliser la partie décodeur pour  faire de la data génération.
 \end{itemize}
 
-\subsubsection{Formalisation}
+\subsection{Formalisation}
 On pose le problème comme ceci: \newline
 $$\min _{\theta_{1}, \theta_{2}},\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta 1}(\mathbf{X})\right)\right\|^{2}$$
 
@@ -60,14 +60,14 @@ $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\lef
 
 Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante (LDA / QDA / FDA).
 
-\subsubsection{Tests et évaluation}
+\subsection{Tests et évaluation}
 J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec}
 
 Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres comportant la partie encodeur de l'autoencodeur et une softmax
 
 Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par seconde) donc très rapide comparé aux autres approches, même si l'accuracy laisse à désirer. A titre de comparaison, j'ai réalisé la même pipeline avec un AE MLP et une fonction de coût habituelle, je tombe sur 86.2\% donc j'imagine qu'il y'a un petit truc à creuser, pas nécéssairement sur la course à l'accuracy mais sur la vitesse de l'approche.
 
-\subsubsection{Remarques}
+\subsection{Remarques}
 \begin{itemize}
     \item Le nombre maximum d'axes obtenus par la LDA correspond au nombre de classe moins un: sur SHREC 14 l'espace latent est donc de dimension 13 toute représentation avec un espace latent superieur est impossible (on ne peut donc difficilement imposer des contraintes de sparsité au modèle). Cela implique également une perte très lourde de l'information vis-à-vis de l'information dans l'espace latent. (SHREC: de 2122 neurones d'entrée à un espace latent avec 13 neurones)
     \item Quelques problèmes de convergence dûs à l'optimisation de $\lambda$ durant l'apprentissage de l'autoencodeur avec la fonction de coût modifiée(optimiser ADAM \cite{kingma2014adam}).

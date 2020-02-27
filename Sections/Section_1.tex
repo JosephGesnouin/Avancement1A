@@ -1,5 +1,5 @@
 %\clearpage
-\section{Etat de l'art}
+\chapter{Etat de l'art}
 \label{sec:SOTA}
 
 Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la dynamique des articulations d'un piéton à une intention. Cette estimation de la dynamique des articulations sera ensuite combinée à la vision afin d’avoir une estimation plus robuste et absolue de l'intention du piéton en fonction de son environnement.\\
@@ -25,7 +25,7 @@ Par conséquent, nous
 
 PipeLine: SQUELETTE -> HAR -> INTENTION
 
-\subsection{Squelettisation de piétons}
+\section{Squelettisation de piétons}
 La nécéssité première de cette thèse consiste donc en l'obtention d'une squelettisation cohérente de chaque piéton présent dans l'image au fil du temps.
 
 Cette squelettisation sera ensuite utilisée en tant que donnée d'entrée de notre réseau afin d'en inférer une classe en fonction de la gestuelle de celui-ci.
@@ -37,10 +37,10 @@ ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou 
 
 
 \label{subsec:SQUEL}
-\subsubsection{Approches Top Down}
-\subsubsection{Approches Bottom Up}
+\subsection{Approches Top Down}
+\subsection{Approches Bottom Up}
 
-\subsection{Human Action Recognition}
+\section{Human Action Recognition}
 
 \textbf{ Compared to RGB videos and optic flow,skeleton sequences are computationally efficient. Furthermore,skeleton  sequences  have  a  better  ability  to  represent  dataset-invariant  action  information  since  no  background  context  isincluded.
 Parler des handcrafted?}
@@ -55,11 +55,11 @@ En réduisant la taille des données d'entrée grâce à la structure de donnée
 
 \label{subsec:HAR}
 
-\subsubsection{Image-Based}
-\subsubsection{Recurent neural network based}
-\subsubsection{Graph Based}
+\subsection{Image-Based}
+\subsection{Recurent neural network based}
+\subsection{Graph Based}
 
-\subsection{Intention Prediction}
+\section{Intention Prediction}
 \textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire [16, 1, 5], ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
 
 Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.
@@ -70,7 +70,7 @@ In the literature various terms such as intention, actionand behavior are used t
 
 
 
-\subsubsection{Handcrafted}
-\subsubsection{Apprentissage profond}
+\subsection{Handcrafted}
+\subsection{Apprentissage profond}
 
 

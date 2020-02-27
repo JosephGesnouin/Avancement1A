@@ -19,7 +19,7 @@ La figure \ref{fig:openPoseSkel}, nous permet de constater que conserver le sque
 
 Une grande majorité des travaux actuels semblent négliger l'importance de cette représentation spatiale et ne se focalisent que sur le coté temporel: la dynamique des articulations, sans remettre en question la structure de données en entrée.
 
-En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation
+En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation.
 
 
 
@@ -30,7 +30,7 @@ Les auto encodeurs étant une composition de transformation non linéaires en es
 
 Je me suis intéréssé à cette question de représentation pour plusieurs raisons:
 \begin{itemize}
-    \item Tout est une question d'embedding et de normalisation en machine learning. Au final, le role premier des couches cachées est de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données d'entrée soient porteuses d'information. Le jour ou l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Théoriquement n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{2016arXiv160803287M}).
+    \item Tout est une question d'embedding et de normalisation en machine learning. Au final, le role premier des couches cachées est de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données d'entrée soient porteuses d'information. Le jour ou l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Selon le théorème d'approximation universelle, n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{scarselli1998universal,2016arXiv160803287M}).
     
     \item En s'intéréssant à la question de la représentation des données, on évite un apprentissage de cette représentation à "l'aveugle" (en optimisant un réseau précis sur un jeu de données précis et en testant un maximum d'hyperparamètres on est assurés de faire un bon résultat.  On peut potentiellement réduire la taille de notre réseau et donc par définition réduire le temps d'inférence de celui-ci, ce qui peut être intéréssant dans le cadre d'un sujet en temps réel.
 \end{itemize}

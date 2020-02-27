@@ -17,10 +17,20 @@ Le format de structure de données de la majorité des articulations disponibles
 
 La figure \ref{fig:openPoseSkel}, nous permet de constater que conserver le squelette obtenu par les algorithmes de detection de pose classiques, sans avoir recourt à une transformation pourrait réduire la qualité de nos résultats: certains couples d'articulations, bien que se suivant de manière incrémentale dans la structure de données utilisée, n'ont en réalité aucune raison valable de l'être: par exemple, l'extrémité gauche du bras et l'épaule droite (\textit{nodes 4 et 5}) ou encore l'extrémité droite du bras et la hanche gauche (\textit{nodes 7 et 8}).
 
-Une grande majorité des travaux actuels semblent négliger l'importance de cette représentation spatiale et ne se focalisent que sur le coté temporel: la dynamique des articulations, sans remettre en question la structure de données en entrée.
+Une grande majorité des travaux actuels semblent négliger l'importance de cette représentation spatiale et ne se focalisent que sur le coté temporel: la dynamique des articulations, sans remettre en question la structure de données spatio-temporelle en entrée.
 
 En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation.
 
+En réalisant un Depth-First Search (DFS) sur un hub du graphe, il est possible d'obtenir une structure de type arbre/graphe:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Images/DFS.png}
+    \caption{(a) Articulations du squelette d'un corps humain avec la structure de données initiale. L'ordre de visite des noeuds est incrémentale:1-2-3-...-16. (b) Le squelette est transformé en une structure arborescente. (c)  L'arbre peut être dépilé en une chaîne dont l'ordre de visite des noeuds conserve la relation physique des articulations: 1-2-3-2-4-5-6-5-4-2-7-8-9-8-7-2-1-10-11-12-13-12-11-10-14-15-16-15-14-10-1, \textit{Image provenant de\cite{liu2016spatio}}}
+    \label{fig:DFS}
+\end{figure}
+
+AJOUTER RESULTATS.
 
 
 \section{Autoencodeur semi-supervisé pour l'action recognition}

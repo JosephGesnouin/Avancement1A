@@ -54,14 +54,14 @@ Une fois la convergence obtenue, on peut imaginer deux utilisations:
 On pose le problème comme ceci: \newline
 $$\min _{\theta_{1}, \theta_{2}},\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta 1}(\mathbf{X})\right)\right\|^{2}$$
 
-Fonction de coût classique d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les parametres des blocs encodeur et decodeur de l’AE. 
+Fonction de coût habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les parametres des blocs encodeur et decodeur de l’AE. 
 
 $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta_{1}}(\mathbf{X})\right)\right\|^{2}+\lambda\left\|f_{\theta_{1}}(\mathbf{X})-\mathbf{S}_{f_{\theta 1}}(\mathbf{X})\right\|^{2}$$
 
 Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante (LDA / QDA / FDA).
 
 \subsubsection{Tests et évaluation}
-J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC
+J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec}
 
 Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres comportant la partie encodeur de l'autoencodeur et une softmax
 

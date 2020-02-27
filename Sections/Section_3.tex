@@ -69,8 +69,10 @@ Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par sec
 
 \subsubsection{Remarques}
 \begin{itemize}
-    \item le nombre maximum d'axes obtenus par la LDA correspond à (\#classes-1): sur SHREC 14 l'espace latent est donc de dimension 13 toute représentation avec un espace latent superieur est impossible (on ne peut donc difficilement imposer des contraintes de sparsité au modèle)
-    \item Problème de convergence au niveau de l'apprentissage de l'AE avec fonction de cout modifiée (optimiser ADAM), j'imagine que mon learning rate est trop élevé mais il faudrait pousser plus profondément afin de voir pourquoi l'optima de la solution du problème est aussi difficile à obtenir.
+    \item Le nombre maximum d'axes obtenus par la LDA correspond au nombre de classe moins un: sur SHREC 14 l'espace latent est donc de dimension 13 toute représentation avec un espace latent superieur est impossible (on ne peut donc difficilement imposer des contraintes de sparsité au modèle). Cela implique une perte très lourde de l'information vis-à-vis de l'information dans l'espace latent.
+    \item Quelques problèmes de convergence durant l'apprentissage de l'autoencodeur avec la fonction de cout modifiée avec l'optimiser ADAM \cite{kingma2014adam}.
+    
+    j'imagine que mon learning rate est trop élevé mais il faudrait pousser plus profondément afin de voir pourquoi l'optima de la solution du problème est aussi difficile à obtenir.
     \item optimisation de $\lambda$ qui devient un hyperparamètre
 \end{itemize}
 

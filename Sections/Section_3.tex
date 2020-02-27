@@ -47,7 +47,7 @@ Les approches factorielles citées plus haut s'apparentent à la projection de d
 Une fois la convergence obtenue, on peut imaginer deux utilisations:
 \begin{itemize}
     \item Récupérer cet espace latent combinant les informations "data driven" grâce à l'apprentissage non-supervisé de l'auto encodeur classique et une première ébauche de séparabilité linéaire grâce à la seconde partie de la fonction de coût. Envoyer l'espace latent à un input de CNN classique très peu profond, GAP, Softmax ou un MLP, Softmax. Finetuner le réseau de bout en bout et voir ce que cela donne quand à la capacité de discrimination de l'approche. 
-    \item Générer des données en réalisant une génération d'instance au niveau de l'espace latent et utiliser la partie décodeur pour voir si cela donne des instances "utilisables" pour faire de la data génération.
+    \item Générer des données en réalisant une génération d'instance au niveau de l'espace latent grâce à des approches type SMOTE \cite{chawla2002smote} ou ADASYN \cite{he2008adasyn}  et utiliser la partie décodeur pour  faire de la data génération.
 \end{itemize}
 
 \subsubsection{Formalisation}

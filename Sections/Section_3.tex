@@ -2,8 +2,8 @@
 \chapter{Experimentations, Réalisations}
 \label{sec:SOTA}
 
-\section{Squeletisation}
-Afin de pouvoir réaliser des premiers tests  et pour avoir une première expérience des problèmes rencontrés, j'ai utilisé des versions de l'état de l'art des approches de classifications 
+\section{Squelettisation}
+Afin de pouvoir réaliser des premiers tests et pour avoir une première expérience des problèmes rencontrés, j'ai utilisé des versions de l'état de l'art des approches de classifications 
 
 \section{Représentation Graphe/Squelette porteuse de sens}
 Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
@@ -37,14 +37,12 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
 \hline
 \textbf{Méthode }                                                       & \textbf{Paramètres}  & \textbf{14 classes } & \textbf{28 classes }  \\ 
 \hline
-DD-Net (filtres \= 64, w/o global fast \& slow motion)     & 1.7M                 & 55.2\%               & 41.6\%                \\
 DD-NET (filtres \= 64)                                                   & 1.82M                & 94.6\%               & 91.9\%                \\
 DD-NET (filtres \= 32)                                                   & 0.50M                & 93.5\%               & 90.4\%                \\
 DD-NET (filtres \= 16)                                                   & 0.15M                & 91.8\%               & 90.0\%                \\
                                                                         &                      &                      &                       \\ 
 \hline
-DFS-DD-Net (filtres \= 64, w/o global fast \& slow motion) & M                    & \%                   & \%                    \\
-DFS-DD-NET (filtres \= 64)                                               & 1.84M                    & 95.7\%                   & \%                    \\
+DFS-DD-NET (filtres \= 64)                                               & 1.84M                    & 95.7\%                   & 95.7\%                    \\
 DFS-DD-NET (filtres \= 32)                                               & 0.51M                    & 95.5\%                   & 93.9\%                    \\
 DFS-DD-NET (filtres \= 16)                                               & 0.16M                & 93.1\%                   & 92.5\%                    \\
 \hline
@@ -86,7 +84,7 @@ Une fois la convergence obtenue, on peut imaginer deux utilisations:
 On pose le problème comme ceci: \newline
 $$\min _{\theta_{1}, \theta_{2}},\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta 1}(\mathbf{X})\right)\right\|^{2}$$
 
-Fonction de coût habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les parametres des blocs encodeur et decodeur de l’AE. 
+Fonction de coût habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les paramètres des blocs encodeur et decodeur de l’AE. 
 
 $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta_{1}}(\mathbf{X})\right)\right\|^{2}+\lambda\left\|f_{\theta_{1}}(\mathbf{X})-\mathbf{S}_{f_{\theta 1}}(\mathbf{X})\right\|^{2}$$
 

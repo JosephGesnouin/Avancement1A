@@ -57,7 +57,7 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
 
 \subsection{Sequence based}
 
-Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences. La plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
+Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences en matière de reconnaissance vocale, de traitement numérique des signaux, de traitement vidéo et d'analyse des données textuelles. La plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
 
 On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
 
@@ -71,11 +71,13 @@ Les approches Image-Based représentent le squelette sous la forme d'une pseudo-
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
 
+D'autres approches à base de CNN, les utilisent en tant que CNN 1D:
+
 Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
 
-Ainsi, Li et al.(2017)\cite{li2017skeleton} proposent de 
+Ainsi, Li et al.(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et al.(2017)\cite{ullah2017action} proposent un approche 
 
-
+\subsection{Attention}
 
 \subsection{Graph Based}
 

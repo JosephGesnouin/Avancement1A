@@ -57,11 +57,10 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
 
 \subsection{Sequence based}
 
-Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences. La plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent des cellules récurrentes 
-
-ce qui explique pourquoi la plupart des approches d'apprentissage profond pour la reconnaissance des gestes utilisent des cellules récurrentes comme la cellule de mémoire à long terme (LSTM) introduite par Hochreiter et Schmidhuber (1997) ou la cellule d'unité récurrente à portes (GRU) introduite par Cho et al. (2014).
+Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences. La plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
 
 On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
+
 
 
 \subsection{Image-Based}
@@ -71,6 +70,10 @@ Les approches Image-Based représentent le squelette sous la forme d'une pseudo-
 
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
+
+Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, puis de modéliser la dynamique temporelle par des couches récurrentes.
+
+Ainsi, Li et al.(2017)\cite{li2017skeleton} proposent de réaliser une 
 
 
 

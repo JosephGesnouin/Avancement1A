@@ -46,7 +46,7 @@ La seconde étape de l'approche consistera en la classification des actions de l
 
 Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two,zhang2016real,sevilla2018integration,DanutPOP} et la réprésentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
 
-Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéréssés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible d'être utilisée en temps réel:
+Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéréssés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible pour une utilisation en temps réel:
 
 \begin{itemize}
     \item En réduisant la taille des données d'entrée grâce à la structure de données associée aux squelettes, ce type d'approche est considéré comme bien plus rapide computationellement parlant que les modalitées listées précédement.
@@ -54,8 +54,16 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
 \end{itemize}
 
 
+
+
 \subsection{Image-Based}
-\subsection{Recurent neural network based}
+Les approches Image-Based représentent le squelette sous la forme d'une pseudo-image pour appliquer des réseaux de convolutions, ou tout autre version spatio-temporelle des CNN 
+
+L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
+
+\subsection{Sequence based}
+
+On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre. 
 \subsection{Graph Based}
 
 \section{Intention Prediction}

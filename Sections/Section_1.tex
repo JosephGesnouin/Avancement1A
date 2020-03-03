@@ -64,18 +64,20 @@ On représente le squelette sous forme d’une séquence et on y applique des r�
 
 
 \subsection{Image-Based}
-Les cellules récurrentes sont relativement lentes et difficiles à entrainer et à utiliser en temps réel comparé aux approches convolutives.
+Les cellules récurrentes sont relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives.
 
-Les approches Image-Based représentent le squelette sous la forme d'une pseudo-image pour appliquer des réseaux de convolutions, ou tout autre version spatio-temporelle des CNN 
+Les approches Image-Based peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des réseaux de convolutions, ou tout autre version spatio-temporelle des CNN.
 
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
 
-D'autres approches à base de CNN, les utilisent en tant que CNN 1D:
+En s'éloignant un peu plus du domaine image mais en conservant la dimension convolutive, d'autres approches à base de CNN, les utilisent en tant que CNN 1D:
 
 Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
 
-Ainsi, Li et al.(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et al.(2017)\cite{ullah2017action} proposent un approche 
+Ainsi, Li et al.(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et al.(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
+
+
 
 \subsection{Attention}
 

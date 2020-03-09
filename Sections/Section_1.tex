@@ -65,23 +65,20 @@ Ainsi, Baccouche et\textit{ al.}\cite{baccouche2011sequential} proposent une arc
 Avola et\textit{ al.} \cite{avola2018exploiting} exploitent les caractéristiques des angles de jointures apprises grâce à une architecture de type LSTM. 
 Zhang et\textit{ al.}\cite{zhang2017geometric} génèrent à partir des articulations, huit indicateurs géométriques et les évaluent avec un réseau LSTM à trois couches.
 Du et\textit{ al.}\cite{du2015hierarchical} divisent le squelette humain en cinq parties puis proposent une approche hierarchique séquentielle.
-Shukla et\textit{ al.}\cite{shukla2017recurrent} proposent une architecture récurente hierarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de jointures en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres diminuant le temps d'inférence sans dégrader la qualité du classificateur.
+Shukla et\textit{ al.}\cite{shukla2017recurrent} proposent une architecture récurente hierarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de jointures en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres, diminuant le temps d'inférence sans dégrader la qualité du classificateur.
 Shahroudy et\textit{ al.}\cite{shahroudy2016ntu} utilisent une approche LSTM se basant sur un apprentissage à long terme des cooccurrences d'articulations caractérisant intrinsèquement les actions humaines.
 Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adaptatif avec une architecture LSTM, permettant au réseau de s'adapter aux points de vue d'observation les plus appropriés de bout en bout afin de gérer les grandes variations d'orientation dans les actions.
 
  
 
 \subsection{Approches convolutives}
-Les cellules récurrentes sont relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives.
-
-Les approches convolutives deviennent une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et 
+Les cellules récurrentes étant relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives, celles-ci sont alors devenues une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et de rapidité.
 
 
+Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D: les données squelettiques sont des éléments de faible dimension. Il est naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
 
-Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D.
-L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
-En outre, les données squelettiques sont des éléments de faible dimension. Il est naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales
+
 
 Ainsi, Ke \textit{et\textit{ al.}}(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
 

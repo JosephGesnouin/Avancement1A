@@ -85,8 +85,9 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
 \end{figure}
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
-Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques envoyé dans une couche softmax pour la classification.
-Pham et\textit{ al.} \cite{pham2018learning}
+Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
+Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau résiduel\cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
+
 
 \textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
 recognition with gated convolutional neural networks,”}

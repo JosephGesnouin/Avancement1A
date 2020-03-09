@@ -95,20 +95,18 @@ Bai et\textit{ al.} \cite{bai2018empirical} montrent que les réseaux de convolu
 
 Par conséquent, Devineau et\textit{ al.} \cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles.
 Yang et\textit{ al.} \cite{2019arXiv190709658Y} proposent un modèle convolutif à trois branches prennant en entrée les positions des articulations du squelette à différentes vitesses et les distances par paires entre les articulations.
-Weng et\textit{ al.} \cite{weng2018deformable}
-
-
-
-Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
-
-Ainsi, Donahue et\textit{ al.} (2015) \cite{donahue2015long} proposent 
-
-Li et\textit{ al.}(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.}(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
-
+Weng et\textit{ al.} \cite{weng2018deformable} proposent un réseau de neurones déformable à convolution unidimensionnelle capable de découvrir les combinaisons d'articulations proteuses d'information et d'éviter les articulations non porteuses d'information.
 
 \textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
 recognition with gated convolutional neural networks,”}
 
+
+
+Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les nformations spatiales avec des couches convolutives, puis de modéliser la dynamique temporelle par des couches récurrentes.
+
+Ainsi, Donahue et\textit{ al.} (2015) \cite{donahue2015long} proposent 
+
+Li et\textit{ al.}(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.}(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
 \subsection{Attention}
 

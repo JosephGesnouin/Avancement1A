@@ -17,22 +17,19 @@ De ce fait, nous avons souhaité voir s'il était possible de réaliser l'analog
     \label{fig:Johansson}
 \end{figure}
 
-Par conséquent, nous 
-
 \textit{De ce fait, nous avons du nous intérésser à plusieurs étapes qui seront considérées comme des parties indépendantes de notre approche}
 
 
 PipeLine: SQUELETTE -> HAR -> INTENTION
 
 \section{Squelettisation de piétons}
-La nécéssité première de cette thèse consiste donc en l'obtention d'une squelettisation cohérente de chaque piéton présent dans l'image au fil du temps.
 
-Cette squelettisation sera ensuite utilisée en tant que donnée d'entrée de notre réseau afin d'en inférer une classe en fonction de la gestuelle de celui-ci.
+Afin d’aboutir à cet objectif, la première étape essentielle est la détection des piétons. De nombreuses méthodes existent dans l’état de l’art, notamment par apprentissage profond où les récents résultats sont tout à fait prometteurs. La méthode finale ciblée concernant la prédiction des intentions raisonne sur la posture des piétons et nécessite donc d’être à même d’effectuer une extraction des articulations majeures des piétons en temps réel pour ensuite alimenter la phase de prédiction.
 
 La tâche de détection est compliquée par la variabilité de l’apparence des personnes (vêtements, pose ...)
 ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.
 
-
+%https://nanonets.com/blog/human-pose-estimation-2d-guide/?utm_source=reddit&utm_medium=social&utm_campaign=pose&utm_content=GROUP_NAME
 
 
 \label{subsec:SQUEL}
@@ -53,25 +50,39 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
     \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invarriantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
+pb spatio temporel -> comment le traiter?
+
+\subsection{Approches récurrentes}
+
+Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences en matière de reconnaissance vocale, de traitement numérique des signaux, de traitement vidéo et d'analyse des données textuelles. 
 
 
-\subsection{Sequence based}
-
-Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences en matière de reconnaissance vocale, de traitement numérique des signaux, de traitement vidéo et d'analyse des données textuelles. La plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
+Ainsi, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
 
 On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
 
+Ainsi, Avola et al. \cite{avola2018exploiting} utilisent les caractéristiques des angles de jointures artisanales apprises par une architecture LSTM.
 
 
-\subsection{Image-Based}
+
+\subsection{Approches convolutives}
 Les cellules récurrentes sont relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives.
 
-Les approches Image-Based peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des réseaux de convolutions, ou tout autre version spatio-temporelle des CNN.
-
+Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D.
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
+Ainsi, Ke et al.(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
 
-En s'éloignant un peu plus du domaine image mais en conservant la dimension convolutive, d'autres approches à base de CNN, les utilisent en tant que CNN 1D:
+to transform a skeleton
+sequence to three video clips for robust feature learning
+and action recognition. We proposed to use a pre-trained
+CNN model followed by a temporal pooling layer to extract
+a compact representation of each frame. The CNN features
+of the three clips at the same time-step are concatenated in
+a single feature vector,
+
+
+En s'éloignant un peu plus du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN, les utilisent en tant que CNN 1D: 
 
 Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
 

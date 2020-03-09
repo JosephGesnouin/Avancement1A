@@ -50,7 +50,7 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
     \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invarriantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
-pb spatio temporel -> comment le traiter?
+pb spatio temporel -> comment le traiter? en gros lister les familles de action reco for skel
 
 \subsection{Approches récurrentes}
 
@@ -65,7 +65,7 @@ Ainsi, Baccouche et\textit{ al.}\cite{baccouche2011sequential} proposent une arc
 Avola et\textit{ al.} \cite{avola2018exploiting} exploitent les caractéristiques des angles de jointures apprises grâce à une architecture de type LSTM. 
 Zhang et\textit{ al.}\cite{zhang2017geometric} génèrent à partir des articulations, huit indicateurs géométriques et les évaluent avec un réseau LSTM à trois couches.
 Du et\textit{ al.}\cite{du2015hierarchical} divisent le squelette humain en cinq parties puis proposent une approche hierarchique séquentielle.
-Shukla et\textit{ al.}\cite{shukla2017recurrent} proposent une architecture récurente hierarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de jointures en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres, diminuant le temps d'inférence sans dégrader la qualité du classificateur.
+Shukla et\textit{ al.}\cite{shukla2017recurrent} proposent une architecture récurente hierarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de jointures en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres et diminuant le temps d'inférence sans dégrader la qualité du classificateur.
 Shahroudy et\textit{ al.}\cite{shahroudy2016ntu} utilisent une approche LSTM se basant sur un apprentissage à long terme des cooccurrences d'articulations caractérisant intrinsèquement les actions humaines.
 Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adaptatif avec une architecture LSTM, permettant au réseau de s'adapter aux points de vue d'observation les plus appropriés de bout en bout afin de gérer les grandes variations d'orientation dans les actions.
 
@@ -85,17 +85,11 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
 \end{figure}
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
-Ainsi, Ke \textit{et\textit{ al.}}(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
+Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques envoyé dans une couche softmax pour la classification.
+Pham et\textit{ al.} \cite{pham2018learning}
 
-to transform a skeleton
-sequence to three video clips for robust feature learning
-and action recognition. We proposed to use a pre-trained
-CNN model followed by a temporal pooling layer to extract
-a compact representation of each frame. The CNN features
-of the three clips at the same time-step are concatenated in
-a single feature vector,
-
-Cao et\textit{ al.}\cite{cao2018skeleton}
+\textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
+recognition with gated convolutional neural networks,”}
 
 
 En s'éloignant un peu plus du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN, les utilisent en tant que CNN 1D: 

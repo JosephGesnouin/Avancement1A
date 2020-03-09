@@ -75,10 +75,15 @@ Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adapta
 Les cellules récurrentes étant relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives, celles-ci sont alors devenues une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et de rapidité.
 
 
-Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D: les données squelettiques sont des éléments de faible dimension. Il est naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
+Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D: les données squelettiques sont des éléments de faible dimension. Il est donc naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
 
-
-
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Images/skeltoim.png}
+    \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
+    \label{fig:skeltoim}
+\end{figure}
+L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
 Ainsi, Ke \textit{et\textit{ al.}}(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
 

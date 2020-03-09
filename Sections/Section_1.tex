@@ -50,7 +50,7 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
     \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invarriantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
-La plupart des travaux existants dans la littérature se focalisent sur les approches basées sur la vidéo. Il existe à ce jour beaucoup moins de méthodes d'apprentissage traitant avec des données squelettiques pour entrée. Dans cette section, nous examinons une liste de ces approches basées sur l'apprentissage profond de reconnaissance d'actions sur des données squelettiques.
+La plupart des travaux existants dans la littérature se focalisent sur les approches basées sur la vidéo. Il existe à ce jour beaucoup moins de méthodes d'apprentissage traitant sur des données squelettiques comme entrée. Dans cette section, nous examinons une liste de ces approches basées sur l'apprentissage profond de reconnaissance d'actions sur des données squelettiques.
 
 \subsection{Approches récurrentes}
 
@@ -59,7 +59,7 @@ Ces dernières années, les réseaux de neurones récurrents ont  été les appr
 
 Analogiquement, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes type LSTM \cite{hochreiter1997long} ou GRU \cite{2014arXiv1406.1078C}.
 
-On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
+On représente le squelette sous forme d’une séquence et l'on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
 
 Ainsi, Baccouche et\textit{ al.}\cite{baccouche2011sequential} proposent une architecture combinant LSTM et RNN pour la reconnaissance d'actions.
 Avola et\textit{ al.} \cite{avola2018exploiting} exploitent les caractéristiques des angles de jointures apprises grâce à une architecture de type LSTM. 
@@ -75,7 +75,7 @@ Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adapta
 Les cellules récurrentes étant relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives, celles-ci sont alors devenues une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et de rapidité.
 
 
-Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D: les données squelettiques sont des éléments de faible dimension. Il est donc naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
+Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D. Les données squelettiques sont des éléments de faible dimension, il est donc naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
 
 \begin{figure}[H]
     \centering
@@ -83,7 +83,7 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
     \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
     \label{fig:skeltoim}
 \end{figure}
-L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.
+L’idée générale étant de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.
 
 
 Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
@@ -91,7 +91,12 @@ Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau ré
 Ludl et\textit{ al.} \cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.
 
 
-En s'éloignant un peu plus du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN, les utilisent en tant que CNN 1D: 
+En s'éloignant du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN les utilisent sous format 1D afin de modéliser des séquences:
+Bai et\textit{ al.}\cite{bai2018empirical} montrent que les réseaux de convolutions peuvent égaler, voire surpasser les performances des réseaux récurrents pour des tâches typiques de modélisation séquentielle.
+
+Ainsi, Devineau et\textit{ al.}\cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles. 
+
+
 
 Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
 
@@ -111,6 +116,8 @@ Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU emp
 \subsection{Graph Based}
 
 \section{Intention Prediction}
+
+\textbf{A ECRIRE}
 \textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire [16, 1, 5], ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
 
 Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.

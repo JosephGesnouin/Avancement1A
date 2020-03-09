@@ -57,13 +57,16 @@ pb spatio temporel -> comment le traiter?
 Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences en matière de reconnaissance vocale, de traitement numérique des signaux, de traitement vidéo et d'analyse des données textuelles. 
 
 
-Ainsi, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes comme les LSTM \cite{hochreiter1997long} ou les GRU \cite{2014arXiv1406.1078C}.
+Analogiquement, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes type LSTM \cite{hochreiter1997long} ou GRU \cite{2014arXiv1406.1078C}.
 
 On représente le squelette sous forme d’une séquence et on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
 
-Ainsi, Avola et al. \cite{avola2018exploiting} utilisent les caractéristiques des angles de jointures artisanales apprises par une architecture LSTM.
-
-
+Ainsi, Baccouche et\textit{ al.}\cite{baccouche2011sequential} proposent une architecture combinant LSTM et RNN pour la reconnaissance d'actions.
+Avola et\textit{ al.} \cite{avola2018exploiting} exploitent les caractéristiques des angles de jointures apprises grâce à une architecture LSTM. 
+Zhang et\textit{ al.}\cite{zhang2017geometric} génèrent à partir des articulations, huit indicateurs géométriques et les évaluent avec un réseau LSTM à trois couches.
+Du et\textit{ al.}\cite{du2015hierarchical} divisent le squelette humain en cinq parties puis proposent une approche hierarchique séquentielle.
+Shahroudyet\textit{ al.}\cite{shahroudy2016ntu} utilisent une approche LSTM se basant sur un apprentissage à long terme des cooccurrences d'articulations caractérisant intrinsèquement les actions humaines.
+Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adaptatif avec une architecture LSTM, qui permet au réseau lui-même de s'adapter aux points de vue d'observation les plus appropriés de bout en bout afin de gérer les grandes variations d'orientation dans les actions.
 
 \subsection{Approches convolutives}
 Les cellules récurrentes sont relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives.
@@ -71,7 +74,7 @@ Les cellules récurrentes sont relativement lentes et difficiles à entrainer ai
 Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D.
 L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
 
-Ainsi, Ke et al.(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
+Ainsi, Ke \textit{et\textit{ al.}}(2017) \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de clips vidéos
 
 to transform a skeleton
 sequence to three video clips for robust feature learning
@@ -86,9 +89,9 @@ En s'éloignant un peu plus du domaine image mais en conservant la notion de con
 
 Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les caractéristiques avec des couches convolutives, adaptées pour exploiter les informations spatiales, puis de modéliser la dynamique temporelle par des couches récurrentes.
 
-Ainsi, Donahue et al. (2015) \cite{donahue2015long} proposent 
+Ainsi, Donahue et\textit{ al.} (2015) \cite{donahue2015long} proposent 
 
-Li et al.(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et al.(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
+Li et\textit{ al.}(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.}(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
 
 

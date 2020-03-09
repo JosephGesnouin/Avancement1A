@@ -83,18 +83,19 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
     \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
     \label{fig:skeltoim}
 \end{figure}
-L’idée générale étant de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.
+L’idée générale étant de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.\\
 
 
 Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
 Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau résiduel \cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
-Ludl et\textit{ al.} \cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.
-
+Ludl et\textit{ al.} \cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.\\
 
 En s'éloignant du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN les utilisent sous format 1D afin de modéliser des séquences:
-Bai et\textit{ al.}\cite{bai2018empirical} montrent que les réseaux de convolutions peuvent égaler, voire surpasser les performances des réseaux récurrents pour des tâches typiques de modélisation séquentielle.
+Bai et\textit{ al.} \cite{bai2018empirical} montrent que les réseaux de convolutions peuvent égaler, voire surpasser les performances des réseaux récurrents pour des tâches typiques de modélisation séquentielle.\\
 
-Ainsi, Devineau et\textit{ al.}\cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles. 
+Par conséquent, Devineau et\textit{ al.} \cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles.
+Yang et\textit{ al.} \cite{2019arXiv190709658Y} proposent un modèle convolutif à trois branches prennant en entrée les positions des articulations du squelette à différentes vitesses et les distances par paires entre les articulations.
+Weng et\textit{ al.} \cite{weng2018deformable}
 
 
 

@@ -50,7 +50,7 @@ Selon notre problématique: lier la dynamique de la pose à une classe, nous nou
     \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invarriantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
-pb spatio temporel -> comment le traiter? en gros lister les familles de action reco for skel
+la plupart des travaux existants dans la littérature sur les réseaux de neurones se concentrent sur des approches basées sur la vidéo. il existe beaucoup moins de méthodes d'apprentissage approfondi publiées qui traitent des données squelettiques en entrée. Dans cette sous-section, nous examinons une liste de ces gestes basés sur l'apprentissage profond méthodes de reconnaissance sur des données squelettiques.
 
 \subsection{Approches récurrentes}
 
@@ -83,14 +83,12 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
     \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
     \label{fig:skeltoim}
 \end{figure}
-L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) et enfin réaliser une classification habituelle.
+L’idée étant d’utiliser la connaissance du domaine image qui s’est améliorée ces dernière années et de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.
+
 
 Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
-Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau résiduel\cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
-
-
-\textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
-recognition with gated convolutional neural networks,”}
+Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau résiduel \cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
+Ludl et\textit{ al.} \cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.
 
 
 En s'éloignant un peu plus du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN, les utilisent en tant que CNN 1D: 
@@ -101,6 +99,9 @@ Ainsi, Donahue et\textit{ al.} (2015) \cite{donahue2015long} proposent
 
 Li et\textit{ al.}(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.}(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
+
+\textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
+recognition with gated convolutional neural networks,”}
 
 
 \subsection{Attention}

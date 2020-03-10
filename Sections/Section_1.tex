@@ -116,13 +116,16 @@ Li et\textit{ al.} \cite{li2017skeleton} proposent une approche où LSTM et CNN 
 Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU empilées et un mécanisme d'attention globale ainsi que deux couches entièrement connectées.
 
 \subsection{Apprentissage géométrique profond}
-La recherche en apprentissage profond s'est jusqu'à présent principalement concentrée sur des données euclidiennes.
+La recherche en apprentissage profond pour la reconnaissance d'actions sur des données squelettiques s'est jusqu'à présent principalement concentrée sur des données euclidiennes.
 La nature non euclidienne de données sous format graphe rend l'utilisation d'opérations de base (comme la convolution) assez difficile à réaliser. 
-L'apprentissage géométrique profond (\textit{Geometric deep learning}\cite{scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
+L'apprentissage géométrique profond (\textit{Geometric deep learning}\cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
 
-L'utilisation de la structure de données format graphe pour un squelette lors de la classification d'actions humaines peut être intéréssante: Les CNN ont la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe peut être intéressante puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud).
+L'utilisation de la structure de données format graphe pour un squelette lors de la classification d'actions humaines peut être intéréssante: Les convolutions ont la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe peut être intéressante puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud). 
 
-Wu et\textit{ al.} \cite{wu2019comprehensive} fournit un état de l'art complet sur l'apprentissage geomtetrique.
+Wu et\textit{ al.} \cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage geométrique profond et propose une taxonomie pour différencier les reseaux géométriques en quatres catégories: récurrents, convolutionnels, auto-encodeurs et spatio-temporels.
+
+Par ailleurs, la majorité des 
+
 
 
 
@@ -137,7 +140,7 @@ Wu et\textit{ al.} \cite{wu2019comprehensive} fournit un état de l'art complet 
 Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.
 
 
-In the literature various terms such as intention, actionand behavior are used to describe what the agent is doing or about to do in the scene. Here, we distinguish intention as the underlying state of mind which cannot be observed but can be inferred from the behavior. This is opposed toactions and, more generally, behaviors, i.e. observable ac-tions such as walking or crossing, for which there is groundtruth available.
+\textit{In the literature various terms such as intention, actionand behavior are used to describe what the agent is doing or about to do in the scene. Here, we distinguish intention as the underlying state of mind which cannot be observed but can be inferred from the behavior. This is opposed toactions and, more generally, behaviors, i.e. observable ac-tions such as walking or crossing, for which there is groundtruth available.}
 
 
 

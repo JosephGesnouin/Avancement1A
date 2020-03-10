@@ -117,18 +117,19 @@ Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU emp
 
 \subsection{Apprentissage géométrique profond}
 La recherche en apprentissage profond s'est jusqu'à présent principalement concentrée sur des données euclidiennes.
-L'apprentissage géométrique profond (\textit{Geometric deep learning}\cite{bronstein2017geometric}) est un terme générique désignant les techniques qui tentent de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes.
+La nature non euclidienne de données sous format graphe rend l'utilisation d'opérations de base (comme la convolution) assez difficile à réaliser. 
+L'apprentissage géométrique profond (\textit{Geometric deep learning}\cite{scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
 
-La nature non euclidienne des données rend l'utilisation des opérations de base (convolutions) assez difficile à réaliser. L'apprentissage approfondi de la géométrie traite en ce sens de l'extension des techniques d'apprentissage approfondi aux graphiques
+L'utilisation de la structure de données format graphe pour un squelette lors de la classification d'actions humaines peut être intéréssante: Les CNN ont la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe peut être intéressante puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud).
 
-\textit{ En changeant complètement le type de structure de données utilisées, on change les problématiques :
-	On ne travaille plus dans un environnement euclidien, les CNN ne sont donc plus applicables si l’on souhaite travailler sous format graphe. 
-	Surcouche des CNN : Les CNN ont la capacité d'extraire des caractéristiques spatiales locales. Les graphes peuvent être intéressants puisque ils sont par définition, des structures connectées localement (l’ensemble des voisins d’un nœud). Certains travaux présentent leur méthodes de Graph Neural Network comme une généralisation des CNN.
-	Petits graphes (15-30 nœuds par personne) : complexité maitrisée plus facilement, ce qui peut être intéressant une fois que l’on souhaite faire du temps réel, mais ce n’est qu’une supposition. De mémoire les algorithmes type graphe restent des méthodes dont la complexité en terme de temps/coût reste la plus optimisée, je peux dire une bêtise.
-	Des versions temporelles des graphs neural network existent.}
+Wu et\textit{ al.} \cite{wu2019comprehensive} fournit un état de l'art complet sur l'apprentissage geomtetrique.
 
 
-\section{Intention Prediction}
+
+
+
+
+\section{Prédiction d'intention}
 
 \textbf{A ECRIRE}
 \textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire, ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà la rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}

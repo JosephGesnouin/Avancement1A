@@ -75,7 +75,7 @@ Zhang et\textit{ al.}\cite{zhang2017view} proposent un réseau récurrent adapta
 Les cellules récurrentes étant relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives, celles-ci sont alors devenues une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et de rapidité.
 
 
-Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D. Les données squelettiques sont des éléments de faible dimension, il est donc naturel d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
+Les approches convolutives peuvent par exemple représenter le squelette sous la forme d'une pseudo-image pour appliquer des convolutions 2D, ou tout autre version spatio-temporelle des CNN comme les convolutions 3D. Les données squelettiques sont des éléments de faible dimension, il est donc envisageable d'organiser une séquence de caractéristiques du squelette de manière chronologique dans une image, qui conserve les informations originales de la dynamique du squelette.
 
 \begin{figure}[H]
     \centering
@@ -88,6 +88,7 @@ L’idée générale étant de structurer les données pour leur donner la forme
 
 Ainsi, Ke et\textit{ al.} \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
 Pham et\textit{ al.} \cite{pham2018learning} proposent d'utiliser un réseau résiduel \cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
+Cao et\textit{ al.}\cite{cao2018skeleton} proposent de classifier l'image obtenue grâce à des gated convolutions.
 Ludl et\textit{ al.} \cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.\\
 
 En s'éloignant du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN les utilisent sous format 1D afin de modéliser des séquences:
@@ -95,21 +96,24 @@ Bai et\textit{ al.} \cite{bai2018empirical} montrent que les réseaux de convolu
 
 Par conséquent, Devineau et\textit{ al.} \cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles.
 Yang et\textit{ al.} \cite{2019arXiv190709658Y} proposent un modèle convolutif à trois branches prennant en entrée les positions des articulations du squelette à différentes vitesses et les distances par paires entre les articulations.
-Weng et\textit{ al.} \cite{weng2018deformable} proposent un réseau de neurones déformable à convolution unidimensionnelle capable de découvrir les combinaisons d'articulations proteuses d'information et d'éviter les articulations non porteuses d'information.
-
-\textit{Cao et\textit{ al.}\cite{cao2018skeleton}(Gated CNN Skeleton-based action)
-recognition with gated convolutional neural networks,”}
+Weng et\textit{ al.} \cite{weng2018deformable} proposent un réseau de neurones déformable à convolution unidimensionnelle capable de découvrir les combinaisons d'articulations proteuses d'information et d'éviter les articulations dont la sémantique n'apporte que peu au modèle.
 
 
 
-Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les nformations spatiales avec des couches convolutives, puis de modéliser la dynamique temporelle par des couches récurrentes.
+Les réseaux récurrents et les réseaux convolutifs peuvent également être fusionnés. L'approche consiste à extraire les informations spatiales avec des couches convolutives, puis de modéliser la dynamique temporelle par des couches récurrentes.
 
-Ainsi, Donahue et\textit{ al.} (2015) \cite{donahue2015long} proposent 
-
-Li et\textit{ al.}(2017)\cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.}(2017)\cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
+Ainsi, Donahue et\textit{ al.} \cite{donahue2015long} proposent d'extraire les informations visuelles d'images provenant d'une vidéo grâce à un CNN 2D puis de les envoyer en entrée d'un LSTM.
+Li et\textit{ al.} \cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (late fusion). Ullah et\textit{ al.} \cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
 \subsection{Attention}
-
+ La perception humaine se concentre sur les parties les plus pertinentes d'une image pour acquérir des informations permettant de comprendre la sémantique de celle-ci. Pour le machine learning, ce phénomène est artificiellement recréé  par le phénomène d'attention \cite{2017arXiv170603762V}: conceptuellement, l'attention permet de quantifier l'interdépendance entre deux objets. Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pondérer l'importance de certains instants de l'action pour la classifier ou encore pondérer l'importance de certaines jointures du squelette à l'instar d'autres jointures. L'attention n'est pas à proprement parler une architecture au même titre que les réseaux récurrents ou les réseaux de convolution mais sert à envoyer des informations porteuses de sens aux layers.\\
+ 
+ On distingue deux types d'attention: \textit{soft attention} et \textit{hard attention}:
+ \begin{itemize}
+     \item \textit{Hard attention}: consiste en la suppression pure et simple de données lors de la selection des données d'entrée: les caractéristiques non pertinentes de l'environnement en dehors de la région considérée comme importante sont ignorés.
+     \item \textit{Soft attention}: consite en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
+ \end{itemize}
+ 
 Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU empilées et un mécanisme d'attention globale ainsi que deux couches entièrement connectées.
 
 \subsection{Graph Based}
@@ -117,7 +121,7 @@ Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU emp
 \section{Intention Prediction}
 
 \textbf{A ECRIRE}
-\textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire [16, 1, 5], ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
+\textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire, ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà laa rue ou sont sur le point de le faire, c'est-à-dire que ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
 
 Un remède aux inconvénients courants des algorithmes basés sur la trajectoire est d'anticiper l'action en estimant sa cause ou son intention non déviante.
 

@@ -115,7 +115,18 @@ Li et\textit{ al.} \cite{li2017skeleton} proposent une approche où LSTM et CNN 
  
 Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU empilées et un mécanisme d'attention globale ainsi que deux couches entièrement connectées.
 
-\subsection{Graph Based}
+\subsection{Geometric deep learning}
+
+
+\textit{research on DL techniques has mainly focused so far on data defined on Euclidean domains (i.e. grids). Nonetheless, in a multitude of different fields, such as: Biology, Physics, Network Science, Recommender Systems and Computer Graphics; one may have to deal with data defined on non-Euclidean domains (i.e. graphs and manifolds). The adoption of Deep Learning in these particular fields has been lagging behind until very recently, primarily since the non-Euclidean nature of data makes the definition of basic operations (such as convolution) rather elusive. Geometric Deep Learning deals in this sense with the extension of Deep Learning techniques to graph/manifold structured data.
+This website represents a collection of materials in the field of Geometric Deep Learning. We collect workshops, tutorials, publications and code, that several differet researchers has produced in the last years. Our goal is to provide a general picture of this new and emerging field, which is rapidly developing in the scientific community, thanks to the broad applicability it presents.}
+
+\textit{ En changeant complètement le type de structure de données utilisées, on change les problématiques :
+	On ne travaille plus dans un environnement euclidien, les CNN ne sont donc plus applicables si l’on souhaite travailler sous format graphe. 
+	Surcouche des CNN : Les CNN ont la capacité d'extraire des caractéristiques spatiales locales. Les graphes peuvent être intéressants puisque ils sont par définition, des structures connectées localement (l’ensemble des voisins d’un nœud). Certains travaux présentent leur méthodes de Graph Neural Network comme une généralisation des CNN.
+	Petits graphes (15-30 nœuds par personne) : complexité maitrisée plus facilement, ce qui peut être intéressant une fois que l’on souhaite faire du temps réel, mais ce n’est qu’une supposition. De mémoire les algorithmes type graphe restent des méthodes dont la complexité en terme de temps/coût reste la plus optimisée, je peux dire une bêtise.
+	Des versions temporelles des graphs neural network existent.}
+
 
 \section{Intention Prediction}
 

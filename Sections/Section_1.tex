@@ -113,18 +113,25 @@ Li et\textit{ al.} \cite{li2017skeleton} proposent une approche où LSTM et CNN 
      \item \textit{Soft attention}: consite en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
  \end{itemize}
  
+ %https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/
+ 
 Maghoumi et\textit{ al.}\cite{maghoumi2019deepgru} proposent des unités GRU empilées et un mécanisme d'attention globale ainsi que deux couches entièrement connectées.
 
 \subsection{Apprentissage géométrique profond}
-La recherche en apprentissage profond pour la reconnaissance d'actions sur des données squelettiques s'est jusqu'à présent principalement concentrée sur des données euclidiennes.
-La nature non euclidienne de données sous format graphe rend l'utilisation d'opérations de base (comme la convolution) assez difficile à réaliser. 
-L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par exemple \cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
+L'évolution du squelette du corps humain au cours du temps peut être considérée comme un graphe dynamique. Cependant, la recherche en apprentissage profond pour la reconnaissance d'actions sur des données squelettiques s'est jusqu'à présent principalement concentrée sur des données euclidiennes (format grille tel une image).
+La nature non euclidienne de données sous format graphe rend l'utilisation d'opérations de base (comme la convolution) difficile à réaliser. 
 
-L'utilisation de la structure de données format graphe pour un squelette lors de la classification d'actions humaines peut être intéréssante: les convolutions ont par définition la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe peuvent être intéressantes puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud). De cette manière, représenter le squelette sous la forme d'un graphe peut avoir l'avantage de ne pas exploiter des liens de voisinages entre joints inexistants.
+Pour autant, l'utilisation de la structure de données format graphe pour un squelette lors de la classification d'actions humaines peut être intéréssante:
+
+les convolutions ont par définition la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe sont adaptées puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud). De cette manière, représenter le squelette sous la forme d'un graphe peut avoir l'avantage de ne pas exploiter des liens de voisinages entre joints inexistants mais de conserver une sémantique spatiale cohérente pour le squelette.
+
+L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par exemple \cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
 
 Wu et\textit{ al.} \cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage geométrique profond et propose une taxonomie pour différencier les reseaux géométriques en quatres catégories: récurrents, convolutionnels, auto-encodeurs et spatio-temporels.
 
-Ainsi, la majorité des architectures classiques d'apprentissage profond sont actuellement en cours 
+Ainsi, 
+
+
 
 
 

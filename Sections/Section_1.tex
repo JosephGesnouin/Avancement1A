@@ -106,11 +106,11 @@ Ainsi, Donahue et\textit{ al.} \cite{donahue2015long} proposent d'extraire les i
 Li et\textit{ al.} \cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (\textit{late fusion}). Ullah et\textit{ al.} \cite{ullah2017action} proposent un approche bidirectionnelle où, les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
 \subsection{Attention}
- La perception humaine se concentre sur les parties les plus pertinentes d'une image pour acquérir des informations permettant de comprendre la sémantique de celle-ci. Pour le machine learning, ce phénomène est artificiellement recréé  par le phénomène d'attention \cite{bahdanau2014neural,2017arXiv170603762V}: conceptuellement, l'attention peut être interprétée au sens large comme un vecteur de poids d'importance. Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pondérer l'importance de certains instants de l'action pour la classifier ou encore pondérer l'importance de certaines jointures du squelette à l'instar d'autres jointures.
-Luong et \textit{al.}\cite{luong2015effective} distingue deux types d'attention: \textit{soft attention} et \textit{hard attention}:
+La perception humaine se concentre sur les parties les plus pertinentes d'une image pour acquérir des informations permettant de comprendre la sémantique de celle-ci. Pour le machine learning, ce phénomène est artificiellement recréé  par le phénomène d'attention \cite{bahdanau2014neural,2017arXiv170603762V}: conceptuellement, l'attention peut être interprétée au sens large comme un vecteur de poids d'importance. Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pondérer l'importance de certains instants de l'action pour la classifier ou encore pondérer l'importance de certaines jointures du squelette à l'instar d'autres jointures.
+Luong et \textit{al.}\cite{luong2015effective} distingue deux types d'attention: \textit{global attention} et \textit{local attention}:
  \begin{itemize}
-     \item \textit{Hard attention}: consiste en la suppression pure et simple de données lors de la selection des données d'entrée: les caractéristiques non pertinentes de l'environnement en dehors de la région considérée comme importante sont ignorées.
-     \item \textit{Soft attention}: consite en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
+     \item \textit{Local attention}: consiste en la suppression pure et simple de données lors de la selection des données d'entrée: les caractéristiques non pertinentes de l'environnement en dehors de la région considérée comme importante sont ignorées.
+     \item \textit{Global attention}: consite en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
  \end{itemize}
  
  %https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/

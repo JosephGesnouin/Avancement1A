@@ -23,10 +23,19 @@ Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la d
 
 \section{Squelettisation de piétons}
 
-Afin d’aboutir à cet objectif, la première étape essentielle est la détection et squelettisation des piétons. De nombreuses méthodes existent dans l’état de l’art, notamment par apprentissage profond où les récents résultats sont tout à fait prometteurs. La méthode finale ciblée concernant la prédiction des intentions raisonne sur la posture des piétons et nécessite donc d’être à même d’effectuer une extraction des articulations majeures des piétons en temps réel pour ensuite alimenter la phase de prédiction. L’objectif final étant orienté vers la prédiction des intentions, notre pipeline se basera sur des approches de l’état de l’art ayant démontré de bonnes performances et présentant des temps de calcul compatibles avec une utilisation temps réel.
+Afin d’aboutir à cet objectif, la première étape essentielle est la détection et squelettisation des piétons. De nombreuses méthodes existent dans l’état de l’art, notamment par apprentissage profond où les récents résultats sont tout à fait prometteurs. La méthode finale ciblée concernant la prédiction des intentions raisonne sur la posture des piétons et nécessite donc d’être à même d’effectuer une extraction des articulations majeures des piétons en temps réel pour ensuite alimenter la phase de prédiction.
+
+L’objectif final étant orienté vers la prédiction des intentions, notre pipeline se basera sur des approches de l’état de l’art ayant démontré de bonnes performances et présentant des temps de calcul compatibles avec une utilisation temps réel.\\
 
 La tâche de détection est compliquée par la variabilité de l’apparence des personnes (vêtements, pose ...)
-ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.
+ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou encore dûs à des problèmes d'echelle dans l'image.\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Images/Difficulties.png}
+    \caption{Exemple de cas difficiles pour des algorithmes de squelettisation: vêtements et luminosité à gauche, occlusion et échelle à droite.}
+    \label{fig:difficulte}
+\end{figure}
 
 %https://nanonets.com/blog/human-pose-estimation-2d-guide/?utm_source=reddit&utm_medium=social&utm_campaign=pose&utm_content=GROUP_NAME
 

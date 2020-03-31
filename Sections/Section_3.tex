@@ -108,22 +108,24 @@ $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\lef
 
 Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante linéaire (LDA).
 
-Une fois, l'entrainement de l'autoencodeur réalisé, récupération des poids de la partie encodeur: $f_{\theta 1}$, ajout d'une fonction classifieur softmax: 
+Une fois, l'entrainement de l'autoencodeur réalisé, récupération des poids de la partie encodeur: $f_{\theta 1}$, ajout d'une fonction classifieur softmax:\\ 
+
+$\sigma(\mathbf{z})_{j}=\frac{\mathrm{e}^{z_{j}}}{\sum_{k=1}^{K} \mathrm{e}^{z_{k}}} \text { pour  tout } j \in\{1, \ldots, K\}$
 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\linewidth]{Images/Autoencoder_modifié.png}
+    \includegraphics[width=0.8\linewidth]{Images/Autoencoder_modif.png}
     \caption{Pipeline de l'approche}
     \label{fig:AEmodif}
 \end{figure}
 
 \subsection{Tests et évaluation}
-J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.
+J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.\\
 
-Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres comportant la partie encodeur de l'autoencodeur et une softmax
+\textit{ \textbf{réécrire + nouveaux résultats} Le modèle final finetuné est assez trivial: un MLP à 0.13M de paramètres comportant la partie encodeur de l'autoencodeur et une softmax
 
-Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par seconde) donc très rapide comparé aux autres approches, même si l'accuracy laisse à désirer. A titre de comparaison, j'ai réalisé la même pipeline avec un AE MLP et une fonction de coût habituelle, je tombe sur 86.2\% donc j'imagine qu'il y'a un petit truc à creuser, pas nécéssairement sur la course à l'accuracy mais sur la vitesse de l'approche.
+\textit{Au final, on obtient un modèle à 88.6\% d'accuracy (23k classification par seconde) donc très rapide comparé aux autres approches, même si l'accuracy laisse à désirer. A titre de comparaison, j'ai réalisé la même pipeline avec un AE MLP et une fonction de coût habituelle, je tombe sur 86.2\% donc j'imagine qu'il y'a un petit truc à creuser, pas nécéssairement sur la course à l'accuracy mais sur la vitesse de l'approche.}}
 
 \subsection{Remarques}
 \begin{itemize}

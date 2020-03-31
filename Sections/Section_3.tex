@@ -108,6 +108,16 @@ $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\lef
 
 Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante linéaire (LDA).
 
+Une fois, l'entrainement de l'autoencodeur réalisé, récupération des poids de la partie encodeur: $f_{\theta 1}$, ajout d'une fonction classifieur softmax: 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Images/Autoencoder_modifié.png}
+    \caption{Pipeline de l'approche}
+    \label{fig:AEmodif}
+\end{figure}
+
 \subsection{Tests et évaluation}
 J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.
 

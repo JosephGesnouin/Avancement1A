@@ -127,18 +127,26 @@ J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SH
 \centering
 \scalebox{0.75}{
 \begin{tabular}{l|l|l|l|l}
-\textbf{Réseau}                                 & \textbf{Nb Params} & \textbf{SHREC 14} & \textbf{SHREC 28} & \textbf{FPS}  \\ 
+\textbf{Réseau}                                 & \textbf{Nb Params} & \textbf{SHREC 14} & \textbf{SHREC 28} & \textbf{FPS (RTX 2080 ti)}  \\ 
 \hline
 Sans initialisation                      &          1.2M &         91.2\% &          &     20 000 \\
-Avec initialisation AE classique (\lambda = 0)        &          1.2M &          91.5\%&          &      20 000\\
-Avec initialisation AE Modifié (\lambda = 5)          &          1.2M &          92.5\%&          &      20 000\\
-Avec initialisation AE Modifié (\lambda = &           &          &          &      \\
-Avec initialisation AE Modifié (\lambda = &           &          &          &      \\
-Avec initialisation AE Modifié (\lambda &           &          &          &      \\
-Avec initialisation AE Modifié (\lambda &           &          &          &     
+Avec initialisation AE classique (\lambda = 0)        &          1.2M &          91.5\%&          &      -\\
+Avec initialisation AE Modifié (\lambda = 5)          &          1.2M &          92.5\%&          &      -\\
+Avec initialisation AE Modifié (\lambda =1) &          1.2M &          91.9\%&          &      -\\
+Avec initialisation AE Modifié (\lambda = &           &          &          &      -\\
+Avec initialisation AE Modifié (\lambda &           &          &          &      -\\
+Avec initialisation AE Modifié (\lambda &           &          &          &     -
 \end{tabular}}
 \caption{Résulats obtenus grâce à l'initialisation des poids avec un AE modifié sur SHREC \cite{de2017shrec}}
 \end{table}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Images/tsne_results.png}
+    \caption{Visualisation des espaces latents via T-Sne: à gauche auto-encodeur classique, à droite auto-encodeur modifié ($\lambda$ = 10)}
+    \label{fig:AEmodifTSNE}
+\end{figure}
 
 \subsection{Remarques}
 \begin{itemize}

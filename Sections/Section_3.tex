@@ -2,9 +2,6 @@
 \chapter{Experimentations, Réalisations}
 \label{sec:SOTA}
 
-\section{Squelettisation}
-Afin de pouvoir réaliser des premiers tests et pour avoir une première expérience des problèmes rencontrés, j'ai utilisé des versions de l'état de l'art des approches de classifications 
-
 \section{Représentation Graphe/Squelette porteuse de sens}
 Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
 
@@ -109,7 +106,7 @@ Fonction de coût habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les
 
 $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta_{1}}(\mathbf{X})\right)\right\|^{2}+\lambda\left\|f_{\theta_{1}}(\mathbf{X})-\mathbf{S}_{f_{\theta 1}}(\mathbf{X})\right\|^{2}$$
 
-Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante (LDA / QDA / FDA).
+Ajout d'une variation dans la fonction de coût: avec S la matrice de projection des individus dans l'espace latent obtenue avec une analyse discriminante linéaire (LDA).
 
 \subsection{Tests et évaluation}
 J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.

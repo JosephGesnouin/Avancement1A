@@ -127,13 +127,14 @@ J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SH
 \centering
 \scalebox{0.75}{
 \begin{tabular}{l|l|l|l|l}
+\hline
 \textbf{Réseau}                                 & \textbf{Nb Params} & \textbf{SHREC 14} & \textbf{SHREC 28} & \textbf{FPS (RTX 2080 ti)}  \\ 
 \hline
 Sans initialisation                      &          1.2M &         91.2\% &          86.3\%&     20 000 \\
 Avec initialisation AE classique (\lambda = 0)        &          1.2M &          91.5\%&          85.9\%&      -\\
 Avec initialisation AE Modifié (\lambda =1) &          1.2M &          91.9\%&          87.6\%&      -\\
 Avec initialisation AE Modifié (\lambda = 2.5) &           1.2M&          92.4\%&          86.9\%&     -\\
-Avec initialisation AE Modifié (\lambda = 5)          &          1.2M &          \textbf{92.5\%}&         \textbf{87.8}\% &      -\\
+Avec initialisation AE Modifié (\lambda = 5)          &          1.2M &          \textbf{92.9\%}&         \textbf{87.8}\% &      -\\
 Avec initialisation AE Modifié (\lambda = 7.5) &          1.2M &         91.9\% &          86.4\%&      -\\
 Avec initialisation AE Modifié (\lambda = 10) &          1.2M &          90.9\%&          85.2\%&      -
 
@@ -142,6 +143,31 @@ Avec initialisation AE Modifié (\lambda = 10) &          1.2M &          90.9\%
 \caption{Résulats obtenus grâce à l'initialisation des poids avec un AE modifié sur SHREC \cite{de2017shrec}}
 \end{table}
 
+
+
+
+\begin{table}
+\scalebox{0.7}{
+\centering
+\begin{tabular}{l|l|l|l} 
+\hline
+\textbf{Methode}                  & \textbf{Nb Params} & \textbf{\textcolor[rgb]{0.129,0.145,0.161}{Average accuracy of 3 splits ~})\textcolor[rgb]{0.129,0.145,0.161}{}~} & \textbf{Classifications par secondes}  \\
+\hline
+Chained Net (ICCV17)              & 17.50 M            & 56.8\%                                                                                                                                        & 33 (1080 Ti)                           \\
+EHPI~ (ITSC19)                    & 1.22 M             & 65.5\%                                                                                                                                        & 29 (1080 Ti)                           \\
+PoTion (CVPR18)                   & 4.87 M             & 67.9\%                                                                                                                                        & 100 (1080 Ti)                          \\
+DD-Net                            & 1.82M              & 77.2\%                                                                                                                                        & 2,200 (1080 Ti)                        \\ 
+\hline
+Sans initialisation (\lambda =0)~ & 0.67M                  &   65.2\%                                                                                                                                            & -                                      \\
+
+Avec initialisation AE classique (\lambda =0)~ & 0.67M                  &   66.4\%                                                                                                                                            & -                                      \\
+Avec initialisation AE modifié (\lambda =1)    & -                  &          66.2\%                                                                                                                                     & -                                      \\
+Avec initialisation AE modifié (\lambda =2.5)   & -                  &          68.3\%                                                                                                                                     & -                                      \\
+Avec initialisation AE modifié (\lambda =5)   & -                  &        67.9\%                                                                                                                                       & -                                      \\
+Avec initialisation AE modifié (\lambda =7.5)   & -                  &          66.5\%                                                                                                                                     & -                                      \\
+\hline
+\end{tabular}}
+\end{table}
 
 \begin{figure}[H]
     \centering

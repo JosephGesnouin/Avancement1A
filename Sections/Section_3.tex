@@ -130,8 +130,9 @@ J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SH
 \hline
 \textbf{Méthode}                                 & \textbf{Nb Params} & \textbf{SHREC 14} & \textbf{SHREC 28} & \textbf{FPS (RTX 2080 ti)}  \\ 
 \hline
-LDA sur l'input                   &          - &         33.0\% &          -\%&      \\
-LDA sur le bottleneck AE modifié (\lambda = 5)              &          - &         33.0\% &          -\%&      \\
+LDA sur l'input                   &          - &         33.0\% &          27.6\%&      \\
+LDA sur le bottleneck AE classique (\lambda = 0)              &          - &         37.9\% &          42.8\%&      \\
+LDA sur le bottleneck AE modifié (\lambda = 5)              &          - &         43.5\% &          35.6\%&      \\
 \hline
 MLP Sans initialisation                      &          1.2M &         91.2\% &          85.2\%&     20 000 \\
 MLP Avec initialisation AE classique (\lambda = 0)        &          1.2M &          91.5\%&          85.9\%&      -\\
@@ -194,14 +195,12 @@ Avec initialisation AE modifié (\lambda =7.5)   & -                  &         
 
 \subsection{A creuser}
 
-
-
-Visualisation T-SNE et PCA des embeddings (comme en text-mining).
-Essayer plusieurs structures plus travaillées qu'un simple MLP:
+\textit{Essayer plusieurs structures plus travaillées qu'un simple MLP:
 \begin{itemize}
     \item AE: Convolutions / Attention / Séquentiel / VAE.
     \item analyse discriminante: QDA  pour ne pas émettre de suppositions vis-à-vis des matrices de covariance de chaque classes
 \end{itemize}
 
-Rien n'est fixé dans la fonction de coût, j'imagine qu'ajouter un autre critère de régularization ne peut être que bénéfique, mais vu les prolèmes de convergence actuels, je préfère ne pas le tenter pour l'instant.
+Rien n'est fixé dans la fonction de coût, j'imagine qu'ajouter un autre critère de régularization ne peut être que bénéfique, mais vu les prolèmes de convergence actuels, je préfère ne pas le tenter pour l'instant.}
+
 

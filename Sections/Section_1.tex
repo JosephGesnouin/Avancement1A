@@ -45,18 +45,18 @@ ainsi que par des phénomènes d’occlusions, dûs à la foule et au décor ou 
     \caption{Exemple de cas difficiles pour des algorithmes de squelettisation: vêtements et luminosité à gauche, occlusion et échelle à droite.}
     \label{fig:difficulte}
 \end{figure}
-Ces difficultés sont l'une des causes de la recrudescence de l'intérêt des chercheurs pour traiter l'estimation de pose selon des approches d'apprentissage profond plutôt que par simple approche statistique comme cela était réalisé il y'a quelques années.\\
+Ces difficultés sont l'une des causes de la recrudescence de l'intérêt des chercheurs pour traiter l'estimation de pose selon des approches d'apprentissage profond plutôt que par simple approche statistique comme cela était réalisé précédement.\\
 
 L'état actuel de la recherche dans ce domaine permet de discriminer les approches de squelettisation MultiPersonnes en deux types d'approches foncièrement différentes dans leur fonctionnement: ici définies comme les méthodes Top-Down et les méthodes Bottom-up.
 \begin{itemize}
-    \item \textbf{Top Down}: consiste en l'ajout d'un détecteur de personnes afin d'identifier tous les keypoints de chaque personne et enfin calculer la pose pour celles-ci.
+    \item \textbf{Top down}: consiste en l'ajout d'un détecteur de personnes afin d'identifier tous les keypoints de chaque personne et enfin calculer la pose pour celles-ci.
     \item \textbf{Bottom up}: consiste à détecter tous les keypoints de l'image (\textit{i.e} les membres de chaque personne), puis d'associer ces keypoints à leur propriétaires respectifs.
 \end{itemize}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\linewidth]{Images/topvsbottom.png}
-    \caption{En haut: Un exemple d'approche Top down. En bas: Un exemple d'approche Bottom up}
+    \includegraphics[width=1\linewidth]{Images/topvsbottom2.png}
+    \caption{En haut: Un exemple d'approche Top down. En bas: Un exemple d'approche Bottom up (\textit{https://github.com/JosephGesnouin/Jupyters\_Nocode\_YolOpenpose})}
     \label{fig:topvsbottom}
 \end{figure}
 

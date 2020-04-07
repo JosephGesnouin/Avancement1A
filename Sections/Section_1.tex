@@ -56,16 +56,15 @@ L'état actuel de la recherche dans ce domaine permet de discriminer les approch
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\linewidth]{Images/topvsbottom2.png}
-    \caption{En haut: Un exemple d'approche Top down. En bas: Un exemple d'approche Bottom up (\textit{https://github.com/JosephGesnouin/Jupyters\_Nocode\_YolOpenpose})}
+    \caption{En haut: Un exemple d'approche Bottom up. En bas: Un exemple d'approche Top down.}
     \label{fig:topvsbottom}
 \end{figure}
 
-
-
 \label{subsec:SQUEL}
-\subsection{Approches Top Down}
-Computationnellement, les méthodes Top Down sont généralement plus longues, cela s'expliquant par l'ajout d'une étape
 \subsection{Approches Bottom Up}
+Les approches Bottom up reposent sur des algorithmes de 
+\subsection{Approches Top Down}
+Les méthodes Top Down sont actuellements plus précises en terme 
 \subsection{De la question de la dimension}
 
 \section{Human Action Recognition}
@@ -73,7 +72,7 @@ Computationnellement, les méthodes Top Down sont généralement plus longues, c
 
 La seconde étape de l'approche consistera en la classification des actions de la personne. La reconnaissance de l'action humaine dans une vidéo est un sujet de recherche difficile de par la grande variation et la complexité des données en entrée.
 
-Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two,zhang2016real,sevilla2018integration,DanutPOP} et la réprésentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
+Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two}\\\cite{zhang2016real}\cite{sevilla2018integration,DanutPOP} et la réprésentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
 
 Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéréssés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible pour une utilisation en temps réel:
 

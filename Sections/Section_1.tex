@@ -49,7 +49,7 @@ Ces difficultés sont l'une des causes de la recrudescence de l'intérêt des ch
 
 L'état actuel de la recherche dans ce domaine permet de discriminer les approches de squelettisation MultiPersonnes en deux types d'approches foncièrement différentes dans leur fonctionnement: ici définies comme les méthodes Top-Down et les méthodes Bottom-up.
 \begin{itemize}
-    \item \textbf{Top down}: consiste en l'ajout d'un détecteur de personnes afin d'identifier tous les keypoints de chaque personne et enfin calculer la pose pour celles-ci.
+    \item \textbf{Top down}: consiste en l'ajout d'un détecteur de personnes afin d'identifier tous les keypoints de chaque personne et ensuite calculer la pose pour celles-ci.
     \item \textbf{Bottom up}: consiste à détecter tous les keypoints de l'image (\textit{i.e} les membres de chaque personne), puis d'associer ces keypoints à leur propriétaires respectifs.
 \end{itemize}
 
@@ -62,10 +62,32 @@ L'état actuel de la recherche dans ce domaine permet de discriminer les approch
 
 \label{subsec:SQUEL}
 \subsection{Approches Bottom Up}
-Les approches Bottom up reposent sur des algorithmes de 
+Les approches Bottom up reposent généralement sur des algorithmes de matching, de théorie des graphes, d'optimisation combinatoire ou encore sur des algorithmes gloutons permettant d'attribuer à chaque keypoints une et unique personne dans l'image une fois la totalité des keypoints obtenus dans l'image grâce à des approches convolutives.\\
+
+\cite{2015arXiv151106645P} proposent d'extraire des keypoints candidats grâce à des architectures classiques telles que Faster RCNN ou Dense CNN puis résolvent le problème de classification (\textit{i.e} classe coude, genou, tête...) et d'attribution de ces keypoints grâce à la programmation linéaire. 
+
+\cite{cao2017realtime} proposent par exemple une approche détectant les keypoints dans l'image grâce à une architecture convolutive à deux branches: l'une inférant un ensemble de 18 heatmaps, chacune représentant une partie particulière du squelette de la pose humaine, l'autre branche inférant un ensemble de 38 \textit{Part Affinity Fields} représentant le degré d'association entre les keypoints. Des graphes bipartis sont ensuites générés en fonction de ces sorties et l'algorithme hongrois est utilisé afin d'élager le graphe et ainsi attribuer de manière optimale chacun des keypoints à une seule personne.
+
+\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche proposons apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci.
+
+\cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'image de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
+
 \subsection{Approches Top Down}
-Les méthodes Top Down sont actuellements plus précises en terme 
+Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Il est
+
+
+\cite{2016arXiv160808526I} proposent de modéliser le problème 
+
+Alpha pose
+MASK RCNN
+
+https://arxiv.org/pdf/1701.01779.pdf
+
+
 \subsection{De la question de la dimension}
+
+\cite{singleshotmultiperson2018} proposent une nouvelle méthode \textit{single-shot} pour l'estimation de la pose 3D de plusieurs personnes dans des scènes générales à partir d'une caméra RGB monoculaire: Ceux-ci réutilisent la même approche que \cite{cao2017realtime} pour associer les keypoints, cependant ils proposent 
+
 
 \section{Human Action Recognition}
 \label{subsec:HAR}
@@ -88,7 +110,7 @@ La plupart des travaux existants dans la littérature se focalisent sur les appr
 Ces dernières années, les réseaux de neurones récurrents ont  été les approches de référence pour la modélisation de séquences en matière de reconnaissance vocale, de traitement numérique des signaux, de traitement vidéo et d'analyse des données textuelles. 
 
 
-Analogiquement, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes type LSTM \cite{hochreiter1997long} ou GRU \cite{2014arXiv1406.1078C}.
+Analogiquement, la plupart des approches d'apprentissage profond pour la reconnaissance de gestes utilisent également des cellules récurrentes type LSTM\\ \cite{hochreiter1997long} ou GRU \cite{2014arXiv1406.1078C}.
 
 On représente le squelette sous forme d’une séquence et l'on y applique des réseaux de neurones à état, permettant de conserver l’information d’un instant de la séquence à un autre.
 

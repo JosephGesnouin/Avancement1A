@@ -68,12 +68,18 @@ Les approches Bottom up reposent généralement sur des algorithmes de matching,
 
 \cite{cao2017realtime} proposent par exemple une approche détectant les keypoints dans l'image grâce à une architecture convolutive à deux branches: l'une inférant un ensemble de 18 heatmaps, chacune représentant une partie particulière du squelette de la pose humaine, l'autre branche inférant un ensemble de 38 \textit{Part Affinity Fields} représentant le degré d'association entre les keypoints. Des graphes bipartis sont ensuites générés en fonction de ces sorties et l'algorithme hongrois est utilisé afin d'élager le graphe et ainsi attribuer de manière optimale chacun des keypoints à une seule personne.
 
-\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci.
+\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci grâce à deux fonction de coût: une de détection et une de matching.
 
 \cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'image de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
 
 \subsection{Approches Top Down}
-Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Computationellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail est que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention.
+Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Computationellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail est que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention. Cela réduirait alors le temps d'inférence de ce type d'approche tout en conservant leur robustesse.
+
+Mask R-CNN \cite{2017arXiv170306870H}, initialement un modèle de segmentation, peut-être modifié au niveau de la sortie du masque afin d'obtenir des poses (extraction des keypoints appartenant à chaque personne dans l'image en modélisant chaque type de keypoints comme une classe distincte et le traitant comme un problème de segmentation.) L'architecture de base extrait d'abord les features d'une image en utilisant un CNN. Ces features sont utilisé par un RPN pour obtenir des bounding boxes candidates à la présence d'objets. En combinant les informations relatives à l'emplacement de la personne grâce aux bounding boxes ainsi qu'aux keypoints obtenus pour celle-ci grâce à la segmentation. On obtient le squelette de la pose humaine pour chacune des personnes présentes dans l'image.
+
+
+
+
 
 
 
@@ -81,7 +87,7 @@ Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algor
 \cite{2016arXiv160808526I} proposent de modéliser le problème 
 
 Alpha pose
-MASK RCNN
+
 
 https://arxiv.org/pdf/1701.01779.pdf
 

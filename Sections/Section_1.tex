@@ -73,18 +73,17 @@ Les approches Bottom up reposent généralement sur des algorithmes de matching,
 \cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'image de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
 
 \subsection{Approches Top Down}
-Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Computationellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail est que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention. Cela réduirait alors le temps d'inférence de ce type d'approche tout en conservant leur robustesse.
+Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Computationellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail étant que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention. Cela réduirait alors le temps d'inférence de ce type d'approche tout en conservant leur robustesse.\\
 
-Mask R-CNN \cite{2017arXiv170306870H}, initialement un modèle de segmentation, peut-être modifié au niveau de la sortie du masque afin d'obtenir des poses (extraction des keypoints appartenant à chaque personne dans l'image en modélisant chaque type de keypoints comme une classe distincte et le traitant comme un problème de segmentation.) L'architecture de base extrait d'abord les features d'une image en utilisant un CNN. Ces features sont utilisé par un RPN pour obtenir des bounding boxes candidates à la présence d'objets. En combinant les informations relatives à l'emplacement de la personne grâce aux bounding boxes ainsi qu'aux keypoints obtenus pour celle-ci grâce à la segmentation. On obtient le squelette de la pose humaine pour chacune des personnes présentes dans l'image.
-
-
+Mask R-CNN \cite{2017arXiv170306870H}, initialement modèle de segmentation, peut-être modifié au niveau de la sortie du masque afin d'obtenir des poses. L'architecture de base extrait d'abord les features d'une image en utilisant un CNN. Ces features sont utilisé par un RPN pour obtenir des bounding boxes candidates à la présence d'objets. En combinant les informations relatives à l'emplacement de la personne grâce aux bounding boxes ainsi qu'aux keypoints obtenus pour celle-ci grâce à la segmentation. On obtient le squelette de la pose humaine pour chacune des personnes présentes dans l'image.
 
 
+\cite{2016arXiv160808526I} montrent que le problème d'estimation multi-poses peut être formulé par un ensemble de problèmes d'association pour chacune des personnes détectées dans l'image. Ainsi, ceux-ci utilisent Faster R-CNN pour la detection de personnes puis, pour chaque personne détectée, génèrent un squelette en utilisant un estimateur de pose mono-personne. Cette approche ne prenant pas en compte les problèmes d'occlusions où de troncature pour chacune des bounding boxes obtenues, ceux-ci réutilisent le système de programmation linéaire de \cite{2015arXiv151106645P} sur chacun des graphes inférés pour chaque bounding box. Les graphes étant de taille bien moindre que dans l'approche Bottom Up, La vitesse d'inference obtenue en est globalement meilleure.
+
+\cite{2017arXiv170101779P}
 
 
 
-
-\cite{2016arXiv160808526I} proposent de modéliser le problème 
 
 Alpha pose
 

@@ -68,12 +68,14 @@ Les approches Bottom up reposent généralement sur des algorithmes de matching,
 
 \cite{cao2017realtime} proposent par exemple une approche détectant les keypoints dans l'image grâce à une architecture convolutive à deux branches: l'une inférant un ensemble de 18 heatmaps, chacune représentant une partie particulière du squelette de la pose humaine, l'autre branche inférant un ensemble de 38 \textit{Part Affinity Fields} représentant le degré d'association entre les keypoints. Des graphes bipartis sont ensuites générés en fonction de ces sorties et l'algorithme hongrois est utilisé afin d'élager le graphe et ainsi attribuer de manière optimale chacun des keypoints à une seule personne.
 
-\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche proposons apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci.
+\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci.
 
 \cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'image de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
 
 \subsection{Approches Top Down}
-Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Il est
+Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de detection de personnes. Computationellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail est que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention.
+
+
 
 
 \cite{2016arXiv160808526I} proposent de modéliser le problème 
@@ -122,8 +124,6 @@ Ainsi, \cite{baccouche2011sequential} proposent une architecture combinant LSTM 
 \cite{shahroudy2016ntu} utilisent une approche LSTM se basant sur un apprentissage à long terme des cooccurrences d'articulations caractérisant intrinsèquement les actions humaines.
 \cite{zhang2017view} proposent un réseau récurrent adaptatif avec une architecture LSTM, permettant au réseau de s'adapter aux points de vue d'observation les plus appropriés de bout en bout afin de gérer les grandes variations d'orientation dans les actions.
 
- 
-
 \subsection{Approches convolutives}
 Les cellules récurrentes étant relativement lentes et difficiles à entrainer ainsi qu'à utiliser en temps réel comparé aux approches dites convolutives, celles-ci sont alors devenues une solution intéressante compte tenu de leurs avantages en matière de parallélisation, d'efficacité dans l'apprentissage des caractéristiques et de rapidité.
 
@@ -132,7 +132,7 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\linewidth]{Images/skeltoim.png}
+    \includegraphics[width=0.5\linewidth]{Images/skeltoim.png}
     \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
     \label{fig:skeltoim}
 \end{figure}
@@ -184,7 +184,7 @@ Pour autant, l'utilisation de la structure de données format graphe pour un squ
 
 les convolutions ont par définition la capacité d'extraire des caractéristiques spatiales locales. Les structures de données type graphe sont adaptées puisqu'elles sont par définition, des structures connectées localement (l’ensemble des voisins d’un noeud). De cette manière, représenter le squelette sous la forme d'un graphe peut avoir l'avantage de ne pas exploiter des liens de voisinages entre joints inexistants mais de conserver une sémantique spatiale cohérente pour le squelette.
 
-L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par exemple \cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
+L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par exemple \\ \cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
 
 \cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage geométrique profond et propose une taxonomie pour différencier les reseaux géométriques en quatres catégories: récurrents, convolutionnels, auto-encodeurs et spatio-temporels.
 

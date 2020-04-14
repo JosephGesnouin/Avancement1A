@@ -80,18 +80,33 @@ Mask R-CNN \cite{2017arXiv170306870H}, initialement modèle de segmentation, peu
 
 \cite{2016arXiv160808526I} montrent que le problème d'estimation multi-poses peut être formulé par un ensemble de problèmes d'association pour chacune des personnes détectées dans l'image. Ainsi, ceux-ci utilisent Faster R-CNN pour la detection de personnes puis, pour chaque personne détectée, génèrent un squelette en utilisant un estimateur de pose mono-personne. Cette approche ne prenant pas en compte les problèmes d'occlusions où de troncature pour chacune des bounding boxes obtenues, ceux-ci réutilisent le système de programmation linéaire de \cite{2015arXiv151106645P} sur chacun des graphes inférés pour chaque bounding box. Les graphes étant de taille bien moindre que dans l'approche Bottom Up, La vitesse d'inference obtenue en est globalement meilleure.
 
-\cite{2017arXiv170101779P}
+\cite{2017arXiv170101779P} proposent une approche top down, où l'estimation des keypoints n'est pas réalisée par regression de chaque keypoints mais par estimation de heatmaps et d'un vecteur de magnitude permettant de cibler au mieux la position du keypoint dans la heatmap. Cette approche permet d'obtenir plusieurs keypoints de la même classe dans la même bounding box et ainsi palier au problème d'occlusion. 
 
-
-
-
-Alpha pose \cite{fang2017rmpe},
+AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation de pose lorsque les bounding boxes de détection de personnes obtenues sont inexactes. L'estimation de pose étant réalisée sur la boundig box où se trouve la personne, des erreurs de localisation et d'inférence de ces boites peuvent résulter en un fonctionement non-optimal de l'algorithme d'extraction de pose. Les auteurs proposent donc l'utilisation d'un Symmetric Spatial Transformer Network (SSTN) pour extraire une zone de qualité à partir d'une bounding box inexacte. Un estimateur de pose est ensuite utilisé sur cette région extraite et les coordonnées obtenues sont transformées pour correspondre à l'espace d'origine.
 
 
 
 \subsection{De la question de la dimension}
 
 \cite{singleshotmultiperson2018} proposent une nouvelle méthode \textit{single-shot} pour l'estimation de la pose 3D de plusieurs personnes dans des scènes générales à partir d'une caméra RGB monoculaire: Ceux-ci réutilisent la même approche que \cite{cao2017realtime} pour associer les keypoints, cependant ils proposent 
+
+
+\subsection{De la question de la séquentialité}
+Sur la base des estimateurs de pose multi-personnes décrits ci-dessus, il est naturel de vouloir les étendre
+de l'approche frame by frame à la vidéo et ainsi prendre en compte des informations séquentielles.
+
+Une grande partie des approches se basent sur l'approche de partionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I}. La différence notoire étant d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.
+
+Un axe de recherche actuel tend à explorer des solutions top-down plus efficaces et plus scalables en procédant d'abord à une estimation de la pose de plusieurs personnes sur chaque image, puis en les reliant
+en termes de similarité d'apparence et de relation temporelle entre les bounding boxes:
+
+Ainsi, \cite{2018arXiv180200977X} proposent PoseFlow, une approche séquentielle d'AlphaPose \cite{fang2017rmpe} en maximisant la confiance globale de l'inference pour une séquence temporelle. tout d'abord une estimation top-down des poses pour chaque image est réalisée. Les Pose Flow sont construits en associant les poses qui indiquent la même personne à travers les frames grâce à une estimation de la distance entre poses. Grâce à une fenêtre glissante, les poses de chaque personnes dans l'image sont normalisées en fonction des positions précédentes et suivantes dans la vidéo.
+
+\cite{Raaj_2019_CVPR} proposent une approche basée sur OpenPose \cite{cao2017realtime}
+
+
+
+
 
 
 \section{Human Action Recognition}

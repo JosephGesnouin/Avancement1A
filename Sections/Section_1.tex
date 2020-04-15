@@ -80,10 +80,9 @@ Mask R-CNN \cite{2017arXiv170306870H}, initialement modèle de segmentation, peu
 
 \cite{2016arXiv160808526I} montrent que le problème d'estimation multi-poses peut être formulé par un ensemble de problèmes d'association pour chacune des personnes détectées dans l'image. Ainsi, ceux-ci utilisent Faster R-CNN pour la detection de personnes puis, pour chaque personne détectée, génèrent un squelette en utilisant un estimateur de pose mono-personne. Cette approche ne prenant pas en compte les problèmes d'occlusions où de troncature pour chacune des bounding boxes obtenues, ceux-ci réutilisent le système de programmation linéaire de \cite{2015arXiv151106645P} sur chacun des graphes inférés pour chaque bounding box. Les graphes étant de taille bien moindre que dans l'approche Bottom Up, La vitesse d'inference obtenue en est globalement meilleure.
 
-\cite{2017arXiv170101779P} proposent une approche top down, où l'estimation des keypoints n'est pas réalisée par regression de chaque keypoints mais par estimation de heatmaps et d'un vecteur de magnitude permettant de cibler au mieux la position du keypoint dans la heatmap. Cette approche permet d'obtenir plusieurs keypoints de la même classe dans la même bounding box et ainsi palier au problème d'occlusion. 
+\cite{2017arXiv170101779P} proposent une approche top down, où l'estimation des keypoints n'est pas réalisée par regression pour chaque keypoint mais par estimation de heatmaps et d'un vecteur de magnitude permettant de cibler au mieux la position du keypoint dans la heatmap. Cette approche permet d'obtenir potentiellement plusieurs keypoints de la même classe dans la même bounding box et ainsi palier au problème d'occlusion pour un espace en 2D. 
 
 AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation de pose lorsque les bounding boxes de détection de personnes obtenues sont inexactes. L'estimation de pose étant réalisée sur la boundig box où se trouve la personne, des erreurs de localisation et d'inférence de ces boites peuvent résulter en un fonctionement non-optimal de l'algorithme d'extraction de pose. Les auteurs proposent donc l'utilisation d'un Symmetric Spatial Transformer Network (SSTN) pour extraire une zone de qualité à partir d'une bounding box inexacte. Un estimateur de pose est ensuite utilisé sur cette région extraite et les coordonnées obtenues sont transformées pour correspondre à l'espace d'origine.
-
 
 
 \subsection{De la question de la dimension}
@@ -93,21 +92,25 @@ AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation
 
 \subsection{De la question de la séquentialité}
 Sur la base des estimateurs de pose multi-personnes décrits ci-dessus, il est naturel de vouloir les étendre
-de l'approche frame by frame à la vidéo et ainsi prendre en compte des informations séquentielles.
+de l'approche frame by frame à la vidéo et ainsi prendre en compte des informations séquentielles.\\
 
-Une grande partie des approches se basent sur l'approche de partionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I}. La différence notoire étant d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.
+Une grande partie des approches se basent sur l'approche de partionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I}. La différence notoire étant d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.\\
 
 Un axe de recherche actuel tend à explorer des solutions top-down plus efficaces et plus scalables en procédant d'abord à une estimation de la pose de plusieurs personnes sur chaque image, puis en les reliant
-en termes de similarité d'apparence et de relation temporelle entre les bounding boxes:
+en termes de similarité d'apparence et de relation temporelle:\\
 
-Ainsi, \cite{2018arXiv180200977X} proposent PoseFlow, une approche séquentielle d'AlphaPose \cite{fang2017rmpe} en maximisant la confiance globale de l'inference pour une séquence temporelle. tout d'abord une estimation top-down des poses pour chaque image est réalisée. Les Pose Flow sont construits en associant les poses qui indiquent la même personne à travers les frames grâce à une estimation de la distance entre poses. Grâce à une fenêtre glissante, les poses de chaque personnes dans l'image sont normalisées en fonction des positions précédentes et suivantes dans la vidéo.
+Ainsi, \cite{2018arXiv180200977X} proposent PoseFlow, une approche séquentielle d'AlphaPose \cite{fang2017rmpe} en maximisant la confiance globale de l'inference des poses pour une séquence temporelle. Tout d'abord une estimation top-down des poses pour chaque image est réalisée. Les Pose Flow sont construits en associant les poses qui correspondent à la même personne à travers les frames grâce à une estimation de la distance entre poses. Grâce à une fenêtre glissante, les poses de chaque personnes dans l'image sont normalisées en fonction des positions précédentes et suivantes dans la vidéo.
 
-\cite{Raaj_2019_CVPR} proposent une approche basée sur OpenPose \cite{cao2017realtime}
+\cite{2019arXiv190502822N} proposent une approche top-down où l'appariement des poses à une personne est basée sur une distance entre deux poses basée sur le flot optique.
 
+\cite{2018arXiv180406208X} proposent une approche top-down
 
+Une autre approche proposée par \cite{Raaj_2019_CVPR} est de réutiliser le principe de Part Affinity Field pour les images statiques de \cite{cao2017realtime} sous une forme séquentielle grâce à une architecture réccurente où le réseau utilise en entrée les heatmaps des frames précédentes pour estimer celles de la frame actuelle.\\
 
+Il sera dans notre cas important de prendre en compte les contraintes de la thèse: les méthodes séquentielles à base d'appariement de poses seront priorisées car la localisation d'une personne peut varier en fonction d'un changement soudain d'angle de caméra, tandis que sa pose restera presque la même. Ceci afin d'obtenir un meilleur tracking des protagonistes de la scène et de ne pas mélanger les dynamiques du squelette de deux personnes à des instants différents dans la séquence mais proches dans l'espace, ce qui rendrait la seconde partie de l'approche biaisée en utilisant des données éronées.\\
 
-
+La question de l'utilité de l'ajout d'une dimension et de la prise en compte de la séquentialité dans l'estimation de pose pour la pipeline de prédiction des intentions est intéréssante.
+Il conviendra également d'évaluer une fois la pipeline réalisée les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complèxe en temps et en capacité de calcul. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
 
 \section{Human Action Recognition}
 \label{subsec:HAR}

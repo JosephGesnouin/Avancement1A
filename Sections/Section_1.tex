@@ -103,14 +103,14 @@ Ainsi, \cite{2018arXiv180200977X} proposent PoseFlow, une approche séquentielle
 
 \cite{2019arXiv190502822N} proposent une approche top-down où l'appariement des poses à une personne est basée sur une distance entre deux poses basée sur le flot optique.
 
-\cite{2018arXiv180406208X} proposent une approche top-down
-
+\cite{2018arXiv180406208X} proposent une approche top-down dont l'identification d'une personne au fil du temps est basée sur deux informations complémentaires: la cohérence spatiale et la cohérance de la pose. Le tracking et l'identification sont réalisés grâce à un réseau siamois convolutif géométrique permettant de déterminer le degré de similarité entre les features extraits des deux poses.
+ 
 Une autre approche proposée par \cite{Raaj_2019_CVPR} est de réutiliser le principe de Part Affinity Field pour les images statiques de \cite{cao2017realtime} sous une forme séquentielle grâce à une architecture réccurente où le réseau utilise en entrée les heatmaps des frames précédentes pour estimer celles de la frame actuelle.\\
 
-Il sera dans notre cas important de prendre en compte les contraintes de la thèse: les méthodes séquentielles à base d'appariement de poses seront priorisées car la localisation d'une personne peut varier en fonction d'un changement soudain d'angle de caméra, tandis que sa pose restera presque la même. Ceci afin d'obtenir un meilleur tracking des protagonistes de la scène et de ne pas mélanger les dynamiques du squelette de deux personnes à des instants différents dans la séquence mais proches dans l'espace, ce qui rendrait la seconde partie de l'approche biaisée en utilisant des données éronées.\\
+Il sera dans notre cas important de prendre en compte les contraintes de la thèse: les méthodes séquentielles à base d'appariement de poses seront priorisées car la localisation d'une personne peut varier en fonction d'un changement soudain d'angle de caméra, tandis que sa pose restera presque la même. Ceci afin d'obtenir un meilleur tracking des protagonistes de la scène et de ne pas mélanger les dynamiques du squelette de deux personnes à des instants différents dans la séquence mais proches dans l'espace, ce qui rendrait la seconde partie de l'approche biaisée en utilisant des données érronées.\\
 
 La question de l'utilité de l'ajout d'une dimension et de la prise en compte de la séquentialité dans l'estimation de pose pour la pipeline de prédiction des intentions est intéréssante.
-Il conviendra également d'évaluer une fois la pipeline réalisée les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complèxe en temps et en capacité de calcul. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
+Il conviendra cependant d'évaluer une fois la pipeline réalisée les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complèxe en temps et en capacité de calcul. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
 
 \section{Human Action Recognition}
 \label{subsec:HAR}

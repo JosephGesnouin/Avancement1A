@@ -129,13 +129,13 @@ Il conviendra cependant d'évaluer une fois la pipeline réalisée les gains obt
 
 La seconde étape de l'approche consistera en la classification des actions de la personne. La reconnaissance de l'action humaine dans une vidéo est un sujet de recherche difficile de par la grande variation et la complexité des données en entrée.
 
-Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two}\\\cite{zhang2016real}\cite{sevilla2018integration,DanutPOP} et la réprésentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
+Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two}\\\cite{zhang2016real}\cite{sevilla2018integration,DanutPOP} et la représentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
 
-Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéréssés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible pour une utilisation en temps réel:
+Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéressés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible pour une utilisation en temps réel:
 
 \begin{itemize}
-    \item En réduisant la taille des données d'entrée grâce à la structure de données associée aux squelettes, ce type d'approche est considéré comme bien plus rapide computationellement parlant que les modalitées listées précédement.
-    \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invarriantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
+    \item En réduisant la taille des données d'entrée grâce à la structure de données associée aux squelettes, ce type d'approche est considéré comme bien plus rapide computationnellement parlant que les modalités listées précédemment.
+    \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invariantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
 La plupart des travaux existants dans la littérature se focalisent sur les approches basées sur la vidéo. Il existe à ce jour beaucoup moins de méthodes d'apprentissage traitant sur des données squelettiques comme entrée. Dans cette section, nous examinons une liste de ces approches basées sur l'apprentissage profond de reconnaissance d'actions sur des données squelettiques.
@@ -152,8 +152,8 @@ On représente le squelette sous forme d’une séquence et l'on y applique des 
 Ainsi, \cite{baccouche2011sequential} proposent une architecture combinant LSTM et RNN pour la reconnaissance d'actions.
  \cite{avola2018exploiting} exploitent les caractéristiques des angles de articulations apprises grâce à une architecture de type LSTM. 
 \cite{zhang2017geometric} génèrent à partir des articulations, huit indicateurs géométriques et les évaluent avec un réseau LSTM à trois couches.
-\cite{du2015hierarchical} divisent le squelette humain en cinq parties puis proposent une approche hierarchique séquentielle.
-\cite{shukla2017recurrent} proposent une architecture récurente hierarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de articulations en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres et diminuant le temps d'inférence sans dégrader la qualité du classificateur.
+\cite{du2015hierarchical} divisent le squelette humain en cinq parties puis proposent une approche hiérarchique séquentielle.
+\cite{shukla2017recurrent} proposent une architecture récurrente hiérarchique sensiblement équivalente à \cite{du2015hierarchical} mais réduisent le nombre de articulations en entrée du modèle, certaines étant considérées comme superflues et ne portant que peu d'information. Conduisant à un ensemble réduit de paramètres et diminuant le temps d'inférence sans dégrader la qualité du classificateur.
 \cite{shahroudy2016ntu} utilisent une approche LSTM se basant sur un apprentissage à long terme des cooccurrences d'articulations caractérisant intrinsèquement les actions humaines.
 \cite{zhang2017view} proposent un réseau récurrent adaptatif avec une architecture LSTM, permettant au réseau de s'adapter aux points de vue d'observation les plus appropriés de bout en bout afin de gérer les grandes variations d'orientation dans les actions.
 
@@ -175,14 +175,14 @@ L’idée générale étant de structurer les données pour leur donner la forme
 Ainsi, \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
 \cite{pham2018learning} proposent d'utiliser un réseau résiduel \cite{he2016deep} avec pour entrée le squelette normalisé transformé dans l'espace RGB.
 \cite{cao2018skeleton} proposent de classifier l'image obtenue grâce à des gated convolutions.
-\cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaitre un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.\\
+\cite{ludl2019simple} proposent une pipeline complète capable en temps réel de reconnaître un humain dans une image, le squelettiser et déterminer l'action effectuée en utilisant le même format d'encodage sous forme d'image RGB.\\
 
 En s'éloignant du domaine image mais en conservant la notion de convolution, d'autres approches à base de CNN les utilisent sous format 1D afin de modéliser des séquences:
 \cite{bai2018empirical} montrent que les réseaux de convolutions peuvent égaler, voire surpasser les performances des réseaux récurrents pour des tâches typiques de modélisation séquentielle.\\
 
 Par conséquent, \textit{ al.} \cite{devineau2018deep} proposent une architecture basée sur des convolutions parallèles capables de capturer des caractéristiques pour différentes résolutions temporelles.
-\cite{2019arXiv190709658Y} proposent un modèle convolutif à trois branches prennant en entrée les positions des articulations du squelette à différentes vitesses et les distances par paires entre les articulations.
-\cite{weng2018deformable} proposent un réseau de neurones déformable à convolution unidimensionnelle capable de découvrir les combinaisons d'articulations proteuses d'information et d'éviter les articulations dont la sémantique n'apporte que peu au modèle.
+\cite{2019arXiv190709658Y} proposent un modèle convolutif à trois branches prenant en entrée les positions des articulations du squelette à différentes vitesses et les distances par paires entre les articulations.
+\cite{weng2018deformable} proposent un réseau de neurones déformable à convolution unidimensionnelle capable de découvrir les combinaisons d'articulations porteuses d'information et d'éviter les articulations dont la sémantique n'apporte que peu au modèle.
 
 
 
@@ -197,7 +197,7 @@ Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pond�
 \cite{luong2015effective} distingue deux types d'attention: \textit{global attention} et \textit{local attention}:
  \begin{itemize}
      \item \textit{Local attention}: consiste en la suppression pure et simple de données lors de la selection des données d'entrée: les caractéristiques non pertinentes de l'environnement en dehors de la région considérée comme importante sont ignorées.
-     \item \textit{Global attention}: consite en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
+     \item \textit{Global attention}: consiste en la prise en compte pondérée dynamiquement de l'ensemble des données de l'entrée.
  \end{itemize}
  
  %https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/
@@ -219,10 +219,10 @@ les convolutions ont par définition la capacité d'extraire des caractéristiqu
 
 L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par exemple \\ \cite{gori2005new,scarselli2008graph,bronstein2017geometric}) désigne les techniques tentant de généraliser les réseaux de neurones profonds (structurés) à des domaines non euclidiens tels que les graphes. 
 
-\cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage geométrique profond et propose une taxonomie pour différencier les reseaux géométriques en quatres catégories: récurrents, convolutionnels, auto-encodeurs et spatio-temporels.
+\cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage géométrique profond et propose une taxonomie pour différencier les réseaux géométriques en quatre catégories: récurrents, convolutifs, auto-encodeurs et spatio-temporels.
 
 Ainsi, \cite{2018arXiv180506184Z} proposent d'appliquer des convolutions sur les arêtes d'un graphe correspondant aux os du squelette afin de conserver la sémantique spatiale.
-\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA (\textit{autoregressive moving average}). Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédement en un seul réseau.
+\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA (\textit{autoregressive moving average}). Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
 
 \section{Prédiction d'intention}
 

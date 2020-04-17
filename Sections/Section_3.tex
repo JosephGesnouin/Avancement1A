@@ -61,7 +61,7 @@ Ainsi, en reprenant la structure de données format tenseur d'un jeu de données
     \label{fig:DFS}
 \end{figure}
 
-Souhaitant m'intéresser à la plus value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture présentée en \ref{fig:DDnet}.
+Souhaitant m'intéresser à la plus value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant pour les mêmes conditions experimentales dans le cadre de convolutions 1D et convolutions 2D. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture présentée en \ref{fig:DDnet} pour les CNN 1D et avec un simple modèle convolutifs pour les convolutions 2D.
 
 
 \begin{figure}[H]
@@ -75,23 +75,35 @@ désigne le Global Average Pooling. FC signifie "Fully Connected". La taille du 
 \end{figure}
 
 \subsection{Tests et évaluations}
+\subsubsection{Evaluation datasets et protocole d'évaluation}
+Nous avons expérimenté les capacités de cette représentation sur deux jeux de données de reconnaissances d'action squelettiques: SHREC (actions de la main en 3D) proposé par \cite{de2017shrec} et JHMDB (action du corps en 2D)  proposé par \cite{jhuang2013towards}.\\
+
+Simlairement à \cite{2019arXiv190709658Y} mais par manque de temps, SHREC est évalué pour un des deux cas : pour 14 gestes. L'ensemble de données JHMDB est évalué en utilisant des squelettes annotés manuellement, et l'évaluation se fait par cross-validation sur un split 3.
+
+\subsubsection{Détails d'implémentation}
+\subsubsection{Modèle CNN 1D}
+L'entrainement se réalise sur une RTX 2080 Ti, les conditions experimentales ne diffèrent pas de \cite{2019arXiv190709658Y}.
+
+\subsubsection{Modèle CNN 2D}
+
+
+\subsubsection{Résultats et discussion}
+
 
 \begin{table}[H]
 \centering
 \scalebox{0.95}{
-\begin{tabular}{l|l|l} 
+\begin{tabular}{l|l|l|l} 
 \hline
-\textbf{Méthode }                                                       & \textbf{Paramètres}  & \textbf{14 classes } \\ 
+\textbf{Méthode}               & \textbf{Paramètres} & \textbf{14 classes} & \textbf{28 classes}  \\ 
 \hline
-DD-NET (filtres \= 64)                                                   & 1.82M                & 94.6\%                \\
-DD-NET (filtres \= 32)                                                   & 0.50M                & 93.5\%                \\
-DD-NET (filtres \= 16)                                                   & 0.15M                & 91.8\%                 \\
-                                                                        &                      &                                      \\ 
+DD-NET (64 filtres)     & 1.82M               & 94.6\%              & 91.9\%               \\
+DD-NET (32 filtres)     & 0.50M               & 93.5\%              & 90.4\%               \\
+DD-NET (16 filtres)     & 0.15M               & 91.8\%              & 90.0\%               \\ 
 \hline
-DFS-DD-NET (filtres \= 64)                                               & 1.84M                    & 95.7\%                    \\
-DFS-DD-NET (filtres \= 32)                                               & 0.51M                    & 95.5\%                 \\
-DFS-DD-NET (filtres \= 16)                                               & 0.16M                & 93.1\%                    \\
-\hline
+DFS-DD-NET (64 filtres) & 1.84M               & 95.9\%              &                      \\
+DFS-DD-NET (32 filtres) & 0.51M               & 94.7\%              &                      \\
+DFS-DD-NET (16 filtres) & 0.16M               & 93.1\%              &                     
 \end{tabular}
 }
 \caption{Résulats obtenus grâce à la normalisation DFS sur SHREC \cite{de2017shrec} (Squelettes de main 3D)}
@@ -114,7 +126,7 @@ DFS-DD-NET (filters 64) & M               & \%                  \\
 DFS-DD-NET (filters 32) & M               & \%                  \\
 DFS-DD-NET (filters 16) & 0.15M           & 66.4\%                 
 \end{tabular}}
-\caption{Résulats obtenus grâce à la normalisation DFS sur JHMDB \cite{jhuang2013towards} (Squelettes corps humain 2D)}
+\caption{Résulats obtenus grâce à la normalisation DFS en conservant l'architecture  \cite{2019arXiv190709658Y} sur JHMDB \cite{jhuang2013towards} (Squelettes corps humain 2D)}
 \end{table}
 
 
@@ -243,12 +255,12 @@ Avec initialisation AE modifié (\lambda =7.5)   & -                  &         
 
 \subsection{A creuser}
 
-\textit{Essayer plusieurs structures plus travaillées qu'un simple MLP:
+Essayer plusieurs structures plus travaillées qu'un simple MLP:
 \begin{itemize}
     \item AE: Convolutions / Attention / Séquentiel / VAE.
     \item analyse discriminante: QDA  pour ne pas émettre de suppositions vis-à-vis des matrices de covariance de chaque classes
 \end{itemize}
 
-Rien n'est fixé dans la fonction de coût, j'imagine qu'ajouter un autre critère de régularization ne peut être que bénéfique, mais vu les prolèmes de convergence actuels, je préfère ne pas le tenter pour l'instant.}
+Rien n'est fixé dans la fonction de coût, j'imagine qu'ajouter un autre critère de régularization ne peut être que bénéfique, mais vu les prolèmes de convergence actuels, je préfère ne pas le tenter pour l'instant.
 
 

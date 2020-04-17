@@ -86,8 +86,25 @@ AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation
 
 
 \subsection{De la question de la dimension}
+Sur la base de la sous-partie sus-jacente, nous pouvons conclure que pour l'estimation de pose en 2D, les méthodes de l'état de l'art obtiennent de très bonnes performances grâce aux réseaux convolutifs.
 
-\cite{singleshotmultiperson2018} proposent une nouvelle méthode \textit{single-shot} pour l'estimation de la pose 3D de plusieurs personnes dans des scènes générales à partir d'une caméra RGB monoculaire: Ceux-ci réutilisent la même approche que \cite{cao2017realtime} pour associer les keypoints, cependant ils proposent 
+Cependant, une des principales limites d'une approche en 2d serait la capacité traitement des occlusions entre piétons dans un espace de dimension 2. Dès lors, afin d'améliorer la detection de pose, la question de l'ajout d'une dimension peut se poser.
+
+Les méthodes d'estimation de poses en 3D sont bien moins matures que pour la 2D. Une des raisons principale à ce jour serait le manque de jeux de données fiables disponibles.
+On peut cependant cerner deux types d'approches: premièrement estimer une pose en 2D et ensuite reconstruire une pose en 3D ou alors effectuer directement la regression d'une pose en 3D.
+
+\cite{tekin2016structured} proposent par exemple une architecture de regression 3D. Au lieu d'utiliser directement un réseau convolutif pour estimer une pose 3D (le label), ceux-ci entrainent un auto-encoder espace latent sparse de dimension superieure à la dimension de l'entrée, ceci afin de capturer de la sémantique suplémentaire comparé aux seules informations présentes dans le label\\le squelette. Puis regressent grâce à un réseau convolutif prenant en entrée une image, les valeurs de l'espace latent pour cette instance et utilisent la partie décodeur afin de récupérer la pose en 3D.
+
+\cite{rogez2019lcr} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D et en combinant les résultats obtenus.
+
+\cite{singleshotmultiperson2018} proposent une  méthode de regression réutilisant la même approche bottom-up que \cite{cao2017realtime} pour associer les keypoints, cependant proposent d'utiliser des \textit{occlusion-robust pose-map} (ORPM), permettant d'inférer la pose du corps entier même en cas de fortes occlusions partielles par d'autres personnes ou d'objets.
+
+
+
+
+
+
+
 
 
 \subsection{De la question de la séquentialité}
@@ -110,7 +127,7 @@ Une autre approche proposée par \cite{Raaj_2019_CVPR} est de réutiliser le pri
 Il sera dans notre cas important de prendre en compte les contraintes de la thèse: les méthodes séquentielles à base d'appariement de poses seront priorisées car la localisation d'une personne peut varier en fonction d'un changement soudain d'angle de caméra, tandis que sa pose restera presque la même. Ceci afin d'obtenir un meilleur tracking des protagonistes de la scène et de ne pas mélanger les dynamiques du squelette de deux personnes à des instants différents dans la séquence mais proches dans l'espace, ce qui rendrait la seconde partie de l'approche biaisée en utilisant des données érronées.\\
 
 La question de l'utilité de l'ajout d'une dimension et de la prise en compte de la séquentialité dans l'estimation de pose pour la pipeline de prédiction des intentions est intéréssante.
-Il conviendra cependant d'évaluer une fois la pipeline réalisée les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complèxe en temps et en capacité de calcul. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
+Il conviendra cependant d'évaluer une fois la pipeline réalisée les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complèxe en temps et en capacité de calcul et non une approche d'identification naïve. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
 
 \section{Human Action Recognition}
 \label{subsec:HAR}

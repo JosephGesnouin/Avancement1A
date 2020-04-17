@@ -61,8 +61,18 @@ Ainsi, en reprenant la structure de données format tenseur d'un jeu de données
     \label{fig:DFS}
 \end{figure}
 
-Souhaitant m'intéresser à la plus value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture.
+Souhaitant m'intéresser à la plus value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture présentée en \ref{fig:DDnet}.
 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.55\linewidth]{Images/ddnet.png}
+    \caption{L'architecture du réseau DD-Net. \textit{2×CNN(3,
+2*filters),/2} désigne deux couches 1D ConvNet (taille du noyau
+= 3, channels = 2*filtres) et un Maxpooling (strides = 2).GAP
+désigne le Global Average Pooling. FC signifie "Fully Connected". La taille du modèle est ajustable en fonction de la variable \textit{filters}.}
+    \label{fig:DDnet}
+\end{figure}
 
 \subsection{Tests et évaluations}
 

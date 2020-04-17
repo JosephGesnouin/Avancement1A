@@ -101,17 +101,7 @@ Analogiquement, \cite{nie2017monocular} prédisent la profondeur des articulatio
 A l'inverse, \cite{li20143d} proposent une approche réalisant directement une régression du squelette en dimension 3. \cite{sun2017compositional} proposent de baser leur regression sur les jointures des keypoints et non les keypoints du squelette.
 \cite{tekin2016structured} entrainent un auto-encoder sur les labels avec un espace latent sparse de dimension superieure à la dimension de l'entrée. Ceci afin de capturer de la sémantique suplémentaire comparé aux seules informations présentes dans le squelette. Puis regressent grâce à un réseau convolutif prenant en entrée une image, les valeurs de l'espace latent pour cette instance et utilisent la partie décodeur afin de récupérer la pose en 3D.\cite{singleshotmultiperson2018} proposent une  méthode de regression de pose 3D réutilisant la même approche bottom-up que \cite{cao2017realtime} pour associer les keypoints et définissent des \textit{occlusion-robust pose-map} (ORPM), permettant d'inférer la pose du corps entier même en cas de fortes occlusions partielles par d'autres personnes ou d'objets.\\
 
-En dernier lieu, \cite{simo2013joint} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D puis de combiner les résultats obtenus.
-\cite{rogez2019lcr}
-
-
-
-
-
-
-
-
-
+En dernier lieu, \cite{simo2013joint} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D puis de combiner les résultats obtenus. \cite{tome2017lifting} proposent une méthode d'affinement itératif dans lequel les inférences 3D aident à affiner et à améliorer les estimations 2D.Puis translatent la prédiction de l'espace de dimension 2 dans un espace de dimension 3. \cite{rogez2019lcr}
 
 \subsection{De la question de la séquentialité}
 Sur la base des estimateurs de pose multi-personnes décrits ci-dessus, il est naturel de vouloir les étendre

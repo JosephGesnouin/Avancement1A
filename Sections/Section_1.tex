@@ -86,18 +86,24 @@ AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation
 
 
 \subsection{De la question de la dimension}
-Sur la base de la sous-partie sus-jacente, nous pouvons conclure que pour l'estimation de pose en 2D, les méthodes de l'état de l'art obtiennent de très bonnes performances grâce aux réseaux convolutifs.
+Nous pouvons remarquer que pour l'estimation de pose en 2D, les méthodes de l'état de l'art obtiennent de bonnes performances grâce aux réseaux convolutifs, devenus en quelques années, la référence en terme d'estimation de pose.
 
 Cependant, une des principales limites d'une approche en 2d serait la capacité traitement des occlusions entre piétons dans un espace de dimension 2. Dès lors, afin d'améliorer la detection de pose, la question de l'ajout d'une dimension peut se poser.
 
-Les méthodes d'estimation de poses en 3D sont bien moins matures que pour la 2D. Une des raisons principale à ce jour serait le manque de jeux de données fiables disponibles.
-On peut cependant cerner deux types d'approches: premièrement estimer une pose en 2D et ensuite reconstruire une pose en 3D ou alors effectuer directement la regression d'une pose en 3D.
+Les méthodes d'estimation de poses en 3D sont bien moins matures que pour la 2D. Une des raisons principale à ce jour serait le manque de jeux de données fiables disponibles \cite{2018arXiv180309722Y}.
+On peut cependant cerner certain types d'approches: premièrement estimer une pose en 2D et ensuite reconstruire une pose en 3D, effectuer directement la regression d'une pose en 3D ou encore traiter le problème d'estimation de pose 3D conjointement, voir itérativement à la regression d'une pose 2D.
 
-\cite{tekin2016structured} proposent par exemple une architecture de regression 3D. Au lieu d'utiliser directement un réseau convolutif pour estimer une pose 3D (le label), ceux-ci entrainent un auto-encoder espace latent sparse de dimension superieure à la dimension de l'entrée, ceci afin de capturer de la sémantique suplémentaire comparé aux seules informations présentes dans le label\\le squelette. Puis regressent grâce à un réseau convolutif prenant en entrée une image, les valeurs de l'espace latent pour cette instance et utilisent la partie décodeur afin de récupérer la pose en 3D.
 
-\cite{rogez2019lcr} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D et en combinant les résultats obtenus.
+\cite{2016arXiv161206524C} proposent par exemple une architecture passant par l'estimation d'une pose intermédiaire en 2D et estiment la valeur de la profondeur de la pose en utilisant l'algorithme des k plus proches voisins sur une base de données de poses 3D.
+\cite{martinez2017simple} montrent que la translation de points dans un espace de dimension 2 en un espace de dimension 3 est une tâche pouvant être résolue avec un simple MLP.
+Analogiquement, \cite{nie2017monocular} prédisent la profondeur des articulations humaines en fonction de leur emplacements 2D en utilisant des LSTM.\\
 
-\cite{singleshotmultiperson2018} proposent une  méthode de regression réutilisant la même approche bottom-up que \cite{cao2017realtime} pour associer les keypoints, cependant proposent d'utiliser des \textit{occlusion-robust pose-map} (ORPM), permettant d'inférer la pose du corps entier même en cas de fortes occlusions partielles par d'autres personnes ou d'objets.
+A l'inverse, \cite{li20143d} proposent une approche réalisant directement une régression du squelette en dimension 3. \cite{sun2017compositional} proposent de baser leur regression sur les jointures des keypoints et non les keypoints du squelette.
+\cite{tekin2016structured} entrainent un auto-encoder sur les labels avec un espace latent sparse de dimension superieure à la dimension de l'entrée. Ceci afin de capturer de la sémantique suplémentaire comparé aux seules informations présentes dans le squelette. Puis regressent grâce à un réseau convolutif prenant en entrée une image, les valeurs de l'espace latent pour cette instance et utilisent la partie décodeur afin de récupérer la pose en 3D.\cite{singleshotmultiperson2018} proposent une  méthode de regression de pose 3D réutilisant la même approche bottom-up que \cite{cao2017realtime} pour associer les keypoints et définissent des \textit{occlusion-robust pose-map} (ORPM), permettant d'inférer la pose du corps entier même en cas de fortes occlusions partielles par d'autres personnes ou d'objets.\\
+
+En dernier lieu, \cite{simo2013joint} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D puis de combiner les résultats obtenus.
+\cite{rogez2019lcr}
+
 
 
 

@@ -39,7 +39,7 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
 
 
 \begin{algorithm}
- \caption{Depth-First Search}\label{algorithm1}
+ \caption{Depth-First Search (DFS)}\label{algorithm1}
  \KwIn{graphe G}
  %\KwOut{how to write algorithm with \LaTeX2e }
  %initialization\;
@@ -50,7 +50,9 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
  }
 \end{algorithm}
 
+L'exploration d'un DFS depuis un sommet $s$ fonctionne comme suit. Il poursuit  un chemin dans le graphe jusqu'à une feuille ou jusqu'à atteindre un sommet déjà visité. L'algorithme revient alors sur le dernier sommet où il était possible de suivre un autre chemin puis continue d'explorer. L'exploration s'arrête quand tous les sommets depuis $s$ ont été visités.
 
+Ainsi, en reprenant le format de données squelettiques  
 
 \begin{figure}[H]
     \centering

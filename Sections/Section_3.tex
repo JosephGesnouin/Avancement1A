@@ -20,7 +20,7 @@ Une grande majorité des travaux actuels semblent négliger l'importance de cett
 
 \subsection{Méthodologie}
 
-En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation: en réalisant un Depth-First Search (DFS) sur un hub du graphe représentant le squelette. De cette manière, il est possible d'obtenir une structure de type arbre/graphe n'exploitant que des liens de voisinage entre joints existants.
+En reprenant les travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation: en réalisant un Depth-First Search (DFS) sur un hub du graphe représentant le squelette. De cette manière, il est possible d'obtenir une structure de type arbre/graphe n'exploitant que des liens de voisinage entre joints existants.
 
 \algnewcommand\algorithmicforeach{\textbf{for each}}
 \algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
@@ -50,9 +50,9 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
  }
 \end{algorithm}
 
-L'exploration d'un DFS depuis un sommet $s$ fonctionne comme suit. Il poursuit  un chemin dans le graphe jusqu'à une feuille ou jusqu'à atteindre un sommet déjà visité. L'algorithme revient alors sur le dernier sommet où il était possible de suivre un autre chemin puis continue d'explorer. L'exploration s'arrête quand tous les sommets depuis $s$ ont été visités.
+L'exploration d'un DFS depuis un sommet $s$ fonctionne comme suit. L'algorithme poursuit  un chemin dans le graphe jusqu'à une feuille ou jusqu'à atteindre un sommet déjà visité. L'algorithme revient alors sur le dernier sommet où il était possible de suivre un autre chemin puis continue d'explorer. L'exploration s'arrête quand tous les sommets depuis $s$ ont été visités.
 
-Ainsi, en reprenant le format de données squelettiques  
+Ainsi, en reprenant la structure de données format tenseur d'un jeu de données, il est possible de réaliser un DFS afin d'obtenir une représentation respectant les relations de dépendance physique du squelette (\ref{fig:DFS}).
 
 \begin{figure}[H]
     \centering
@@ -61,7 +61,8 @@ Ainsi, en reprenant le format de données squelettiques
     \label{fig:DFS}
 \end{figure}
 
-Souhaitant m'intéresser à l'importance de la représentation pour la classification d'actions et à la plus value apportée par celle-ci, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y}.
+Souhaitant m'intéresser à la plus value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture.
+
 
 \subsection{Tests et évaluations}
 

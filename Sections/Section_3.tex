@@ -3,6 +3,8 @@
 \label{sec:SOTA}
 
 \section{Représentation Graphe/Squelette porteuse de sens}
+
+\subsection{Introduction}
 Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
 
 \begin{figure}[H]
@@ -16,7 +18,38 @@ La figure \ref{fig:openPoseSkel}, nous permet de constater que conserver le sque
 
 Une grande majorité des travaux actuels semblent négliger l'importance de cette représentation spatiale et ne se focalisent que sur le coté temporel: la dynamique des articulations, sans remettre en question la structure de données spatio-temporelle en entrée.
 
-En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation: en réalisant un Depth-First Search (DFS) sur un hub du graphe, il est possible d'obtenir une structure de type arbre/graphe n'exploitant que des liens de voisinage entre joints existants.
+\subsection{Méthodologie}
+
+En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}, j'ai souhaité m'intérésser à cette question de représentation: en réalisant un Depth-First Search (DFS) sur un hub du graphe représentant le squelette. De cette manière, il est possible d'obtenir une structure de type arbre/graphe n'exploitant que des liens de voisinage entre joints existants.
+
+\algnewcommand\algorithmicforeach{\textbf{for each}}
+\algdef{S}[FOR]{ForEach}[1]{\algorithmicforeach\ #1\ \algorithmicdo}
+
+\begin{algorithm}
+ \caption{Explorer}\label{algorithm1}
+ \KwIn{graphe G, sommet s}
+  marquer le sommet s\;
+  afficher(s)\;
+ \ForEach {sommet $t$ fils de $s$}{
+  \eIf{$t$ n'est pas marqué}{
+    Explorer(G,t)\;
+  }
+ }
+\end{algorithm}
+
+
+\begin{algorithm}
+ \caption{Depth-First Search}\label{algorithm1}
+ \KwIn{graphe G}
+ %\KwOut{how to write algorithm with \LaTeX2e }
+ %initialization\;
+ \ForEach {sommet $s \in \mathcal G $}{
+  \eIf{s n'est pas marqué}{
+    explorer(G,s)\;
+  }
+ }
+\end{algorithm}
+
 
 
 \begin{figure}[H]
@@ -26,7 +59,9 @@ En m'inspirant des travaux de \cite{liu2016spatio} et \cite{2018arXiv180110304Y}
     \label{fig:DFS}
 \end{figure}
 
- Double-feature Double-motion Network (DD-Net) \cite{2019arXiv190709658Y}
+Souhaitant m'intéresser à l'importance de la représentation pour la classification d'actions et à la plus value apportée par celle-ci, j'ai souhaité me comparer à un modèle de classification existant dans les mêmes conditions experimentales. Je me suis donc basé sur l'approche experimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y}.
+
+\subsection{Tests et évaluations}
 
 \begin{table}[H]
 \centering

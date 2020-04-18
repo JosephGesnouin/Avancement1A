@@ -111,7 +111,7 @@ DD-NET (64 filtres)     & 1.82M               & 94.6\%              & 91.9\%    
 DD-NET (32 filtres)     & 0.50M               & 93.5\%              & 90.4\%               \\
 DD-NET (16 filtres)     & 0.15M               & 91.8\%              & 90.0\%               \\ 
 \hline
-DFS-DD-NET (64 filtres) & 1.84M               & 95.9\%              &  92.4\%                   \\
+DFS-DD-NET (64 filtres) & 1.84M               & \textbf{95.9}\%              &  \textbf{92.4}\%                   \\
 DFS-DD-NET (32 filtres) & 0.51M               & 94.7\%              &  92.0\%                   \\
 DFS-DD-NET (16 filtres) & 0.16M               & 93.1\%              &  90.5\%                   
 \end{tabular}
@@ -128,12 +128,12 @@ DFS-DD-NET (16 filtres) & 0.16M               & 93.1\%              &  90.5\%
 Chained Net \cite{2017arXiv170400616Z}             & 17.5M           & 56.8\%              \\
 EHPI \cite{ludl2019simple}                   & 1.22M           & 65.5\%              \\
 POTION    \cite{choutas2018potion}              & 4.87            & 67.9\%              \\
-DD-Net (filters 64)     & 1.82M           & 77.2\%              \\
+DD-Net (filters 64)     & 1.82M           & \textbf{77.2}\%              \\
 DD-Net (filters 32)     & 0.5M            & 73.7\%              \\
 DD-Net (filters 16)     & 0.15M           & 65.7\%              \\ 
 \hline
 DFS-DD-NET (filters 64) & 1.81M               & 76.7\%                  \\
-DFS-DD-NET (filters 32) & 0.5M               & 77.2\%                  \\
+DFS-DD-NET (filters 32) & 0.5M               & \textbf{77.2}\%                  \\
 DFS-DD-NET (filters 16) & 0.15M           & 66.4\%                 
 \end{tabular}}
 \caption{Résulats obtenus grâce à la normalisation DFS en conservant l'architecture \cite{2019arXiv190709658Y} sur JHMDB \cite{jhuang2013towards} (Squelettes corps humain 2D)}
@@ -160,13 +160,13 @@ DFS-DD-NET (filters 16) & 0.15M           & 66.4\%
 \textbf{Méthode} & \textbf{Kernel Size} & \textbf{Params} & \textbf{accuracy 14} & \textbf{accuracy 28}  \\ 
 \hline
 Lenet-5          & 3x3                  & 0.10M           & 90.9\%               & \%                    \\
-Lenet-5          & 5x5                  & 0.10M           & 91.9\%               & \%                    \\
+Lenet-5          & 5x5                  & 0.10M           & 91.9\%               & 85.5\%                    \\
 Lenet-5          & 7x7                  & 0.10M           & 92.3\%                   & 84.5\%                    \\ 
 Lenet-5          & 9x9                  & 0.10M           & 90.9\%                   & 87.6\%                    \\ 
 \hline
-DFS-Lenet-5      & 3x3                  & 0.18M           & 90.9\%               & \%                    \\
-DFS-Lenet-5      & 5x5                  & 0.18M           & 92.9\%               & \%                    \\
-DFS-Lenet-5      & 7x7                  & 0.18M           & 93.4\%               & 88.6\%                  \\
+DFS-Lenet-5      & 3x3                  & 0.18M           & 90.9\%               & \textbf{89.1}\%                    \\
+DFS-Lenet-5      & 5x5                  & 0.18M           & 92.9\%               & 88.1\%                    \\
+DFS-Lenet-5      & 7x7                  & 0.18M           & \textbf{93.4}\%               & 88.6\%                  \\
 DFS-Lenet-5      & 9x9                  & 0.18M           & 91.5\%               & 87.6\%                   
 \end{tabular}}
 \end{table}

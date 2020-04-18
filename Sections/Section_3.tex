@@ -95,30 +95,12 @@ Simlairement à \cite{2019arXiv190709658Y}, SHREC est évalué pour deux cas : p
 \end{itemize}
 
 
-\begin{table}[H]
-\centering
-\scalebox{0.75}{
-\begin{tabular}{l|l|l|l|l} 
-\hline
-\textbf{Méthode} & \textbf{Kernel Size} & \textbf{Params} & \textbf{accuracy 14} & \textbf{accuracy 28}  \\ 
-\hline
-Lenet-5          & 3x3                  & 0.10M           & 90.9\%               & \%                    \\
-Lenet-5          & 5x5                  & 0.10M           & 91.9\%               & \%                    \\
-Lenet-5          & 7x7                  & 0.10M           & 92.3\%                   & \%                    \\ 
-Lenet-5          & 9x9                  & 0.10M           & 90.9\%                   & \%                    \\ 
-\hline
-DFS-Lenet-5      & 3x3                  & 0.18M           & 90.9\%               & \%                    \\
-DFS-Lenet-5      & 5x5                  & 0.18M           & 92.9\%               & \%                    \\
-DFS-Lenet-5      & 7x7                  & 0.18M           & 93.4\%               & \%                  \\
-DFS-Lenet-5      & 9x9                  & 0.18M           & 91.5\%               & \%                   
-\end{tabular}}
-\end{table}
-
 
 \subsubsection{Résultats et discussion}
 
-
-\begin{table}[H]
+\begin{itemize}
+    \item \textbf{Modèle CNN 1D}:
+    \begin{table}[H]
 \centering
 \scalebox{0.75}{
 \begin{tabular}{l|l|l|l} 
@@ -134,15 +116,8 @@ DFS-DD-NET (32 filtres) & 0.51M               & 94.7\%              &  92.0\%   
 DFS-DD-NET (16 filtres) & 0.16M               & 93.1\%              &  90.5\%                   
 \end{tabular}
 }
-\caption{Résulats obtenus grâce à la normalisation DFS sur SHREC \cite{de2017shrec} (Squelettes de main 3D)}
+\caption{Résulats obtenus grâce à la normalisation DFS sur SHREC \cite{de2017shrec} (Squelettes de main 3D) en conservant l'architecture \cite{2019arXiv190709658Y}}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\linewidth]{Images/shrec14_comparison.png}
-    \caption{Matrices de confusions obtenues sur SHREC 14 par DD-NET (à gauche) et DFS-DD-NET (à droite)}
-    \label{fig:DDnetconfus14}
-\end{figure}
 
 \begin{table}[H]
 \centering
@@ -157,12 +132,51 @@ DD-Net (filters 64)     & 1.82M           & 77.2\%              \\
 DD-Net (filters 32)     & 0.5M            & 73.7\%              \\
 DD-Net (filters 16)     & 0.15M           & 65.7\%              \\ 
 \hline
-DFS-DD-NET (filters 64) & 1.81MM               & 76.7\%                  \\
+DFS-DD-NET (filters 64) & 1.81M               & 76.7\%                  \\
 DFS-DD-NET (filters 32) & 0.5M               & 77.2\%                  \\
 DFS-DD-NET (filters 16) & 0.15M           & 66.4\%                 
 \end{tabular}}
-\caption{Résulats obtenus grâce à la normalisation DFS en conservant l'architecture  \cite{2019arXiv190709658Y} sur JHMDB \cite{jhuang2013towards} (Squelettes corps humain 2D)}
+\caption{Résulats obtenus grâce à la normalisation DFS en conservant l'architecture \cite{2019arXiv190709658Y} sur JHMDB \cite{jhuang2013towards} (Squelettes corps humain 2D)}
 \end{table}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    \item \textbf{Modèle CNN 2D}:
+    \begin{table}[H]
+\centering
+\scalebox{0.75}{
+\begin{tabular}{l|l|l|l|l} 
+\hline
+\textbf{Méthode} & \textbf{Kernel Size} & \textbf{Params} & \textbf{accuracy 14} & \textbf{accuracy 28}  \\ 
+\hline
+Lenet-5          & 3x3                  & 0.10M           & 90.9\%               & \%                    \\
+Lenet-5          & 5x5                  & 0.10M           & 91.9\%               & \%                    \\
+Lenet-5          & 7x7                  & 0.10M           & 92.3\%                   & 84.5\%                    \\ 
+Lenet-5          & 9x9                  & 0.10M           & 90.9\%                   & 87.6\%                    \\ 
+\hline
+DFS-Lenet-5      & 3x3                  & 0.18M           & 90.9\%               & \%                    \\
+DFS-Lenet-5      & 5x5                  & 0.18M           & 92.9\%               & \%                    \\
+DFS-Lenet-5      & 7x7                  & 0.18M           & 93.4\%               & 88.6\%                  \\
+DFS-Lenet-5      & 9x9                  & 0.18M           & 91.5\%               & 87.6\%                   
+\end{tabular}}
+\end{table}
+{Résulats obtenus grâce à la normalisation DFS sur SHREC \cite{de2017shrec} (Squelettes de main 3D) pour un réseau convolutif 2D: Lenet.}
+\end{itemize}
+
+
+
+
+
 
 
 

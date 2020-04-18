@@ -88,16 +88,12 @@ Nous avons expérimenté les capacités de cette représentation sur deux jeux d
 Simlairement à \cite{2019arXiv190709658Y}, SHREC est évalué pour deux cas : pour 14 et 28 gestes. L'ensemble de données JHMDB est évalué en utilisant des squelettes annotés manuellement, et l'évaluation se fait par cross-validation sur un split 3.
 
 \subsubsection{Détails d'implémentation}
-\subsubsection{Modèle CNN 1D}
-L'entrainement se réalise sur une RTX 2080 Ti, les conditions experimentales ne diffèrent pas de celles de \cite{2019arXiv190709658Y}.
 
-\subsubsection{Modèle CNN 2D} 
-L'entrainement se réalise sur une RTX 2080 Ti, contrairement à l'architecture \newline Lenet \cite{lecun1998gradient}.
+\begin{itemize}
+    \item \textbf{Modèle CNN 1D}: Les conditions experimentales ne diffèrent pas de celles de \cite{2019arXiv190709658Y}.
+    \item \textbf{Modèle CNN 2D}: Nous disposons pour chaque instance d'un tenseur de dimension 3: (32, 22, 3) et de dimension (32, 43, 3) pour la version DFS. Ces valeurs correspondent respectivement au nombre de frames, au nombre de keypoints et à leur position dans l'espace 3d pour une action donnée. L'image d'entrée est arrangée selon l'approche présentée dans la figure \ref{fig:skeltoim} du chapitre \ref{partieconvolutive}. \newline Contrairement à l'architecture Lenet \cite{lecun1998gradient} originale, nous ajoutons pour chaque layer une couche de dropout de valeur \textit{0.5}. Après l'extraction de features des couches convolutives, une couche de batchnormalisation est ajoutée pour chaque layer dense de l'architecture préalablement au dropout.\newline L'entrainement est réalisé avec l'optimiseur Adam \cite{kingma2014adam} suivant les recommandations du papier initial et avec un learning rate de 0.01. Nous réduisons automatiquement le learning rate de moitié une fois coincé dans un plateau après 5 epochs n'améliorant pas la loss.
+\end{itemize}
 
-L'image est arrangée comme suit: disposant pour chaque instance d'un tenseur de dimension 3, la séquentialité est modélisée par 
-
-Pour chaque layer, nous utilisons une couche de dropout à \textit{0.5} et une couche de batchnormalisation.
-L'entrainement est réalisé avec l'optimiseur Adam suivant les recommandations du papier initial. Nous réduisons automatiquement le learning rate de moitié une fois coincé dans un plateau après 5 epochs n'améliorant pas la loss.
 
 \begin{table}[H]
 \centering
@@ -109,7 +105,7 @@ L'entrainement est réalisé avec l'optimiseur Adam suivant les recommandations 
 Lenet-5          & 3x3                  & 0.10M           & 90.9\%               & \%                    \\
 Lenet-5          & 5x5                  & 0.10M           & 91.9\%               & \%                    \\
 Lenet-5          & 7x7                  & 0.10M           & 92.3\%                   & \%                    \\ 
-Lenet-5          & 9x9                  & 0.10M           & \%                   & \%                    \\ 
+Lenet-5          & 9x9                  & 0.10M           & 90.9\%                   & \%                    \\ 
 \hline
 DFS-Lenet-5      & 3x3                  & 0.18M           & 90.9\%               & \%                    \\
 DFS-Lenet-5      & 5x5                  & 0.18M           & 92.9\%               & \%                    \\

@@ -3,7 +3,7 @@
 \label{sec:SOTA}
 
 \section{Représentation Graphe/Squelette porteuse de sens}
-
+\label{dfs}
 \subsection{Introduction}
 Le format de structure de données de la majorité des articulations disponibles via les approches de squelettisation en un tenseur ignore les relations de dépendance physique entre les articulations et ajoute de fausses connexions entre les articulations du corps qui ne sont pas liées physiquement.
 
@@ -96,7 +96,9 @@ désigne le Global Average Pooling. FC signifie "Fully Connected". La taille du 
 \end{figure}
 
 \subsection{Tests et évaluations}
+\label{JHMDBSHREC}
 \subsubsection{Evaluation datasets et protocole d'évaluation}
+
 Nous avons expérimenté les capacités de cette représentation sur deux jeux de données de reconnaissances d'action squelettiques: SHREC (actions de la main en 3D) proposé par \cite{de2017shrec} et JHMDB (action du corps en 2D)  proposé par \cite{jhuang2013towards}.\\
 
 Similairement à \cite{2019arXiv190709658Y}, SHREC est évalué pour deux cas : pour 14 et 28 gestes. L'ensemble de données JHMDB est évalué en utilisant des squelettes annotés manuellement, et l'évaluation se fait par cross-validation sur un split 3.
@@ -214,31 +216,36 @@ Les auto encodeurs étant une composition de transformation non linéaires en es
 
 Je me suis intéréssé à cette question de représentation pour plusieurs raisons:
 \begin{itemize}
-    \item Tout est une question d'embedding et de normalisation en machine learning. Au final, le role premier des couches cachées est de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données d'entrée soient porteuses d'information. Le jour ou l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Selon le théorème d'approximation universelle, n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{universalapproxtheorm,scarselli1998universal}).
+    \item Tout est une question d'embedding et de normalisation en machine learning. Le role premier des couches cachées est de transformer cet embedding en espérant qu'il soit porteur d'information. Le jour où l'on trouve un moyen de normaliser et de représenter les données de manière plus adequate, n'importe quel classifieur pourra obtenir de bons résultats pour peu que les données en entrée soient porteuses d'information. Le jour où l'on arrivera à obtenir une représentation utilisable plus rapidement au lieu de stacker des layers au sein d'un réseau de neurones, d'autres problématiques d'apprentissage apparaitront mais le gain serait intéréssant: (Selon le théorème d'approximation universelle, n'importe quel Shallow Network peut supposément approximer une fonction donnée \cite{universalapproxtheorm,scarselli1998universal}). 
     
-    \item En s'intéréssant à la question de la représentation des données, on évite un apprentissage de cette représentation à "l'aveugle" (en optimisant un réseau précis sur un jeu de données précis et en testant un maximum d'hyperparamètres on est assurés de faire un bon résultat.  On peut potentiellement réduire la taille de notre réseau et donc par définition réduire le temps d'inférence de celui-ci, ce qui peut être intéréssant dans le cadre d'un sujet en temps réel.
+    \item En s'intéréssant à la question de la représentation des données, on évite un apprentissage de cette représentation à "l'aveugle": en optimisant un réseau précis sur un jeu de données précis et en testant un maximum d'hyperparamètres on est assurés de faire un bon résultat. Plus la représentation des données est fiable, plus l'architecture utilisée pour la classification peut-être triviale.
+    On peut donc potentiellement réduire la taille de notre réseau et donc par définition réduire le temps d'inférence de celui-ci, ce qui peut être intéréssant dans le cadre d'un sujet en temps réel.
+    
+    \item Peu de travaux de recherche en reconnaissance d'actions se focalisent sur la représentation des données, la majorité des travaux actuels translatent la connaissance de domaines connexes tels que la computer vision ou le text-mining et s'inspirent des méthodes de l'état de l'art dans ces domaines. Il n'existe à ce jour à ma connaissance aucune publication sur l'utilisation des auto-encodeurs pour la reconnaissance d'actions squelettiques.
 \end{itemize}
 
-L'idée étant d'entrainer un autoencodeur avec une fonction de coût modifiée en rajoutant une contrainte sur la séparation linéaire des classes dans l'espace latent (LDA / QDA / FDA). Il a été montré que la représentation optimale interne d'un MLP s'obtient en faisant une analogie avec une analyse discriminante non linéaire \cite{webb1990optimised}.
+L'idée étant d'entrainer un autoencodeur avec une fonction de coût modifiée en rajoutant une contrainte sur la séparation linéaire des classes dans l'espace latent (LDA / QDA / FDA). Il a été montré que la représentation optimale interne d'un MLP s'obtient en faisant une analogie avec une analyse discriminante non linéaire \cite{webb1990optimised}. Parallèlement, \cite{2020arXiv200312843B} montrent que l'ajout d'une fonction de cout non-supervisée lors d'un problème de classification avec peu de données permet une meilleure généralisation des réseaux.
 
-Les approches factorielles citées plus haut s'apparentent à la projection de données dans l'espace comme celle d'une ACP mais tandis que l'ACP maximise la variance du jeu de données, celles-ci se focalisent sur la maximisation de la séparabilité des classes dans l'espace (supervisé). On obtiendrait donc un AutoEncodeur "semi-supervisé" dans le sens où celui-ci se focalise sur deux informations complètement différentes dans les données, l'une de manière non-supervisée, l'autre de manière supervisée:
+
+Les approches factorielles citées plus haut s'apparentent à la projection de données dans l'espace comme celle d'une ACP mais tandis que l'ACP maximise la variance du jeu de données, celles-ci se focalisent sur la maximisation de la séparabilité des classes dans l'espace, ce qui en fait des méthodes supervisées. On obtiendrait donc un AutoEncodeur "semi-supervisé" dans le sens où celui-ci se focalise sur deux informations complètement différentes dans les données, l'une de manière non-supervisée, l'autre de manière supervisée:
 \begin{itemize}
-    \item La structure inhérente des données capturée de manière non supervisée grâce à l'Auto-encodeur, on conserverait une partie de l'information importante et discriminante du jeu de données. (feature extraction)
-    \item La séparabilité des classes dans l'espace grâce à l'analyse discriminante (non) linéaire. Ce qui permettrait de réduire le nombre de layer au final.
+    \item La structure inhérente des données capturée de manière non supervisée grâce à la reconstruction de l'Auto-encodeur et sa capacité d'abstraction. On conserverait alors une partie de l'information importante et discriminante du jeu de données. (feature extraction)
+    \item La séparabilité des classes dans l'espace grâce à l'analyse discriminante (non) linéaire. Ce qui permettrait de réduire le nombre de layers.
 \end{itemize}{}
 
 
-Une fois la convergence obtenue, on peut imaginer deux utilisations:
+Nous pouvons imaginer deux utilisations à cette approche:
 \begin{itemize}
-    \item Récupérer cet espace latent combinant les informations "data driven" grâce à l'apprentissage non-supervisé de l'auto encodeur classique et une première ébauche de séparabilité linéaire grâce à la seconde partie de la fonction de coût. Envoyer l'espace latent à un input de CNN classique très peu profond, GAP, Softmax ou un MLP, Softmax. Finetuner le réseau de bout en bout et voir ce que cela donne quand à la capacité de discrimination de l'approche. 
-    \item Générer des données en réalisant une génération d'instance au niveau de l'espace latent grâce à des approches type SMOTE \cite{chawla2002smote} ou ADASYN \cite{he2008adasyn}  et utiliser la partie décodeur pour  faire de la data génération.
+    \item Récupérer cet espace latent combinant les informations "data driven" grâce à l'apprentissage non-supervisé de l'auto encodeur classique et la première ébauche de séparabilité linéaire grâce à la seconde partie de la fonction de coût. Envoyer l'espace latent à un réseau de neurones très peu profond pour la classification. Finetuner le réseau de bout en bout et voir ce que cela apporte quand à la capacité de discrimination de l'approche. 
+    \item Générer des données en réalisant une génération d'instances au niveau de l'espace latent grâce à des approches type SMOTE \cite{chawla2002smote} ou ADASYN \cite{he2008adasyn}  et utiliser la partie décodeur pour  faire de la data génération.
 \end{itemize}
 
 \subsection{Formalisation}
-On pose le problème comme ceci: \newline
+La pipeline complète de notre approche est présentée en figure \ref{fig:AEmodif}.
+Nous définissons le problème comme ceci: \newline
 $$\min _{\theta_{1}, \theta_{2}},\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta 1}(\mathbf{X})\right)\right\|^{2}$$
 
-Fonction de coût habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les paramètres des blocs encodeur et decodeur de l’AE. 
+Fonction de reconstruction habituelle d'un autoencodeur avec $\theta_{1}, \theta_{2}$ les paramètres des blocs encodeur et decodeur de l’AE. 
 
 $$\min _{\theta_{1}, \theta_{2}, \mathbf{S}}\left\|\mathbf{X}-g_{\theta_{2}}\left(f_{\theta_{1}}(\mathbf{X})\right)\right\|^{2}+\lambda\left\|f_{\theta_{1}}(\mathbf{X})-\mathbf{S}_{f_{\theta 1}}(\mathbf{X})\right\|^{2}$$
 
@@ -246,18 +253,39 @@ Ajout d'une variation dans la fonction de coût: avec S la matrice de projection
 
 Une fois, l'entrainement de l'autoencodeur réalisé, récupération des poids de la partie encodeur: $f_{\theta 1}$, ajout d'une fonction classifieur softmax:\\ 
 
-$\sigma(\mathbf{z})_{j}=\frac{\mathrm{e}^{z_{j}}}{\sum_{k=1}^{K} \mathrm{e}^{z_{k}}} \text { pour  tout } j \in\{1, \ldots, K\}$
-
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\linewidth]{Images/Autoencoder_modif.png}
-    \caption{Pipeline de l'approche}
+    \includegraphics[width=1.1\linewidth]{Images/AE_supervis.png}
+    \caption{Pipeline de l'approche: (1) nous entrainons un autoencodeur pour reconstruire une séquence représentant une action en y ajoutant une contrainte spécifique à la séparabilité des classes dans l'espace latent. (2) extraction des poids de la partie encodeur jusqu'au bottleneck représenté en rouge et ajout d'une softmax, transformant alors la partie encodeur en un réséau pré-entrainé sur les données pour la classification des actions.}
     \label{fig:AEmodif}
 \end{figure}
 
+Nous souhaitons dans un premier temps évaluer l'apport de cette représentation pour la classification.
+
 \subsection{Tests et évaluation}
-J'ai réalisé l'implémentation de cette approche sur deux jeux de données: SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.\\
+
+\subsubsection{Evaluation datasets}
+Par soucis d'économie de temps, j'ai réalisé l'évaluation de cette approche sur les mêmes jeux de données que ceux présentés en \ref{JHMDBSHREC}, à savoir SHREC \cite{de2017shrec} et JHMDB \cite{jhuang2013towards}.\\
+
+\subsubsection{Détails d'implémentation}
+
+Afin d'évaluer la qualité de représentation, nous avons choisi de prendre une architecture d'autoencodeur la plus facile possible: semblable à celle d'un perceptron multicouches. Naturellement, il est possible de réaliser le même travail sur des autoencodeur convolutifs ou séquentiels afin de capturer la séquentialité de l'action ou de minimiser la taille du réseau et ainsi potentiellement améliorer l'accuracy et le temps d'inférence.\\
+
+L'architecture est composé d'une partie encodeur et d'une partie décodeur.
+La partie encodeur est définie telle quelle:
+\begin{itemize}
+    \item Un couche d'entrée de dimension 2112 représentant les valeurs d'une action complète pour 32 pas de temps, 22 keypoints et  3 dimensions.
+    \item 5 layers dense d'extractions de features dont la dimension diminue d'une puissance de deux pour chaque layer (512, 256, 128, 64, 32).
+    \item Un bottleneck correspondant de dimension du nombre de classe du jeu de données moins un: le nombre maximum d'axes obtenus par les analyses factorielles correspond au nombre de classe moins un. Pour SHREC 14 celui-ci aura 13 valeurs pour SHREC 28 27 valeurs et pour JHMDB 20 valeurs.
+\end{itemize}
+
+La partie décodeur est symmétrique à la partie encodeur à l'exception du bottleneck qui est unique.\\
+Pour chaque layers, nous ajoutons une couche de dropout de valeur \textit{0.1} et de la batchnormalisation préalablement au dropout.
+L’entraînement est réalisé avec l'optimiseur Adam \cite{kingma2014adam} suivant les recommandations du papier initial pour la première et la seconde étape.\\
+
+L'optimisation du paramètre $\lambda$ est actuellement sujette à discussions, nous avons pour l'instant fait varier les valeurs de lambda de manière empirique afin de suivre l'impact que la normalisation LDA avait sur le résultat final. 
+
+\subsubsection{Résultats}
 
 \begin{table}[H]
 \centering
@@ -280,13 +308,14 @@ MLP Avec initialisation AE Modifié (\lambda = 10) &          1.2M &          90
 
 
 \end{tabular}}
+\label{trivial}
 \caption{Résulats obtenus grâce à l'initialisation des poids avec un AE modifié sur SHREC \cite{de2017shrec}}
 \end{table}
 
 
 
 
-\begin{table}
+\begin{table}[H]
 \scalebox{0.7}{
 \centering
 \begin{tabular}{l|l|l|l} 
@@ -307,7 +336,13 @@ Avec initialisation AE modifié (\lambda =5)   & -                  &        67.
 Avec initialisation AE modifié (\lambda =7.5)   & -                  &          66.5\%                                                                                                                                     & -                                      \\
 \hline
 \end{tabular}}
+\caption{Résulats obtenus grâce à l'initialisation des poids avec un AE modifié sur JHMDB.}
+\label{resJHMDB}
 \end{table}
+
+\subsubsection{Discussions et visualisations}
+
+Nous avons souhaité dans un premier temps  verrifier que le jeu de données n'était pas suffisament trivial pour qu'une simple LDA sur l'entrée $X$ suffise à obtenir des résultats cohérents et ce sans utiliser l'apprentissage profond. Selon le tableau \ref{fig:AEmodif}, nous remarquons qu'une simple LDA sur l'entrée n'est pas suffisante pour obtenir des résultats corrects. Cependant il nous a semblé interéssant de regarder si l'utilisation des données projetées dans l'espace latent après entrainement d'un autoencodeur classique et de notre encodeur modifé apportait de l'information avant finetuning. Après une LDA sur les données projetées jusqu'au bottleneck, nous réalisons qu'un autoencodeur classique et que notre autoencodeur modifé permettent à une simple LDA de trouver plus de sens aux données. D'après la figure \ref{fig:AEmodifTSNE} ci-dessous, nous remarquons également que la projection des données vers l'espace latent dans le cadre de notre autoencodeur permet d'obtenir une séparation plus visible dans l'espace des centroïdes de chaque classe.
 
 \begin{figure}[H]
     \centering
@@ -316,27 +351,34 @@ Avec initialisation AE modifié (\lambda =7.5)   & -                  &         
     \label{fig:AEmodifTSNE}
 \end{figure}
 
+Toujours selon le tableau \ref{fig:AEmodif}, nous avons donc voulu comparer la qualité de représentation pour la classification entre un autoencodeur à fonction de coût classique ($\lambda = 0$) et à fonction de coût modifiée après finetuning. Nous remarquons ici que la normalisation LDA permet d'obtenir des résultats sensiblement meilleurs aux résultats obtenus par un autoencodeur général sur les deux jeux de données proposés.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\linewidth]{Images/shrec28.png}
-    \caption{ca}
+    \caption{Matrice de confusion obtenue sur SHREC 28 avec un autoencodeur modifié ($\lambda = 5$).}
     \label{fig:rsshrec28}
 \end{figure}\textbf{}
 
-\subsection{Remarques}
+Nous avons dans un dernier temps, souhaité comparer l'approche AE-LDA à l'état de l'art pour ces deux jeux de données et ainsi voir si un modèle trivial se focalisant sur la réprésentation de ses données avec une régularisation non supervisée pouvait concourir avec des approches plus complèxes comme les réseaux de neurones à état ou réseau de neurones convolutifs: la figure \ref{fig:tabguillaume} et le tableau \ref{resJHMDB} nous permettent de constater que notre méthode dont les résultats sur SHREC 14 et SHREC 28 sont respectivement 92.5\% et 87.1\% et de 68.3\% sur JHMDB peut jusqu'à une certaine limite concourir avec des approches plus complèxes. Il convient cependant de rappeler qu'en se fiant aux résultats de \cite{2019arXiv190709658Y}, notre méthode est jusqu'à 4 fois plus rapide que les méthodes de l'état de l'art (20 000 classifications par secondes).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\linewidth]{Images/guillaume_TAB.png}
+    \caption{Resultats de l'état de l'art sur SHREC 14/28, image provenant des recherches approfondies sur le jeu de données par Guillaume Devineau. }
+    \label{fig:tabguillaume}
+\end{figure}\textbf{}
+
+Nous avons donc montré qu'il est plus qu'interéssant de se focaliser sur la question de représentation des données pour la question de la reconnaissance d'action squelettiques.
+
+
+\subsection{Travail à fournir}
+Le réseau présenté ci-dessus étant trivial, il est possible d'envisager plusieurs axes d'amélioration:
+
 \begin{itemize}
-    \item Le nombre maximum d'axes obtenus par la LDA correspond au nombre de classe moins un: sur SHREC 14 l'espace latent est donc de dimension 13 toute représentation avec un espace latent superieur est impossible (on ne peut donc difficilement imposer des contraintes de sparsité au modèle). Cela implique également une perte très lourde de l'information vis-à-vis de l'information dans l'espace latent. (SHREC: de 2122 neurones d'entrée à un espace latent avec 13 neurones)
-    \item Quelques problèmes de convergence dûs à l'optimisation de $\lambda$ durant l'apprentissage de l'autoencodeur avec la fonction de coût modifiée(optimiser ADAM \cite{kingma2014adam}).
+    \item Essayer plusieurs structures d'autoencodeur plus travaillées qu'un simple MLP: AE convolutif, AE séquentiel, utiliser des couches d'attention...
+    \item Utiliser des analyses factorielles moins spécifiques que l'analyse discriminante linéaire. L'analyse discriminante quadratique par exemple, permettant alors de ne pas émettre de suppositions vis-à-vis des matrices de covariance de chaque classes. 
+    \item cumuler la structuration des keypoints présentée en \ref{dfs} à cette approche pour un autoencodeur convolutif et évaluer la pertinence de cumuler les deux approches.
 \end{itemize}
 
-\subsection{A creuser}
-
-Essayer plusieurs structures plus travaillées qu'un simple MLP:
-\begin{itemize}
-    \item AE: Convolutions / Attention / Séquentiel / VAE.
-    \item analyse discriminante: QDA  pour ne pas émettre de suppositions vis-à-vis des matrices de covariance de chaque classes
-\end{itemize}
-
-Rien n'est fixé dans la fonction de coût, j'imagine qu'ajouter un autre critère de régularization ne peut être que bénéfique, mais vu les prolèmes de convergence actuels, je préfère ne pas le tenter pour l'instant.
-
-
+Cependant, nous ne sommes pas complètement convaincus de la capacité de ces deux jeux de données à représenter la totalité des difficultés qui existent pour la prédiction d'intention de piétons. Ainsi, nous avons pour l'instant préféré laisser cette approche en suspent jusqu'à la mise en place d'une pipeline sur des jeux de données de pietons plus complèxes afin d'évaluer cette approche dans le cadre de la thèse.

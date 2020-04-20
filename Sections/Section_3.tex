@@ -271,12 +271,12 @@ Par soucis d'économie de temps, j'ai réalisé l'évaluation de cette approche 
 
 Afin d'évaluer la qualité de représentation, nous avons choisi de prendre une architecture d'autoencodeur la plus facile possible: semblable à celle d'un perceptron multicouches. Naturellement, il est possible de réaliser le même travail sur des autoencodeur convolutifs ou séquentiels afin de capturer la séquentialité de l'action ou de minimiser la taille du réseau et ainsi potentiellement améliorer l'accuracy et le temps d'inférence.\\
 
-L'architecture est composé d'une partie encodeur et d'une partie décodeur.
+L'architecture est composée d'une partie encodeur et d'une partie décodeur.
 La partie encodeur est définie telle quelle:
 \begin{itemize}
     \item Un couche d'entrée de dimension 2112 représentant les valeurs d'une action complète pour 32 pas de temps, 22 keypoints et  3 dimensions.
     \item 5 layers dense d'extractions de features dont la dimension diminue d'une puissance de deux pour chaque layer (512, 256, 128, 64, 32).
-    \item Un bottleneck correspondant de dimension du nombre de classe du jeu de données moins un: le nombre maximum d'axes obtenus par les analyses factorielles correspond au nombre de classe moins un. Pour SHREC 14 celui-ci aura 13 valeurs pour SHREC 28 27 valeurs et pour JHMDB 20 valeurs.
+    \item Un bottleneck de dimension du nombre de classe du jeu de données moins un: le nombre maximum d'axes obtenus par les analyses factorielles correspond au nombre de classe moins un. Pour SHREC 14 celui-ci aura 13 valeurs pour SHREC 28 27 valeurs et pour JHMDB 20 valeurs.
 \end{itemize}
 
 La partie décodeur est symmétrique à la partie encodeur à l'exception du bottleneck qui est unique.\\
@@ -369,16 +369,15 @@ Nous avons dans un dernier temps, souhaité comparer l'approche AE-LDA à l'éta
     \label{fig:tabguillaume}
 \end{figure}\textbf{}
 
-Nous avons donc montré qu'il est plus qu'interéssant de se focaliser sur la question de représentation des données pour la question de la reconnaissance d'action squelettiques.
-
-
+Pour conclure, nous avons montré ici,  qu'il est plus qu'interéssant de se focaliser sur la question de la représentation des données pour la reconnaissance d'action squelettiques. 
 \subsection{Travail à fournir}
 Le réseau présenté ci-dessus étant trivial, il est possible d'envisager plusieurs axes d'amélioration:
 
 \begin{itemize}
     \item Essayer plusieurs structures d'autoencodeur plus travaillées qu'un simple MLP: AE convolutif, AE séquentiel, utiliser des couches d'attention...
     \item Utiliser des analyses factorielles moins spécifiques que l'analyse discriminante linéaire. L'analyse discriminante quadratique par exemple, permettant alors de ne pas émettre de suppositions vis-à-vis des matrices de covariance de chaque classes. 
-    \item cumuler la structuration des keypoints présentée en \ref{dfs} à cette approche pour un autoencodeur convolutif et évaluer la pertinence de cumuler les deux approches.
+    \item Cumuler la structuration des keypoints présentée en \ref{dfs} à cette approche pour un autoencodeur convolutif et évaluer la pertinence de cumuler les deux approches.
+    \item L'évaluation de la capacité de génération de l'autoencodeur n'a pas encore été évaluée.
 \end{itemize}
 
-Cependant, nous ne sommes pas complètement convaincus de la capacité de ces deux jeux de données à représenter la totalité des difficultés qui existent pour la prédiction d'intention de piétons. Ainsi, nous avons pour l'instant préféré laisser cette approche en suspent jusqu'à la mise en place d'une pipeline sur des jeux de données de pietons plus complèxes afin d'évaluer cette approche dans le cadre de la thèse.
+Cependant, nous ne sommes pas complètement convaincus de la capacité de ces deux jeux de données à représenter la totalité des difficultés qui existent pour la prédiction d'intention de piétons. Ainsi, nous avons pour l'instant préféré laisser cette approche en suspent jusqu'à la mise en place d'une pipeline sur des jeux de données de pietons supposément plus complexes.

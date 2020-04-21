@@ -15,7 +15,7 @@ De ce fait, nous avons souhaité voir s'il était possible de réaliser l'analog
     \label{fig:Johansson}
 \end{figure}
 
-Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la dynamique des articulations d'un piéton à une intention. Cette estimation de la dynamique des articulations sera ensuite combinée à la vision afin d’avoir une estimation plus robuste et absolue de l'intention du piéton en fonction de son environnement.\\
+Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la dynamique des articulations d'un piéton à une intention. Cette estimation de la dynamique des articulations sera ensuite combinée à la vision afin d’avoir une estimation plus robuste et plus absolue de l'intention du piéton en fonction de son environnement.\\
 
 
 
@@ -23,7 +23,9 @@ Dans le cadre de cette thèse, nous cherchons dans un premier temps à lier la d
 
 \section{Squelettisation de piétons}
 
-Afin d’aboutir à cet objectif, la première étape essentielle est la détection et squelettisation des piétons. De nombreuses méthodes existent dans l’état de l’art, notamment par apprentissage profond où les récents résultats sont tout à fait prometteurs. La méthode finale ciblée concernant la prédiction des intentions raisonne sur la posture des piétons et nécessite donc d’être à même d’effectuer une extraction des articulations majeures des piétons en temps réel pour ensuite alimenter la phase de prédiction.
+La détection et la squelettisation des piétons est la première et nécessaire étape d'une prédiction des intentions dont l'analyse de la posture est un composant essentiel.
+Notre pipeline se basera sur des approches de l’état de l’art ayant démontré de bonnes performances et présentant
+des temps de calcul compatibles avec une utilisation temps réel.
 
 
 \begin{figure}[H]
@@ -33,7 +35,6 @@ Afin d’aboutir à cet objectif, la première étape essentielle est la détect
     \label{fig:difficulte}
 \end{figure}
 
-L’objectif final étant orienté vers la prédiction des intentions, notre pipeline se basera sur des approches de l’état de l’art ayant démontré de bonnes performances et présentant des temps de calcul compatibles avec une utilisation temps réel.\\
 
 La tâche de détection est compliquée de par la variabilité de l’apparence des personnes (vêtements, pose ...)
 ainsi que par des phénomènes d’occlusions, dus à la foule et au décor ou encore dus à des problèmes d'échelle dans l'image.\\
@@ -45,9 +46,11 @@ ainsi que par des phénomènes d’occlusions, dus à la foule et au décor ou e
     \caption{Exemple de cas difficiles pour des algorithmes de squelettisation: vêtements et luminosité à gauche, occlusion et échelle à droite.}
     \label{fig:difficulte}
 \end{figure}
-Ces difficultés sont l'une des causes de la recrudescence de l'intérêt des chercheurs pour traiter l'estimation de pose selon des approches d'apprentissage profond plutôt que par simple approche statistique comme cela était réalisé précédemment.\\
+Les approches construites sur les méthodes d'apprentissage profond semblent plus prometteuses dans le dépassement de ces difficultés que ne  semblent l'être les approches statistiques. \\
 
-L'état actuel de la recherche dans ce domaine permet de discriminer les approches de squelettisation multi-personnes 2D en deux types d'approches foncièrement différentes dans leur fonctionnement: ici définies comme les méthodes Top-Down et les méthodes Bottom-up.
+
+Dans l'état actuel de la recherche en matière de squelettisation multi-personnes 2D, deux types de méthodes se différencient profondément : ici définies comme les méthodes Top-Down et les méthodes
+Bottom-up.
 \begin{itemize}
     \item \textbf{Top down}: consiste en l'ajout d'un détecteur de personnes afin d'identifier tous les keypoints de chaque personne et ensuite calculer la pose pour celles-ci.
     \item \textbf{Bottom up}: consiste à détecter tous les keypoints de l'image (\textit{i.e} les membres de chaque personne), puis d'associer ces keypoints à leur propriétaires respectifs.
@@ -224,7 +227,7 @@ L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par
 Ainsi, \cite{2018arXiv180506184Z} proposent d'appliquer des convolutions sur les arêtes d'un graphe correspondant aux os du squelette afin de conserver la sémantique spatiale.
 \cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA (\textit{autoregressive moving average}). Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
 
-\section{Prédiction d'intention}
+\section{Prédiction d'intention des piétons}
 
 \textbf{A ECRIRE}
 \textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire, ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà la rue ou sont sur le point de le faire: ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}

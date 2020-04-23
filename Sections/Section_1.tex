@@ -43,7 +43,7 @@ ainsi que par des phénomènes d’occlusions, dus à la foule et au décor ou e
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\linewidth]{Images/Difficulties.png}
-    \caption{Exemple de cas difficiles pour des algorithmes de squelettisation: vêtements et luminosité à gauche, occlusion et échelle à droite.}
+    \caption{Exemple de cas difficiles pour des algorithmes de squelettisation: vêtements et luminosité à gauche, occlusion et échelle à droite.}oui
     \label{fig:difficulte}
 \end{figure}
 Les approches construites sur les méthodes d'apprentissage profond semblent plus prometteuses dans le dépassement de ces difficultés que ne  semblent l'être les approches statistiques. \\
@@ -225,9 +225,31 @@ L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par
 \cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage géométrique profond et propose une taxonomie pour différencier les réseaux géométriques en quatre catégories: récurrents, convolutifs, auto-encodeurs et spatio-temporels.
 
 Ainsi, \cite{2018arXiv180506184Z} proposent d'appliquer des convolutions sur les arêtes d'un graphe correspondant aux os du squelette afin de conserver la sémantique spatiale.
-\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA (\textit{autoregressive moving average}). Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
+\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA. Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
 
-\section{Prédiction d'intention des piétons}
+\section{Prédiction d'intention}
+Nous présentons dans cette section une approche connexe à la reconnaissance d'actions: la prédiction d'intention. Tandis que la reconnaissance consiste en l'utilisation d'une séquence complète pour labéliser une action, la prédiction raisonne à partir d'une séquence incomplète. 
+
+Comme présenté dans la partie \ref{sujetdethes}, nous définissons dans le cadre de la thèse l'intention du piéton comme une combinaison de comportements discrets de haut niveau ainsi que de trajectoires continues décrivant le mouvement futur attendu du piéton. Nous présentons donc ici deux types de prédictions: continue et discrète.
+
+\subsection{Prédictions d'actions, l'inférence discrète}
+Formellement, soit une séquence complète d'action $\mathbf{x}_{1: T}$ et une séquence incomplète $\mathbf{x}_{1: t}$ contenant $t$ pas de temps, correspondant aux $t$ premiers pas de temps de $\mathbf{x}_{1: T}$ , et définie telle que $\mathbf{x}_{1: t}=\left\{f_{1}, f_{2}, \cdots, f_{t}\right\}$. Le but est d'inférer le label de l'action incomplète $y: \mathbf{x}_{1: t} \rightarrow y$.\\
+
+Il est possible de différencier deux catégories de travaux sur la prédiction d'intention: les prédictions à court  et à long terme.
+
+\subsubsection{inférence à court terme}
+Dans le cadre d'une inférence à court terme; se focalisant alors sur des séquences d'action de courte durée (quelques secondes), nous souhaitons reconnaître une action humaine à un stade précoce.\\
+
+Il est dans ce cas alors possible d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. Cependant, ces méthodes ne sont pas suffisantes car certaines actions sont très difficiles à reconnaître en raison du manque d'information. \ref{ryoo2011human} reconnait les actions en cours en observant certaines features accumulées au fil du temps de manière probabiliste,
+
+
+\subsubsection{inférence à long terme}
+A l'inverse, dans le cadre d'une inférence à long terme,\\
+
+
+\subsection{Prédiction de la trajectoire, l'inférence continue}
+
+
 
 \textbf{A ECRIRE}
 \textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire, ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà la rue ou sont sur le point de le faire: ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}

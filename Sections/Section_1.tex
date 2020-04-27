@@ -71,30 +71,30 @@ Les approches Bottom up reposent généralement sur des algorithmes de matching,
 
 \cite{cao2017realtime} proposent par exemple une approche détectant les keypoints dans l'image grâce à une architecture convolutive à deux branches: l'une inférant un ensemble de 18 heatmaps, chacune représentant une partie particulière du squelette de la pose humaine, l'autre branche inférant un ensemble de 38 \textit{Part Affinity Fields} représentant le degré d'association entre les keypoints. Des graphes bipartis sont ensuite générés en fonction de ces sorties et l'algorithme hongrois est utilisé afin d'élaguer le graphe et ainsi attribuer de manière optimale chacun des keypoints à une seule personne.
 
-\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci grâce à deux fonction de coût: une de détection et une de matching.
+\cite{627f7b8a4a3441f28d400cfbd7a32b80} proposent une approche apprenant à un réseau à produire simultanément des détections de keypoints et les affectations de ceux-ci grâce à deux fonctions de coût: une de détection et une de matching.
 
-\cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'image de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
+\cite{DBLP:journals/corr/InsafutdinovAPT16} proposent une approche bottom up capable de travailler sur une suite d'images de manière séquentielle et ne se restreignent plus à l'approche frame by frame des méthodes précédentes: Après avoir détecté les keypoints de chaque frame, ceux-ci sont associés sous la forme d'un graphe spatio-temporel, le problème d'attribution des keypoints à une personne est alors assimilé à un problème de coupe minimum en théorie des graphes.
 
 \subsection{Approches Top Down}
-Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de détection de personnes. Computationnellement parlant, ces méthodes augmentent significativement en temps en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail étant que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture à priori avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention. Cela réduirait alors le temps d'inférence de ce type d'approche tout en conservant leur robustesse.\\
+Contrairement aux approches Bottom Up qui reposent sur la qualité de leur algorithme de matching, les méthodes Top Down reposent sur la qualité d'inférence de leur modèle de détection de personnes. Computationnellement parlant, ces méthodes augmentent significativement en temps d'exécution en fonction du nombre de personnes dans l'image mais sont généralement plus robustes. Un avantage significatif pour notre travail est que ce type d'approche permet d'identifier les positions dans l'image des personnes dites à risque pour la voiture avant de lancer une estimation de pose et par conséquent, permet d'omettre certaines inférences qui ne seraient pas utiles pour la partie suivante d'estimation d'intention. Cela réduirait alors le temps d'inférence de ce type d'approche tout en conservant leur robustesse.\\
 
 Mask R-CNN \cite{2017arXiv170306870H}, initialement modèle de segmentation, peut-être modifié au niveau de la sortie du masque afin d'obtenir des poses. L'architecture de base extrait d'abord les features d'une image en utilisant un CNN. Ces features sont utilisé par un RPN pour obtenir des bounding boxes candidates à la présence d'objets. En combinant les informations relatives à l'emplacement de la personne grâce aux bounding boxes ainsi qu'aux keypoints obtenus pour celle-ci grâce à la segmentation. On obtient le squelette de la pose humaine pour chacune des personnes présentes dans l'image.
 
 
 \cite{2016arXiv160808526I} montrent que le problème d'estimation multi-poses peut être formulé par un ensemble de problèmes d'association pour chacune des personnes détectées dans l'image. Ainsi, ceux-ci utilisent Faster R-CNN pour la détection de personnes puis, pour chaque personne détectée, génèrent un squelette en utilisant un estimateur de pose mono-personne. Cette approche ne prenant pas en compte les problèmes d'occlusions où de troncature pour chacune des bounding boxes obtenues, ceux-ci réutilisent le système de programmation linéaire de \cite{2015arXiv151106645P} sur chacun des graphes inférés pour chaque bounding box. Les graphes étant de taille bien moindre que dans l'approche Bottom Up, La vitesse d'inférence obtenue en est globalement meilleure.
 
-\cite{2017arXiv170101779P} proposent une approche top down, où l'estimation des keypoints n'est pas réalisée par régression pour chaque keypoint mais par estimation de heatmaps et d'un vecteur de magnitude permettant de cibler au mieux la position du keypoint dans la heatmap. Cette approche permet d'obtenir potentiellement plusieurs keypoints de la même classe dans la même bounding box et ainsi, dans une certaine mesure, palier au problème d'occlusion pour l'estimation des poses dans un espace 2D. 
+\cite{2017arXiv170101779P} proposent une approche top down, où l'estimation des keypoints n'est pas réalisée par régression pour chaque keypoint mais par estimation de heatmaps et d'un vecteur de magnitude permettant de cibler au mieux la position du keypoint dans la heatmap. Cette approche permet d'obtenir potentiellement plusieurs keypoints de la même classe dans la même bounding box et ainsi, dans une certaine mesure, palier le problème d'occlusion pour l'estimation des poses dans un espace 2D. 
 
-AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation de pose lorsque les bounding boxes de détection de personnes obtenues sont inexactes. L'estimation de pose étant réalisée sur la boundig box où se trouve la personne, des erreurs de localisation et d'inférence de ces boites peuvent résulter en un fonctionnement non-optimal de l'algorithme d'extraction de pose. Les auteurs proposent donc l'utilisation d'un Symmetric Spatial Transformer Network (SSTN) pour extraire une zone de qualité à partir d'une bounding box inexacte. Un estimateur de pose est ensuite utilisé sur cette région extraite et les coordonnées obtenues sont transformées pour correspondre à l'espace d'origine.
+AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation de pose lorsque les bounding boxes de détection de personnes obtenues sont inexactes. L'estimation de pose étant réalisée sur la boundig box où se trouve la personne, des erreurs de localisation et d'inférence de ces boites peuvent résulter un fonctionnement non-optimal de l'algorithme d'extraction de pose. Les auteurs proposent donc l'utilisation d'un Symmetric Spatial Transformer Network (SSTN) pour extraire une zone de qualité à partir d'une bounding box inexacte. Un estimateur de pose est ensuite utilisé sur cette région extraite et les coordonnées obtenues sont transformées pour correspondre à l'espace d'origine.
 
 
 \subsection{De la question de la dimension}
 Nous pouvons remarquer que pour l'estimation de pose en 2D, les méthodes de l'état de l'art obtiennent de bonnes performances grâce aux réseaux convolutifs, devenus en quelques années, la référence en terme d'estimation de pose.
 
-Cependant, une des principales limites d'une approche en 2D serait la capacité traitement des occlusions entre piétons dans un espace de dimension 2. Dès lors, afin d'améliorer la détection de pose, la question de l'ajout d'une dimension peut se poser.
+Cependant, une des principales limites d'une approche en 2D est la capacité traitement des occlusions entre piétons dans un espace de dimension 2. Dès lors, afin d'améliorer la détection de pose, la question de l'ajout d'une dimension peut se poser.
 
-Les méthodes d'estimation de poses en 3D sont bien moins matures que pour l'estimation de pose en 2D. Une des raisons principale à ce jour serait le manque de jeux de données fiables disponibles \cite{2018arXiv180309722Y}.
-On peut cependant cerner certain types d'approches: premièrement estimer une pose en 2D pour ensuite reconstruire une pose en 3D, effectuer directement la régression d'une pose en 3D ou encore traiter le problème d'estimation de pose 3D conjointement, voir itérativement à la régression d'une pose 2D.
+Les méthodes d'estimation de poses en 3D sont bien moins matures que celles d'estimation de pose en 2D. Une des raisons principale à ce jour serait le manque de jeux de données fiables disponibles \cite{2018arXiv180309722Y}.
+On peut cependant discerner certain types d'approches: estimer une pose en 2D et reconstruire une pose en 3D, effectuer directement la régression d'une pose en 3D ou encore traiter le problème d'estimation de pose 3D conjointement, voir itérativement à la régression d'une pose 2D.
 
 
 \cite{2016arXiv161206524C} proposent par exemple une architecture passant par l'estimation d'une pose intermédiaire en 2D et estiment la valeur de la profondeur de la pose en utilisant l'algorithme des k plus proches voisins sur une base de données de poses 3D.
@@ -109,7 +109,7 @@ En dernier lieu, \cite{simo2013joint} proposent de découper le problème d'esti
 \subsection{De la question de la séquentialité}
 Sur la base des estimateurs de pose multi-personnes décrits ci-dessus, et dans le cadre de la thèse, il est naturel de vouloir les étendre de l'approche frame by frame à la vidéo et ainsi prendre en compte les informations séquentielles présentes dans celle-ci.\\
 
-Une grande partie des approches se basent sur les travaux de partitionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I}. La différence notoire étant d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.\\
+Une grande partie des approches se basent sur les travaux de partitionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I} pour l'approche frame by frame. La différence notoire pour prendre en compte la séquentialité est d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.\\
 
 Un axe de recherche actuel tend à explorer des solutions top-down plus efficaces et plus scalables en procédant d'abord à une estimation de la pose de plusieurs personnes sur chaque image, puis en les reliant
 en termes de similarité d'apparence et de relation temporelle:\\
@@ -124,7 +124,7 @@ Une autre approche proposée par \cite{Raaj_2019_CVPR} est de réutiliser le pri
 
 Il sera dans notre cas important de prendre en compte les contraintes de la thèse: les méthodes séquentielles à base d'appariement de poses seront priorisées car la localisation d'une personne peut varier en fonction d'un changement soudain d'angle de caméra, tandis que sa pose restera presque la même. Ceci afin d'obtenir un meilleur tracking des protagonistes de la scène et de ne pas mélanger les dynamiques du squelette de deux personnes à des instants différents dans la séquence mais proches dans l'espace, ce qui rendrait la seconde partie de l'approche biaisée en utilisant des données erronées.\\
 
-La question de l'utilité de l'ajout d'une dimension et de la prise en compte de la séquentialité dans l'estimation de pose pour la pipeline de prédiction des intentions est intéressante. Il conviendra cependant d'évaluer une fois la pipeline réalisée, les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complexe en temps et en capacité de calcul comparé à une approche d'identification naïve supposément plus rapide. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'inter-changer les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
+La question de l'utilité de l'ajout d'une dimension et de la prise en compte de la séquentialité dans l'estimation de pose pour la pipeline de prédiction des intentions est intéressante. Il conviendra cependant d'évaluer une fois la pipeline réalisée, les gains obtenus en accuracy avec la mise en place d'un algorithme d'estimation de pose plus complexe en temps et en capacité de calcul comparé à une approche d'identification naïve supposément plus rapide. Les briques de notre approche étant indépendantes, il ne sera pas difficile d'interchanger les algorithmes d'estimation de pose et ainsi de suivre l'évolution de l'état de l'art dans ce domaine sans pour autant bousculer complètement la pipeline.
 
 \section{Human Action Recognition}
 \label{subsec:HAR}
@@ -133,14 +133,16 @@ La seconde étape de l'approche consistera en la classification des actions de l
 
 Les principales modalités utilisées pour la reconnaissance d'actions humaines comprennent les vidéos RGB dans leur intégralité \cite{donahue2015long,2014arXiv1412.0767T,varol2017long,Wu_2018_CVPR}, le flow optique \cite{simonyan2014two}\\\cite{zhang2016real}\cite{sevilla2018integration,DanutPOP} et la représentation sous forme de squelette \cite{vemulapalli2014human,du2015hierarchical,2016arXiv160707043L,2018arXiv180107455Y}.
 
-Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes majoritairement intéressés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus plausible pour une utilisation en temps réel:
+Selon notre problématique: lier la dynamique de la pose à une classe, nous nous sommes principalement intéressés à la dernière famille d'approches. La représentation sous forme de squelette qui semble être l'approche la plus robuste mais également la plus efficiente pour une utilisation en temps réel:
 
 \begin{itemize}
-    \item En réduisant la taille des données d'entrée grâce à la structure de données associée aux squelettes, ce type d'approche est considéré comme bien plus rapide computationnellement parlant comparé aux modalités listées précédemment.
+    \item En réduisant la taille des données d'entrée grâce à la structure de données associée aux squelettes, ce type d'approche est considéré comme bien plus rapide computationnellement parlant comparé aux autres approches évoquées.
     \item Par ailleurs, celles-ci sont généralement bien plus robustes et capables de représenter les informations invariantes d'une action puisque qu'aucun contexte de fond n'y est inclus.
 \end{itemize}
 
-La plupart des travaux existants dans la littérature se focalisent sur les approches basées sur la vidéo. Il existe à ce jour beaucoup moins de méthodes d'apprentissage traitant sur des données squelettiques comme entrée. Dans cette section, nous examinons une liste de ces approches basées sur l'apprentissage profond de reconnaissance d'actions sur des données squelettiques.
+La plupart des travaux existants dans la littérature se focalisent sur les approches basées sur la vidéo. Il existe à ce jour beaucoup moins de méthodes d'apprentissage traitant des données squelettiques.\\
+
+Dans cette section, nous examinons une liste de ces approches basées sur l'apprentissage profond de reconnaissance d'actions sur des données squelettiques.
 
 \subsection{Approches récurrentes}
 
@@ -172,7 +174,7 @@ Les approches convolutives peuvent par exemple représenter le squelette sous la
     \caption{Organisation de la structure de données squelette en 3D en une image à trois channel (RGB)}
     \label{fig:skeltoim}
 \end{figure}
-L’idée générale étant de structurer les données pour leur donner la forme escomptée (une suite d’image) pour ensuite être classifiée en utilisant les méthodes standard de vision par ordinateur.\\
+L’idée générale étant de structurer les données pour leur donner la forme escomptée (une suite d’image) et classifier celles-ci en utilisant les méthodes standard de vision par ordinateur.\\
 
 
 Ainsi, \cite{ke2017new} proposent de transformer une séquence squelette sous la forme de trois clips vidéos, les caractéristiques des CNN des trois clips sont alors fusionés en un unique vecteur de caractéristiques alors envoyé dans une softmax pour la classification.
@@ -194,9 +196,9 @@ Les réseaux récurrents et les réseaux convolutifs peuvent également être fu
 Ainsi, \cite{donahue2015long} proposent d'extraire les informations visuelles d'images provenant d'une vidéo grâce à un CNN 2D puis de les envoyer en entrée d'un LSTM.
 \cite{li2017skeleton} proposent une approche où LSTM et CNN sont fusionnés "tardivement" (\textit{late fusion}). \cite{ullah2017action} proposent une approche bidirectionnelle où les features obtenus par le CNN sont envoyés dans un LSTM bidirectionnel \cite{Schuster97bidirectionalrecurrent}, connectant deux couches cachées de directions opposées à la même sortie. La couche de sortie pouvant alors obtenir simultanément des informations sur les états passés et futurs.
 
-\subsection{Attention}
+\subsection{De l'attention}
 La perception humaine se concentre sur les parties les plus pertinentes d'une image pour acquérir des informations permettant de comprendre la sémantique de celle-ci. Pour le machine learning, ce phénomène est artificiellement recréé  par le phénomène d'attention \cite{bahdanau2014neural,2017arXiv170603762V}: conceptuellement, l'attention peut être interprétée au sens large comme un vecteur de poids d'importance. 
-Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pondérer l'importance de certains instants de l'action pour la classifier ou encore pondérer l'importance de certaines articulations du squelette à l'instar d'autres articulations.
+Dans le cadre de la reconnaissance d'action, l'attention peut permettre de pondérer l'importance de certains instants de l'action pour la classifier ou encore pondérer l'importance de certaines articulations du squelette.
 \cite{luong2015effective} distingue deux types d'attention: \textit{global attention} et \textit{local attention}:
  \begin{itemize}
      \item \textit{Local attention}: consiste en la suppression pure et simple de données lors de la selection des données d'entrée: les caractéristiques non pertinentes de l'environnement en dehors de la région considérée comme importante sont ignorées.
@@ -225,7 +227,7 @@ L'apprentissage géométrique profond (\textit{Geometric deep learning} voir par
 \cite{wu2019comprehensive} fournit un état de l'art sur l'apprentissage géométrique profond et propose une taxonomie pour différencier les réseaux géométriques en quatre catégories: récurrents, convolutifs, auto-encodeurs et spatio-temporels.
 
 Ainsi, \cite{2018arXiv180506184Z} proposent d'appliquer des convolutions sur les arêtes d'un graphe correspondant aux os du squelette afin de conserver la sémantique spatiale.
-\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA. Finalement,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
+\cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA. Enfin,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
 
 \section{Prédiction d'intention}
 Nous présentons dans cette section une approche connexe à la reconnaissance d'actions: la prédiction d'intention. Tandis que la reconnaissance consiste en l'utilisation d'une séquence complète pour labéliser une action, la prédiction raisonne à partir d'une séquence incomplète. 
@@ -240,7 +242,7 @@ Il est possible de différencier deux catégories de travaux sur la prédiction 
 \subsubsection{Inférence à court terme}
 Dans le cadre d'une inférence à court terme; se focalisant alors sur des séquences d'action de courte durée (quelques secondes), nous souhaitons reconnaître une action humaine à un stade précoce.\\
 
-Il est dans ce cas alors possible d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. Cependant, ces méthodes ne sont pas suffisantes puisque non optimisées pour le problème donné. \cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps, d'autres approches \textit{handcrafted} telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
+Il est dans ce cas alors possible, jusqu'à un certain point d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. \cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps, d'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
 
 Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction:
 
@@ -251,6 +253,7 @@ Innévitablement, les progrès récents ont naturellement conduit au développem
 
 \subsubsection{Inférence à long terme}
 A l'inverse, dans le cadre d'une inférence à long terme, il convient de diviser une action en un suite d'actions primitives, comme présenté en figure \ref{fig:47}.
+La durée de ces actions complexes est bien plus longue et leur prédiction en est plus compliquée que pour des actions à court terme.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{Images/47.png}
@@ -258,8 +261,11 @@ A l'inverse, dans le cadre d'une inférence à long terme, il convient de divise
     \label{fig:47}
 \end{figure}
 
-La durée de ces actions complexes est bien plus longue et leur prédiction en est plus compliquée que pour des actions à court terme. Il \\
-
+ L'utilisation d'informations contextuelles pour ces inférences à long terme est importante: la connaissance à priori de certains objets présents dans la scène permet par exemple de limiter le nombre d'actions plausibles dans l'espace de recherche, puisqu'une majorité des actions à long terme peuvent être conditionnées en fonction de l'objet dont elles sont la cible.\\
+ 
+ Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, avoir une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelletisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
+ 
+ Nous n'avons donc pour l'instant, pas approfondi la question de l'inférence à long terme. Il est cependant intéréssant de garder en tête, la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 

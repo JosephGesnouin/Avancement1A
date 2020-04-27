@@ -88,7 +88,7 @@ Mask R-CNN \cite{2017arXiv170306870H}, initialement modèle de segmentation, peu
 AlphaPose \cite{fang2017rmpe} proposent une approche pour faciliter l'estimation de pose lorsque les bounding boxes de détection de personnes obtenues sont inexactes. L'estimation de pose étant réalisée sur la boundig box où se trouve la personne, des erreurs de localisation et d'inférence de ces boites peuvent résulter un fonctionnement non-optimal de l'algorithme d'extraction de pose. Les auteurs proposent donc l'utilisation d'un Symmetric Spatial Transformer Network (SSTN) pour extraire une zone de qualité à partir d'une bounding box inexacte. Un estimateur de pose est ensuite utilisé sur cette région extraite et les coordonnées obtenues sont transformées pour correspondre à l'espace d'origine.
 
 
-\subsection{De la question de la dimension}
+\subsection{Question de la dimension}
 Nous pouvons remarquer que pour l'estimation de pose en 2D, les méthodes de l'état de l'art obtiennent de bonnes performances grâce aux réseaux convolutifs, devenus en quelques années, la référence en terme d'estimation de pose.
 
 Cependant, une des principales limites d'une approche en 2D est la capacité traitement des occlusions entre piétons dans un espace de dimension 2. Dès lors, afin d'améliorer la détection de pose, la question de l'ajout d'une dimension peut se poser.
@@ -106,7 +106,7 @@ A l'inverse, \cite{li20143d} proposent une approche convolutive réalisant direc
 
 En dernier lieu, \cite{simo2013joint} proposent de découper le problème d'estimation de poses 3D en estimant simultanément les poses en 2D et en 3D puis de combiner les résultats obtenus. \cite{tome2017lifting} proposent une méthode d'affinement itératif dans lequel les inférences 3D aident à affiner et à améliorer les estimations 2D. Puis translatent la prédiction de l'espace de dimension 2 dans un espace de dimension 3. Dans \cite{rogez2019lcr}, l'estimation des poses humaines 2D/3D est réalisée conjointement grâce à une architecture de localisation-classification-régression (LCR-Net). La localisation étant réalisée grâce à un RPN, suggérant des poses candidates à différents endroits de l'image, un classificateur estime les différentes propositions de pose, finalement une régression affine les propositions de pose en 2D et 3D.
 
-\subsection{De la question de la séquentialité}
+\subsection{Question de la séquentialité}
 Sur la base des estimateurs de pose multi-personnes décrits ci-dessus, et dans le cadre de la thèse, il est naturel de vouloir les étendre de l'approche frame by frame à la vidéo et ainsi prendre en compte les informations séquentielles présentes dans celle-ci.\\
 
 Une grande partie des approches se basent sur les travaux de partitionnement de graphe de \cite{2015arXiv151106645P} et \cite{2016arXiv160503170I} pour l'approche frame by frame. La différence notoire pour prendre en compte la séquentialité est d'étendre le graphe des keypoints dans l'espace à chaque frame en un graphe spatio-temporel. Cependant les solveurs actuels de programmation linéaire prennent un temps conséquent à converger et l'utilisation en temps réel en devient compliquée voir impossible considérant la taille du graphe pour une vidéo.\\

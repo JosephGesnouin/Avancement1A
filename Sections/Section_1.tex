@@ -240,9 +240,11 @@ Formellement, soit une séquence complète d'action $\mathbf{x}_{1: T}$ et une s
 Il est possible de différencier deux catégories de travaux sur la prédiction d'intention: les prédictions à court  et à long terme.
 
 \subsubsection{Inférence à court terme}
-Dans le cadre d'une inférence à court terme; se focalisant alors sur des séquences d'action de courte durée (quelques secondes), nous souhaitons reconnaître une action humaine à un stade précoce.\\
+Dans le cadre d'une inférence à court terme, se focalisant alors sur des séquences d'action de courte durée (quelques secondes), nous souhaitons reconnaître une action humaine à un stade précoce.\\
 
-Il est dans ce cas alors possible, jusqu'à un certain point d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. \cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps, d'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
+Il est dans ce cas alors possible, jusqu'à un certain point, d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles.\\
+
+\cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps. D'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
 
 Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction:
 
@@ -265,7 +267,8 @@ La durée de ces actions complexes est bien plus longue et leur prédiction en e
  
  Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, avoir une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelletisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
  
- Nous n'avons donc pour l'instant, pas approfondi la question de l'inférence à long terme. Il est cependant intéréssant de garder en tête, la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).
+ Nous n'avons donc pour l'instant, pas approfondi la question de l'inférence à long terme.\\
+ Il est cependant intéréssant de garder à l'esprit la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 

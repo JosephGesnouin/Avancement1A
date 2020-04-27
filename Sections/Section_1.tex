@@ -237,31 +237,31 @@ Formellement, soit une séquence complète d'action $\mathbf{x}_{1: T}$ et une s
 
 Il est possible de différencier deux catégories de travaux sur la prédiction d'intention: les prédictions à court  et à long terme.
 
-\subsubsection{inférence à court terme}
+\subsubsection{Inférence à court terme}
 Dans le cadre d'une inférence à court terme; se focalisant alors sur des séquences d'action de courte durée (quelques secondes), nous souhaitons reconnaître une action humaine à un stade précoce.\\
 
-Il est dans ce cas alors possible d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. Cependant, ces méthodes ne sont pas suffisantes car certaines actions sont très difficiles à reconnaître en raison du manque d'information. \ref{ryoo2011human} reconnait les actions en cours en observant certaines features accumulées au fil du temps de manière probabiliste,
+Il est dans ce cas alors possible d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles. Cependant, ces méthodes ne sont pas suffisantes puisque non optimisées pour le problème donné. \cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps, d'autres approches \textit{handcrafted} telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
+
+Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction:
+
+\cite{ma2016learning} proposent par exemple d'utiliser des CNN combinés à des LSTM pour capturer des features spatiaux-temporels et introduisent une fonction de coût se focalisant à la fois sur l'erreur de classification et sur la stabilité de la prédiction à mesure que la séquence est observée. De manière similaire, \cite{jain2016recurrent} proposent
 
 
-\subsubsection{inférence à long terme}
-A l'inverse, dans le cadre d'une inférence à long terme,\\
+
+
+\subsubsection{Inférence à long terme}
+A l'inverse, dans le cadre d'une inférence à long terme, il convient de diviser une action en un suite d'actions primitives, comme présenté en figure \ref{fig:47}.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Images/47.png}
+    \caption{Une action complexe pouvant être décomposée en une série d'action primitives, issue de \cite{li2014prediction}}
+    \label{fig:47}
+\end{figure}
+
+La durée de ces actions complexes est bien plus longue et leur prédiction en est plus compliquée que pour des actions à court terme. Il \\
 
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 
-
-
-\textbf{A ECRIRE}
-\textit{La plupart des approches actuelles de la prédiction de l'action des piétons sont basées sur la trajectoire, ce qui signifie qu'elles s'appuient sur le mouvement passé observé des piétons et/ou la dynamique des véhicules pour prédire l'emplacement futur des piétons. Ces approches sont toutefois efficaces lorsque les piétons traversent déjà la rue ou sont sur le point de le faire: ces algorithmes réagissent à une action déjà en cours au lieu de l'anticiper.}
-
-
-\textbf{Intéréssant}
-\textit{In the literature various terms such as intention, actionand behavior are used to describe what the agent is doing or about to do in the scene. Here, we distinguish intention as the underlying state of mind which cannot be observed but can be inferred from the behavior. This is opposed toactions and, more generally, behaviors, i.e. observable ac-tions such as walking or crossing, for which there is groundtruth available.}
-
-
-
-
-\subsection{Handcrafted}
-\subsection{Apprentissage profond}
 
 

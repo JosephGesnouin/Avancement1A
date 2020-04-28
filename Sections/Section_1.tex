@@ -246,7 +246,7 @@ Il est dans ce cas alors possible, jusqu'à un certain point, d'utiliser des app
 
 \cite{ryoo2011human} est la première publication mentionnant le principe de prédiction et reconnait les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps. D'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
 
-Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction:
+Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction à court terme:
 
 \cite{ma2016learning} proposent par exemple d'utiliser des CNN combinés à des LSTM pour capturer des features spatiaux-temporels et introduisent une fonction de coût se focalisant à la fois sur l'erreur de classification et sur la stabilité de la prédiction à mesure que la séquence est observée. De manière similaire, \cite{jain2016recurrent} proposent
 
@@ -265,7 +265,7 @@ La durée de ces actions complexes est bien plus longue et leur prédiction en e
 
  L'utilisation d'informations contextuelles pour ces inférences à long terme est importante: la connaissance à priori de certains objets présents dans la scène permet par exemple de limiter le nombre d'actions plausibles dans l'espace de recherche, puisqu'une majorité des actions à long terme peuvent être conditionnées en fonction de l'objet dont elles sont la cible.\\
  
- Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, avoir une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelletisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
+ Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, disposer d'une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelletisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
  
  Nous n'avons donc pour l'instant, pas approfondi la question de l'inférence à long terme.\\
  Il est cependant intéréssant de garder à l'esprit la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).

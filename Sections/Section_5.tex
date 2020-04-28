@@ -3,23 +3,28 @@
 \label{sec:SOTA}
 
 \section{Bases de données}
-Joint Attention for Autonomous Driving(JAAD) Dataset \cite{2016arXiv160904741K,Rasouli_2017_ICCV}
+Nous avons identifié deux jeux de données sur lesquels nous baserons nos travaux:
+Joint Attention for Autonomous Driving(\href{http://jaad-explore.nvision2.eecs.yorku.ca/}{JAAD}) \cite{2016arXiv160904741K,Rasouli_2017_ICCV} et Pedestrian Intention Estimation (\href{https://data.nvision2.eecs.yorku.ca/PIE_dataset/}{PIE}) Dataset \cite{Rasouli2019PIE}.\\
 
-Pedestrian Intention Estimation (PIE) Dataset \cite{Rasouli2019PIE}
+Ces jeux de données couvrent un large éventail d'apparences de piétons pour des conditions environnementales diverses: hiver, printemps, été, automne, fortes pluies, brouillard, pour des niveaux de luminosité et de contraste différents en fonction de la position du soleil dans la journée.\\
 
-\section{Idées}
+En plus de proposer des conditions environnementales diverses, ces jeux de données proposent des séquences pour des niveaux d'occlusions variants (0\%, 35\%, 44\%). Les différentes situations d'occlusion de piéton dans une action entrainent des cas particuliers devant être pris en compte dans l'élaboration d'un modèle afin que celui-ci soit robuste.
 
-A partir de l'information brute (squelette), construire une représentation de l'information permettant une justification du conditionnement du réseaux (taille des kernels) et une explicabilité des réltats.
+A ce jour, ces deux jeux de données sont les deux références principales dans la recherche pour la prédiction d'intention des piétons: les autres jeux de données étant trop peu fournis ou ne reflétant pas la compléxité de la tache.
 
-A partir des travaux de Guillaume Devineau et des recherches r les auto-encodeurs, proposer un outil permettant d'enrichir les bases de données existantes r la dynamique de squelettes humains
+Cependant, il n'existe à ce jour pas d'annotations opensource pour l'estimation de pose pour ces jeux de données. La squeletisation des piétons étant une étape fondamentale de notre approche, il sera nécéssaire de réaliser une estimation de pose grâce à des approches de l'état de l'art pour chacune des séquences des jeux de données afin d'obtenir une version  squeletisée afin de répondre à la problématique.
 
 
-Construire une architecture de traitement via réseaux de neurones prenant en charge:
-- des dynamiques à périodes longues[ 3-4s ] marche, course, ...
-- des dynamiques à périodes courtes[ 1s, ] inattention (objet qui tombe)
-- des meta-informations pplémentaires en entrées : by making one
-SVM powerful enough for predicting these partial videos
-and making the progress levels unnecessary in testing. In
-addition, traini
+\section{Perspectives}
 
-Comme nous définissons l'intention comme une combinaison de comportements discrets de haut niveau ainsi que de trajectoires continues décrivant le mouvement futur attendu du piéton, notre modèle de prédiction d'intention
+Nous allons dans l’immédiat, mettre en place une pipeline sur les jeux de données JAAD et PIE afin d'obtenir des squelettes annotés utilisables pour évaluer les approches présentées en \ref{sec:exp}.\\
+
+A plus long terme, nous identifions trois axes de recherche que nous souhaiterions approfondir ces prochains mois:
+\begin{itemize}
+    \item A partir de l'information brute (squelette), construire une représentation de l'information permettant une justification du conditionnement du réseaux (taille des kernels) et une explicabilité des résultats.
+    \item Proposer un outil permettant d'enrichir les bases de données existantes sur la dynamique des squelettes humains. Probablement en s'inspirant des travaux réalisés sur l'auto-encodeur présenté en \ref{refAEmod}.
+    \item Construire une architecture de traitement via réseaux de neurones prenant en charge: des dynamiques à périodes longues (3-4s), des dynamiques à périodes courtes (1s), des méta-informations supplémentaires en entrées. Nécéssitant alors de s'intérésser aux architectures pour les données mixtes (squelette, image, informations qualitatives: contexte).
+\end{itemize}
+
+
+

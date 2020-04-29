@@ -230,7 +230,7 @@ Ainsi, \cite{2018arXiv180506184Z} proposent d'appliquer des convolutions sur les
 \cite{yan2018spatial} étendent les convolutions spatiales de graphe en convolutions spatio-temporelles. Ils proposent une approche spatio-temporelle convolutive incluant des articulations liées dans le temps dans le bloc convolutif en plus des articulations liées spatialement. \cite{2018arXiv180209834L} proposent de cumuler des convolutions spatio-temporelles avec un modèle ARMA. Enfin,  \cite{Si_2019_CVPR} proposent de cumuler l'attention à un réseau géométrique CNN-LSTM, capitalisant alors toutes les approches présentées précédemment en un seul réseau.
 
 \section{Prédiction d'intention}
-Nous présentons dans cette section une approche connexe à la reconnaissance d'actions: la prédiction d'intention. Tandis que la reconnaissance consiste en l'utilisation d'une séquence complète pour labéliser une action, la prédiction raisonne à partir d'une séquence incomplète. 
+Nous présentons dans cette section une approche connexe à la reconnaissance d'actions: la prédiction d'intention. Tandis que la reconnaissance consiste en l'utilisation d'une séquence complète pour labelliser une action, la prédiction raisonne à partir d'une séquence incomplète. 
 
 Comme présenté dans la partie \ref{sujetdethes}, nous définissons dans le cadre de la thèse l'intention du piéton comme une combinaison de comportements discrets de haut niveau ainsi que de trajectoires continues décrivant le mouvement futur attendu du piéton. Nous présentons donc ici deux types de prédictions: continue et discrète.
 
@@ -244,9 +244,9 @@ Dans le cadre d'une inférence à court terme, se focalisant alors sur des séqu
 
 Il est dans ce cas alors possible, jusqu'à un certain point, d'utiliser des approches de reconnaissance d'actions pour l'inférence à court terme et ce même si elles ne sont pas optimisées pour la reconnaissance d'actions partielles.\\
 
-\cite{ryoo2011human} sont les premiers à expliciter le principe de prédiction et reconnaissent les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps. D'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labéliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
+\cite{ryoo2011human} sont les premiers à expliciter le principe de prédiction et reconnaissent les actions en cours de manière probabiliste en observant certaines features accumulés au fil du temps. D'autres approches handcrafted telles que \cite{soomro2018online} et \cite{soomro2016predicting} utilisent des SVM binaires pour labelliser des extraits vidéo comme des catégories de sous-actions puis obtiennent le label en final en utilisant la programmation dynamique.\\
 
-Innévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction à court terme:\\ 
+Inévitablement, les progrès récents ont naturellement conduit au développement d'approches d'apprentissage profond pour la prédiction à court terme:\\ 
 
 Une grande majorité des travaux suivent la logique d'ajouter des contraintes à la fonction de coût du réseau:\\
 \cite{ma2016learning} proposent par exemple d'utiliser des CNN combinés à des LSTM pour capturer des features spatiaux-temporels et introduisent une fonction de coût se focalisant à la fois sur l'erreur de classification et sur la stabilité de la prédiction à mesure que la séquence est observée. De manière similaire, \cite{jain2016recurrent} proposent une fonction de coût pénalisant de manière progressive les erreurs de classification en fonction du temps.
@@ -254,7 +254,7 @@ Une grande majorité des travaux suivent la logique d'ajouter des contraintes à
 
 
 A l'inverse, certains travaux se basent sur les méthodes génératives de l'état de l'art en apprentissage profond et se focalisent sur la représentation future de l'action pour ensuite la classifier:
-\cite{2019arXiv191207148G} et \cite{xu2019prediction} proposent par exemple d'utiliser des GANs pour générer la suite de l'action et la classifier,\cite{runsheng2017predictive} utilisent un auto-encodeur variationel. 
+\cite{2019arXiv191207148G} et \cite{xu2019prediction} proposent par exemple d'utiliser des GANs pour générer la suite de l'action et la classifier,\cite{runsheng2017predictive} utilisent un auto-encodeur variationnel. 
 \cite{wang2019progressive} utilisent par exemple le principe du teacher-student learning et se basent sur le principe de distillation de la connaissance entre un réseau teacher, entrainé pour la reconnaissance d'actions envers un réseau student pour la prédiction d'actions.\\
 
 Nous remarquons ici que dans le cadre d'une inférence à court terme, deux approches se distinguent: encourager le modèle à généraliser correctement avec le moins de frame de la séquence disponible grâce à l'ajout de régularisation sur la fonction de coût ou générer les features futurs de l'action grâce à des modèles génératifs puis de classifier l'action.
@@ -272,10 +272,10 @@ La durée de ces actions complexes est bien plus longue et leur prédiction en e
 
  L'utilisation d'informations contextuelles pour ces inférences à long terme est importante: la connaissance à priori de certains objets présents dans la scène permet par exemple de limiter le nombre d'actions plausibles dans l'espace de recherche, puisqu'une majorité des actions à long terme peuvent être conditionnées en fonction de l'objet dont elles sont la cible.\\
  
- Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, disposer d'une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelletisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
+ Cependant, ce domaine de recherche repose majoritairement sur le fait de pouvoir diviser une action en un suite de primitives, et donc, disposer d'une séquence vidéo de taille conséquente, ce qui est problématique dans le cadre de la thèse puisque les vidéos sur lesquelles nous baserons notre travail sont plutôt courtes et que la squelettisation des protagonistes ne peut se faire qu'à une distance faible de la caméra.
  
  Nous n'avons donc pour l'instant, pas approfondi la question de l'inférence à long terme.\\
- Il est cependant intéréssant de garder à l'esprit la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).
+ Il est cependant intéressant de garder à l'esprit la possibilité de conditionner la prédiction en fonction de la présence d'un objet spécifique (\textit{ie} téléphone portable) pour l'inférence à court terme, ou de tout autre indicateur contextuel (nombres de voies, heure, météo, passage piéton, genre, âge).
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 

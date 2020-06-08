@@ -64,18 +64,18 @@ Ainsi, en reprenant la structure de données format tenseur d'un jeu de données
 \end{figure}
 
 
-L'idée derrière cette normalisation précédant l'application de convolutions est que la fenêtre de la convolution ne se focalise que  sur des features dont les keypoints sont liés physiquement dans la réalité tout en évitant le plus de redondance, inévitable lorsque l'on souhaite conserver la structure spatiale. Comme présenté sur la figure \ref{fig:explanationCNN}, les keypoints étant organisés pour respecter la structure spatio-temporelle de l'action, dans le cadre d'une convolution 1D, la fenêtre se focalisera par exemple sur trois keypoints tels que le genou, le pied et la hanche et de leur position pour tout instant de la séquence. Dans le cadre d'une convolution 2D, nous ajoutons une limite à la séquentialité pour la fenêtre et celle-ci se focalisera sur un nombre figé de pas de temps et non la totalité de la séquence.
+L'idée derrière cette normalisation précédant l'application de convolutions est que la fenêtre de la convolution ne se focalise que  sur des features dont les keypoints sont liés physiquement dans la réalité tout en évitant le plus possible les redondances, qui sont  inévitables lorsque l’on souhaite conserver la structure spatiale. Comme présenté sur la figure \ref{fig:explanationCNN}, les keypoints étant organisés pour respecter la structure spatio-temporelle de l'action, dans le cadre d'une convolution 1D, la fenêtre se focalisera par exemple sur trois keypoints tels que le genou, le pied et la hanche et de leur position pour tout instant de la séquence. Dans le cadre d'une convolution 2D, nous ajoutons une limite à la séquentialité pour la fenêtre et celle-ci se focalisera sur un nombre figé de pas de temps et non la totalité de la séquence.
 
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\linewidth]{Images/explanation_cnn_dfs.png}
-    \caption{Explication de la formalisation des données en un tenseur sous pour une convolution 1D et convolution 2D et visualisation de l'application d'un CNN pour de telles données.}
+    \caption{Explication de la formalisation des données en un tenseur pour une convolution 1D et convolution 2D et visualisation de l'application d'un CNN pour de telles données.}
     \label{fig:explanationCNN}
 \end{figure}
 
-Souhaitant m'intéresser à la plus-value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité me comparer à un modèle de classification existant pour les mêmes conditions expérimentales dans le cadre de convolutions 1D et convolutions 2D. Je me suis donc basé sur l'approche expérimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture présentée en \ref{fig:DDnet} pour les CNN 1D et avec un simple Lenet-5 \cite{lecun1998gradient} pour les convolutions 2D dont l'architecture est présentée en \ref{fig:Lenet}.
+Souhaitant m'intéresser à la plus-value apportée par cette représentation proposée par \cite{liu2016spatio} et \cite{2018arXiv180110304Y} pour la classification d'actions squelettiques, j'ai souhaité la comparer à un modèle de classification existant pour les mêmes conditions expérimentales dans le cadre de convolutions 1D et convolutions 2D. Je me suis donc basé sur l'approche expérimentale de Double-feature Double-motion Network \cite{2019arXiv190709658Y} ainsi que sur leur architecture présentée en \ref{fig:DDnet} pour les CNN 1D et avec un simple Lenet-5 \cite{lecun1998gradient} pour les convolutions 2D dont l'architecture est présentée en \ref{fig:Lenet}.
 
 
 \begin{figure}[H]
@@ -101,7 +101,7 @@ désigne le Global Average Pooling. FC signifie "Fully Connected". La taille du 
 
 Nous avons expérimenté les capacités de cette représentation sur deux jeux de données de reconnaissances d'action squelettiques: SHREC (actions de la main en 3D) proposé par \cite{de2017shrec} et JHMDB (action du corps en 2D)  proposé par \cite{jhuang2013towards}.\\
 
-Similairement à \cite{2019arXiv190709658Y}, SHREC est évalué pour deux cas : pour 14 et 28 gestes. L'ensemble de données JHMDB est évalué en utilisant des squelettes annotés manuellement, et l'évaluation se fait par cross-validation sur un split 3.
+Suivant \cite{2019arXiv190709658Y}, SHREC est évalué pour deux cas : pour 14 et 28 gestes. L'ensemble de données JHMDB est évalué en utilisant des squelettes annotés manuellement, et l'évaluation se fait par cross-validation sur un split 3.
 
 \subsubsection{Détails d'implémentation}
 
@@ -203,9 +203,9 @@ DFS-Lenet-5      & 9x9                       & -                   & 68.1\%
 
 Nous remarquons ici, une amélioration de l'accuracy pour deux jeux de données traitant des problèmes similaires: la reconnaissance d'action squelettiques pour des niveaux différents (la main et le corps), pour des dimensions différentes (2d et 3d) et pour des dimensions de convolutions variantes.
 
-La normalisation semble fonctionner plus significativement sur le jeu de données SHREC comparé à JHMDB. Une explication plausible serait que le niveau d'abstraction et de précision n'est pas le même entre ces jeux de données. Le nombre de keypoints dans SHREC est supérieur à JHMDB et par conséquent l'organisation de ceux-ci pourrait apporter plus d'information. 
+L'apport de la normalisation semble plus marqué sur SHREC que sur JHMDB. Une explication serait que le niveau d'abstraction et de précision n'est pas le même entre ces jeux de données. Le nombre de keypoints dans SHREC est supérieur à JHMDB et par conséquent l'organisation de ceux-ci pourrait apporter plus d'information. 
 
-En choisissant volontairement un modèle complexe pour la convolution 1d et un modèle trivial pour la convolution 2d. Nous émettons l'hypothèse que cette transformation peut-être bénéfique peu importe le niveau de complexité du modèle. Cependant, celle-ci modifie significativement la taille de l'entrée du réseau et par conséquent la taille en paramètres des approches augmentera. Cette augmentation n'est que peu visible sur DD-Net car il n'y a pas de layer dense. Pour Lenet-5 la taille du modèle augmente du simple au double, et ce à cause de la partie fully connected de l'architecture. Il conviendra donc d'éviter le plus possible l'utilisation de layer dense pour cette approche ou de travailler sur des réseaux de taille réduite.
+En choisissant un modèle complexe pour la convolution 1d et un modèle trivial pour la convolution 2d, nous émettons l'hypothèse que cette transformation peut-être bénéfique quelque soit le niveau de complexité du modèle. Cependant, celle-ci modifie significativement la taille de l'entrée du réseau et par conséquent la taille en paramètres des approches augmentera. Cette augmentation n'est que peu visible sur DD-Net car il n'y a pas de layer dense. Pour Lenet-5 la taille du modèle augmente du simple au double, et ce à cause de la partie fully connected de l'architecture. Il conviendra donc d'éviter le plus possible l'utilisation de layer dense pour cette approche ou de travailler sur des réseaux de taille réduite.
 
 Finalement, cette normalisation nécessite une connaissance à priori de l'organisation de la structure des données en entrée (coude: keypoint 1, tête: keypoint 2, ...). Dans le cadre de la thèse, cela ne pose pas de contraintes spécifiques. Cependant, il sera par exemple impossible de réaliser ce travail sur des jeux de données dont la structure des données n'est pas précisée.
 

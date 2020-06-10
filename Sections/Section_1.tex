@@ -279,5 +279,13 @@ La durée de ces actions complexes est bien plus longue et leur prédiction en e
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 
+Outre la prédiction d'actions, un autre aspect clé de la prédiction d'intention se concentre sur l'évolution de la trajectoire du piéton: à savoir, réaliser une régression de la position du piéton à un instant $t$ donné.
+
+Historiquement, une majorité des approches proposent de réaliser un clustering des trajectoires afin d'avoir un modèle spécifique pour chaque type de trajectoires \cite{zhou2011random, morris2011trajectory, kim2011gaussian}.
+
+Avec l'avènement de l'apprentissage profond pour le traitement de données séquentielles, une méthode évidente ici, est d'inférer via des approches séquentielles (LSTM, RNN, GRU) la position des coordonnées du piéton en utilisant comme seul élément du modèle la trajectoire passée du piéton. C'est en suivant cette idée que \cite{DBLP:phd/hal/Pop19} propose de conditionner de manière binaire l'inférence des coordonnées futures des piétons en fonction de leurs actions prédites de manière discrète.
+
+Néanmoins, la prévision de la trajectoire future des mouvements d'une personne n'est pas si triviale. La prévision ne peut être faite de manière isolée en prenant comme seule information dans le modèle la position passée de chaque piéton indépendamment. Dans un contexte d'interractions sociale, les piétons adaptent leur trajectoires en fonction des comportements de leurs voisins, de l'environnement et des objets présents dans la scène.
+
 
 

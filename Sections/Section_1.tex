@@ -279,7 +279,7 @@ La durée de ces actions complexes est bien plus longue et leur prédiction en e
 
 \subsection{Prédiction de la trajectoire, l'inférence continue}
 
-Outre la prédiction d'actions, un autre aspect clé de la prédiction d'intention se concentre sur l'évolution de la trajectoire du piéton: à savoir, réaliser une régression de la position du piéton à un instant $t$ donné.
+Outre la prédiction d'actions, un autre aspect clé de la prédiction d'intention se concentre sur l'évolution de la trajectoire du piéton: à savoir, réaliser une régression de la position du piéton pour un instant $t$ donné.
 
 Historiquement, une majorité des approches proposent de réaliser un clustering des trajectoires afin d'avoir un modèle spécifique pour chaque type de trajectoires \cite{zhou2011random, morris2011trajectory, kim2011gaussian}.
 
@@ -288,4 +288,11 @@ Avec l'avènement de l'apprentissage profond pour le traitement de données séq
 Néanmoins, la prévision de la trajectoire future des mouvements d'une personne n'est pas si triviale. La prévision ne peut être faite de manière isolée en prenant comme seule information dans le modèle la position passée de chaque piéton indépendamment. Dans un contexte d'interractions sociale, les piétons adaptent leur trajectoires en fonction des comportements de leurs voisins, de l'environnement et des objets présents dans la scène.
 
 
+Comme le souligne \cite{kong2018human} dans son état de l'art, la prise en charge de données multimodales pour la regression de la trajectoire d'un piéton est un sujet à approfondir afin de conditionner au mieux les trajectoires d'une personne en fonction de l'environnement et de la scène.
+\cite{kooij2014context} conditionnent par exemple la prédiction de la trajectoire d'un piéton en fonction de trois indicateurs: l'existence d'un véhicule, l'attention du piéton de son environnement et la représentation spatiale de la scène.
 
+En approfondissant cette idée, \cite{2018arXiv180310892G} proposent par exemple de ne pas se contenter de trajectoires uniquement plausibles \textit{physiquement} mais également plausibles \textit{socialement}. 
+
+Une grande majorité des travaux actuels \cite{alahi2016social,lee2017desire,2018arXiv180310892G} se basent sur cette notion \textit{sociale} du déplacement humain: les trajectoires de chaque individu sont modélisées par un modèle récurrent et l'ajout d'une couche de \textit{social pooling}, constituée de neurones à état permet de modéliser les dépendences entre chaque trajectoires des protagonistes et ainsi conserver une cohérence spatiale dans la scène.
+
+Un axe de recherche important dans ce domaine est de prendre en compte ces données multimodales (mise en commun des trajectoires, prise en compte de la scène: voiture, heure de la journée, nombre de piétons, passage piéton, attention des piétons) afin de modéliser certaines correlations dans le déplacement des piétons. \textit{Comment enrichir le modèle avec les informations de la scène ?} est typiquement l'une des questions ouvertes dans ce domaine de recherche à laquelle nous souhaiterions sans doute répondre durant ces trois années.
